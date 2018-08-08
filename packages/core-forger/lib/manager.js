@@ -5,6 +5,7 @@ const delay = require('delay')
 const container = require('@arkecosystem/core-container')
 const logger = container.resolvePlugin('logger')
 const config = container.resolvePlugin('config')
+const database = container.resolvePlugin('database')
 const emitter = container.resolvePlugin('event-emitter')
 
 const { slots } = require('@arkecosystem/crypto')
@@ -58,7 +59,7 @@ module.exports = class ForgerManager {
       await delay(100)
     }
 
-    return this.__monitor(null)
+    return this.__monitor()
   }
 
   /**
@@ -69,6 +70,10 @@ module.exports = class ForgerManager {
   async __monitor (round) {
     try {
       round = await this.client.getRound()
+
+      logger.verbose(`DELEGATES THIS ROUND ROUND: ${round.delegates.length}`)
+      logger.verbose(`CURRENT FORGER: ${database.walletManager.getWalletByPublicKey(round.nextForger.publicKey).username}`)
+
       const delayTime = parseInt(config.getConstants(round.lastBlock.height).blocktime) * 1000 - 2000
 
       if (!round.canForge) {
