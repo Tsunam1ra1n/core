@@ -236,43 +236,47 @@ module.exports = class ConnectionInterface {
 
     logger.debug('Updating delegate statistics')
 
-    const sortBy = require('lodash/sortBy')
+    // const sortBy = require('lodash/sortBy')
 
     let logDelegates = delegates.map(delegate => delegate.publicKey)
-    logDelegates = sortBy(logDelegates)
+    // logDelegates = sortBy(logDelegates)
     logger.verbose('DELEGATES: ' + JSON.stringify(logDelegates))
     logger.verbose('DELEGATES COUNT: ' + logDelegates.length)
 
     let logBlocks = this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey)
-    logBlocks = sortBy(logBlocks)
+    // logBlocks = sortBy(logBlocks)
     logger.verbose('BLOCKS: ' + JSON.stringify(logBlocks))
     logger.verbose('BLOCKS COUNT: ' + logBlocks.length)
 
     let logDelegatesUsernames = logDelegates.map(i => this.walletManager.getWalletByPublicKey(i).username)
-    logDelegatesUsernames = sortBy(logDelegatesUsernames)
+    // logDelegatesUsernames = sortBy(logDelegatesUsernames)
     logger.verbose('DELEGATES USERNAMES: ' + JSON.stringify(logDelegatesUsernames))
 
     let logBlocksUsernames = logBlocks.map(i => this.walletManager.getWalletByPublicKey(i).username)
-    logBlocksUsernames = sortBy(logBlocksUsernames)
+    // logBlocksUsernames = sortBy(logBlocksUsernames)
     logger.verbose('BLOCKS USERNAMES: ' + JSON.stringify(logBlocksUsernames))
 
-    let blocksMatchDelegates = JSON.stringify(logDelegates) === JSON.stringify(logBlocks)
-    logger.verbose(`BLOCKS MATCH DELEGATES: ${blocksMatchDelegates}`)
+    // let blocksMatchDelegates = JSON.stringify(logDelegates) === JSON.stringify(logBlocks)
+    // logger.verbose(`BLOCKS MATCH DELEGATES: ${blocksMatchDelegates}`)
 
     try {
       delegates.forEach(delegate => {
         let producedBlocks = this.blocksInCurrentRound.filter(blockGenerator => blockGenerator.data.generatorPublicKey === delegate.publicKey)
         let wallet = this.walletManager.getWalletByPublicKey(delegate.publicKey)
 
-        logger.verbose(`PRODUCED BLOCKS: ${producedBlocks.length}`)
+        const username = this.walletManager.getWalletByPublicKey(delegate.publicKey).username
 
         if (producedBlocks.length === 0) {
+          logger.verbose(`PRODUCED BLOCKS: ${producedBlocks.length} by ${username}`)
+
           wallet.missedBlocks++
           logger.debug(`Delegate ${wallet.username} (${wallet.publicKey}) just missed a block. Total: ${wallet.missedBlocks}`)
           wallet.dirty = true
           emitter.emit('forger.missing', {
             delegate: wallet
           })
+        } else {
+          logger.verbose(`PRODUCED BLOCKS: ${producedBlocks.length} by ${username}`)
         }
       })
     } catch (error) {

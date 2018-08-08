@@ -43,7 +43,7 @@ module.exports = class ForgerManager {
       this.delegates.push(new Delegate(bip38, this.network, password))
     }
 
-    logger.debug(`Loaded ${this.delegates.map(delegate => delegate.publicKey)} delegates.`)
+    logger.debug(`Loaded ${this.delegates.map(delegate => database.walletManager.getWalletByPublicKey(delegate.publicKey).username)} delegates.`)
 
     return this.delegates
   }
@@ -70,8 +70,6 @@ module.exports = class ForgerManager {
   async __monitor (round) {
     try {
       round = await this.client.getRound()
-
-      logger.verbose(`CURRENT FORGER: ${database.walletManager.getWalletByPublicKey(round.nextForger.publicKey).username}`)
 
       const delayTime = parseInt(config.getConstants(round.lastBlock.height).blocktime) * 1000 - 2000
 
@@ -102,6 +100,8 @@ module.exports = class ForgerManager {
       }
 
       await this.__forgeNewBlock(delegate, round)
+
+      logger.verbose(`BLOCK FORGED: ${database.walletManager.getWalletByPublicKey(delegate.publicKey).username}`)
 
       await delay(delayTime) // we will check at next slot
       return this.__monitor(round)
