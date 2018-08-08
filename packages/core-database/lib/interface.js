@@ -245,7 +245,8 @@ module.exports = class ConnectionInterface {
 
     const sortBy = require('lodash/sortBy')
 
-    logger.verbose(JSON.stringify(sortBy(logDelegates)) === JSON.stringify(sortBy(logBlocks)))
+    const blocksMatchDelegates = JSON.stringify(sortBy(logDelegates)) === JSON.stringify(sortBy(logBlocks))
+    logger.verbose(`BLOCKS MATCH DELEGATES: ${blocksMatchDelegates}`)
 
     try {
       delegates.forEach(delegate => {
