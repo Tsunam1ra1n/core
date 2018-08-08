@@ -244,7 +244,6 @@ module.exports = class Blockchain {
 
   /**
    * Hande a block during a rebuild.
-   * NOTE: We should be sure this is fail safe (ie callback() is being called only ONCE)
    * @param  {Block} block
    * @param  {Function} callback
    * @return {Object}
@@ -264,27 +263,26 @@ module.exports = class Blockchain {
 
         state.lastBlock = block
 
-        return callback()
+        callback()
       } else if (block.data.height > this.getLastBlock().data.height + 1) {
         state.lastDownloadedBlock = state.lastBlock
-        return callback()
+        callback()
       } else if (block.data.height < this.getLastBlock().data.height || (block.data.height === this.getLastBlock().data.height && block.data.id === this.getLastBlock().data.id)) {
         state.lastDownloadedBlock = state.lastBlock
-        return callback()
+        callback()
       } else {
         state.lastDownloadedBlock = state.lastBlock
         logger.info(`Block ${block.data.height.toLocaleString()} disregarded because on a fork :knife_fork_plate:`)
-        return callback()
+        callback()
       }
     } else {
       logger.warn(`Block ${block.data.height.toLocaleString()} disregarded because verification failed :scroll:`)
-      return callback()
+      callback()
     }
   }
 
   /**
    * Process the given block.
-   * NOTE: We should be sure this is fail safe (ie callback() is being called only ONCE)
    * @param  {Block} block
    * @param  {Function} callback
    * @return {(Function|void)}
@@ -292,34 +290,17 @@ module.exports = class Blockchain {
   async processBlock (block, callback) {
     if (!block.verification.verified) {
       logger.warn(`Block ${block.data.height.toLocaleString()} disregarded because verification failed :scroll:`)
+
       return callback()
     }
 
-    try {
-      this.__isChained(stateMachine.state.lastBlock, block)
-      ? await this.acceptChainedBlock(block)
-      : await this.manageUnchainedBlock(block)
+    const state = stateMachine.state
 
-      stateMachine.state.lastBlock = block
-    } catch (error) {
-      logger.error(`Refused new block ${JSON.stringify(block.data)}`)
-      logger.debug(error.stack)
-      stateMachine.state.lastDownloadedBlock = stateMachine.state.lastBlock
-      this.dispatch('FORK')
-    }
+    this.__isChained(state.lastBlock, block)
+      ? await this.acceptChainedBlock(block, state)
+      : await this.manageUnchainedBlock(block, state)
 
-    try {
-      // broadcast only current block
-      const blocktime = config.getConstants(block.data.height).blocktime
-      if (slots.getSlotNumber() * blocktime <= block.data.timestamp) {
-        this.p2p.broadcastBlock(block)
-      }
-    } catch (error) {
-      logger.warn(`Can't broadcast properly block ${JSON.stringify(block.data.heigt)}`)
-      logger.debug(error.stack)
-    }
-
-    return callback()
+    callback()
   }
 
   /**
@@ -329,16 +310,33 @@ module.exports = class Blockchain {
    * @return {void}
    */
   async acceptChainedBlock (block, state) {
-    await this.database.applyBlock(block)
-    await this.database.saveBlock(block)
+    try {
+      await this.database.applyBlock(block)
+      await this.database.saveBlock(block)
 
-    if (this.transactionPool) {
-      try {
-        await this.transactionPool.acceptChainedBlock(block)
-      } catch (error) {
-        logger.warn('Issue applying block to transaction pool')
-        logger.debug(error.stack)
+      state.lastBlock = block
+
+      // broadcast only current block
+      const blocktime = config.getConstants(block.data.height).blocktime
+      if (slots.getSlotNumber() * blocktime <= block.data.timestamp) {
+        this.p2p.broadcastBlock(block)
       }
+    } catch (error) {
+      logger.error(`Refused new block: ${JSON.stringify(block.data)}`)
+      logger.debug(error.stack)
+
+      state.lastDownloadedBlock = state.lastBlock
+
+      return this.dispatch('FORK')
+    }
+
+    try {
+      if (this.transactionPool) {
+        await this.transactionPool.acceptChainedBlock(block)
+      }
+    } catch (error) {
+      logger.warn('Issue applying block to transaction pool')
+      logger.debug(error.stack)
     }
   }
 
@@ -348,10 +346,10 @@ module.exports = class Blockchain {
    * @param  {Object} state
    * @return {void}
    */
-  async manageUnchainedBlock (block) {
+  async manageUnchainedBlock (block, state) {
     if (block.data.height > this.getLastBlock().data.height + 1) {
       logger.info(`Blockchain not ready to accept new block at height ${block.data.height.toLocaleString()}. Last block: ${this.getLastBlock().data.height.toLocaleString()} :warning:`)
-      stateMachine.state.lastDownloadedBlock = stateMachine.state.lastBlock
+      state.lastDownloadedBlock = state.lastBlock
     } else if (block.data.height < this.getLastBlock().data.height) {
       logger.debug(`Block ${block.data.height.toLocaleString()} disregarded because already in blockchain :warning:`)
     } else if (block.data.height === this.getLastBlock().data.height && block.data.id === this.getLastBlock().data.id) {

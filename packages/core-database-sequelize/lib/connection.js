@@ -596,14 +596,18 @@ module.exports = class SequelizeConnection extends ConnectionInterface {
    * @return {[]String}
    */
   async getRecentBlockIds () {
-    const blocks = await this.query
-      .select('id')
-      .from('blocks')
-      .orderBy({ timestamp: 'DESC' })
-      .limit(10)
-      .all()
+    if (!this.recentBlockIds.length) {
+      const blocks = await this.query
+        .select('id')
+        .from('blocks')
+        .orderBy({ timestamp: 'DESC' })
+        .limit(10)
+        .all()
 
-    return blocks.map(block => block.id)
+      this.recentBlockIds = blocks.map(block => block.id)
+    }
+
+    return this.recentBlockIds
   }
 
   /**
