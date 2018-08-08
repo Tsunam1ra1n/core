@@ -235,17 +235,20 @@ module.exports = class ConnectionInterface {
 
     logger.debug('Updating delegate statistics')
 
-    logger.verbose(JSON.stringify(delegates.map(delegate => delegate.publicKey)))
-    logger.verbose(delegates.map(delegate => delegate.publicKey).length)
-    logger.verbose(JSON.stringify(this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey)))
-    logger.verbose(this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey).length)
+    const logDelegates = delegates.map(delegate => delegate.publicKey)
+    logger.verbose('DELEGATES: ' + JSON.stringify(logDelegates))
+    logger.verbose('DELEGATES COUNT: ' + delegates.length)
+
+    const logBlocks = this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey)
+    logger.verbose('BLOCKS: ' + JSON.stringify(logBlocks))
+    logger.verbose('BLOCKS COUNT: ' + logBlocks.length)
 
     try {
       delegates.forEach(delegate => {
         let producedBlocks = this.blocksInCurrentRound.filter(blockGenerator => blockGenerator.data.generatorPublicKey === delegate.publicKey)
         let wallet = this.walletManager.getWalletByPublicKey(delegate.publicKey)
 
-        logger.verbose(producedBlocks)
+        logger.verbose(`PRODUCED BLOCKS: ${producedBlocks.length}`)
 
         if (producedBlocks.length === 0) {
           wallet.missedBlocks++
