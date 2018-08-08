@@ -243,6 +243,10 @@ module.exports = class ConnectionInterface {
     logger.verbose('BLOCKS: ' + JSON.stringify(logBlocks))
     logger.verbose('BLOCKS COUNT: ' + logBlocks.length)
 
+    const sortBy = require('lodash/sortBy')
+
+    logger.verbose(JSON.stringify(sortBy(logDelegates)) === JSON.stringify(sortBy(logBlocks)))
+
     try {
       delegates.forEach(delegate => {
         let producedBlocks = this.blocksInCurrentRound.filter(blockGenerator => blockGenerator.data.generatorPublicKey === delegate.publicKey)
