@@ -236,7 +236,9 @@ module.exports = class ConnectionInterface {
     logger.debug('Updating delegate statistics')
 
     logger.verbose(JSON.stringify(delegates.map(delegate => delegate.publicKey)))
-    logger.verbose(JSON.stringify(this.blocksInCurrentRound.map(delegate => delegate.data.publicKey)))
+    logger.verbose(delegates.map(delegate => delegate.publicKey).length)
+    logger.verbose(JSON.stringify(this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey)))
+    logger.verbose(this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey).length)
 
     try {
       delegates.forEach(delegate => {
