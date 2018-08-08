@@ -235,17 +235,27 @@ module.exports = class ConnectionInterface {
 
     logger.debug('Updating delegate statistics')
 
-    const logDelegates = delegates.map(delegate => delegate.publicKey)
+    const sortBy = require('lodash/sortBy')
+
+    let logDelegates = delegates.map(delegate => delegate.publicKey)
+    logDelegates = sortBy(logDelegates)
     logger.verbose('DELEGATES: ' + JSON.stringify(logDelegates))
     logger.verbose('DELEGATES COUNT: ' + logDelegates.length)
 
-    const logBlocks = this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey)
+    let logBlocks = this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey)
+    logBlocks = sortBy(logBlocks)
     logger.verbose('BLOCKS: ' + JSON.stringify(logBlocks))
     logger.verbose('BLOCKS COUNT: ' + logBlocks.length)
 
-    const sortBy = require('lodash/sortBy')
+    let logDelegatesUsernames = logDelegates.map(i => this.walletManager.getWalletByPublicKey(i).username)
+    logDelegatesUsernames = sortBy(logDelegatesUsernames)
+    logger.verbose('DELEGATES USERNAMES: ' + JSON.stringify(logDelegatesUsernames))
 
-    const blocksMatchDelegates = JSON.stringify(sortBy(logDelegates)) === JSON.stringify(sortBy(logBlocks))
+    let logBlocksUsernames = logBlocks.map(i => this.walletManager.getWalletByPublicKey(i).username)
+    logBlocksUsernames = sortBy(logBlocksUsernames)
+    logger.verbose('BLOCKS USERNAMES: ' + JSON.stringify(logBlocksUsernames))
+
+    let blocksMatchDelegates = JSON.stringify(logDelegates) === JSON.stringify(logBlocks)
     logger.verbose(`BLOCKS MATCH DELEGATES: ${blocksMatchDelegates}`)
 
     try {
