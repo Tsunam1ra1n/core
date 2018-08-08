@@ -235,10 +235,15 @@ module.exports = class ConnectionInterface {
 
     logger.debug('Updating delegate statistics')
 
+    logger.verbose(JSON.stringify(delegates.map(delegate => delegate.publicKey)))
+    logger.verbose(JSON.stringify(this.blocksInCurrentRound.map(delegate => delegate.data.publicKey)))
+
     try {
       delegates.forEach(delegate => {
         let producedBlocks = this.blocksInCurrentRound.filter(blockGenerator => blockGenerator.data.generatorPublicKey === delegate.publicKey)
         let wallet = this.walletManager.getWalletByPublicKey(delegate.publicKey)
+
+        logger.verbose(producedBlocks)
 
         if (producedBlocks.length === 0) {
           wallet.missedBlocks++

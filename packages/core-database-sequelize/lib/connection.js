@@ -186,6 +186,8 @@ module.exports = class SequelizeConnection extends ConnectionInterface {
 
     this.activedelegates = data
 
+    logger.verbose(this.activedelegates.length)
+
     return this.activedelegates
   }
 
