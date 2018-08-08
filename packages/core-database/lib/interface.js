@@ -237,7 +237,7 @@ module.exports = class ConnectionInterface {
 
     const logDelegates = delegates.map(delegate => delegate.publicKey)
     logger.verbose('DELEGATES: ' + JSON.stringify(logDelegates))
-    logger.verbose('DELEGATES COUNT: ' + delegates.length)
+    logger.verbose('DELEGATES COUNT: ' + logDelegates.length)
 
     const logBlocks = this.blocksInCurrentRound.map(delegate => delegate.data.generatorPublicKey)
     logger.verbose('BLOCKS: ' + JSON.stringify(logBlocks))
