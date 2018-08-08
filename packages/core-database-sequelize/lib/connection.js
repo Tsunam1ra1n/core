@@ -186,6 +186,7 @@ module.exports = class SequelizeConnection extends ConnectionInterface {
 
     this.activedelegates = data
 
+    logger.verbose(JSON.stringify(this.activedelegates.map(d => d.publicKey)))
     logger.verbose(this.activedelegates.length)
 
     return this.activedelegates
