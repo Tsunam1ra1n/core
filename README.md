@@ -54,15 +54,6 @@ This repository contains all plugins that make up the PHANTOM Core.
 
 If you discover a security vulnerability within this package, please send an e-mail to security@phantom.org. All security vulnerabilities will be promptly addressed.
 
-## Credits
-
--   [All Contributors](../../contributors)
--   [Alex Barnsley](https://github.com/alexbarnsley)
--   [Brian Faust](https://github.com/faustbrian)
--   [François-Xavier Thoorens](https://github.com/fix)
--   [Joshua Noack](https://github.com/supaiku0)
--   [Kristjan Košič](https://github.com/kristjank)
--   [Vasil Dimov](https://github.com/vasild)
 
 ## License
 [MIT](LICENSE) © [PHANTOM](https://phantom.org)
