@@ -1,6 +1,6 @@
 {
-    "name": "@arkecosystem/core-database",
-    "description": "Database Interface for Ark Core",
+    "name": "@phantomchain/core-database",
+    "description": "Database Interface for PHANTOM Core",
     "version": "2.1.0",
     "contributors": [
         "François-Xavier Thoorens <fx@ark.io>",
@@ -22,18 +22,18 @@
         "clean": "del dist",
         "docs": "../../node_modules/typedoc/bin/typedoc src --out docs",
         "lint": "../../node_modules/tslint/bin/tslint -c ../../tslint.json 'src/**/*.ts' '__tests__/**/*.ts' --fix",
-        "test": "cross-env ARK_ENV=test jest --runInBand --forceExit",
-        "test:coverage": "cross-env ARK_ENV=test jest --coverage --coveragePathIgnorePatterns='/(defaults.ts|index.ts)$' --runInBand --forceExit",
-        "test:debug": "cross-env ARK_ENV=test node --inspect-brk ../../node_modules/.bin/jest --runInBand",
-        "test:watch": "cross-env ARK_ENV=test jest --runInBand --watch",
-        "test:watch:all": "cross-env ARK_ENV=test jest --runInBand --watchAll",
+        "test": "cross-env PHANTOM_ENV=test jest --runInBand --forceExit",
+        "test:coverage": "cross-env PHANTOM_ENV=test jest --coverage --coveragePathIgnorePatterns='/(defaults.ts|index.ts)$' --runInBand --forceExit",
+        "test:debug": "cross-env PHANTOM_ENV=test node --inspect-brk ../../node_modules/.bin/jest --runInBand",
+        "test:watch": "cross-env PHANTOM_ENV=test jest --runInBand --watch",
+        "test:watch:all": "cross-env PHANTOM_ENV=test jest --runInBand --watchAll",
         "updates": "../../node_modules/npm-check-updates/bin/npm-check-updates -a"
     },
     "dependencies": {
-        "@arkecosystem/core-interfaces": "^2.1.0",
-        "@arkecosystem/core-container": "^2.1.0",
-        "@arkecosystem/core-utils": "^2.1.0",
-        "@arkecosystem/crypto": "^2.1.0",
+        "@phantomchain/core-interfaces": "^2.1.0",
+        "@phantomchain/core-container": "^2.1.0",
+        "@phantomchain/core-utils": "^2.1.0",
+        "@phantomchain/crypto": "^2.1.0",
         "@types/lodash.clonedeep": "^4.5.4",
         "@types/lodash.compact": "^3.0.4",
         "@types/lodash.uniq": "^4.5.4",
@@ -43,7 +43,7 @@
         "pluralize": "^7.0.0"
     },
     "devDependencies": {
-        "@arkecosystem/core-test-utils": "^2.1.0"
+        "@phantomchain/core-test-utils": "^2.1.0"
     },
     "publishConfig": {
         "access": "public"

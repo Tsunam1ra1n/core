@@ -12,30 +12,31 @@ const format = dist => ({
 });
 
 const browserConfig = {
-    target: "web",
-    babel: {
-        modules: "umd",
-        useBuiltIns: "usage",
-        targets: {
-            browsers: "defaults",
-        },
-    },
-    resolve: {
-        alias: {
-            deepmerge$: "deepmerge/dist/umd.js",
-        },
-    },
-    node: {
-        net: "empty",
-    },
-    output: {
-        ...format(pkg.browser),
-        library: "ArkEcosystemCrypto",
-        libraryTarget: "umd",
-        umdNamedDefine: true,
-        globalObject: "this",
-    },
-};
+  entry: resolve(pkg.main),
+  target: 'web',
+  babel: {
+    modules: 'umd',
+    useBuiltIns: 'usage',
+    targets: {
+      browsers: 'defaults'
+    }
+  },
+  resolve: {
+    alias: {
+      deepmerge$: 'deepmerge/dist/umd.js'
+    }
+  },
+  node: {
+    net: 'empty'
+  },
+  output: {
+    ...format(pkg.browser),
+    library: 'PhantomCrypto',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
+    globalObject: 'this'
+  }
+}
 
 const moduleConfig = {
     target: "node",

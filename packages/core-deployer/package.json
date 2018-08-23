@@ -1,0 +1,40 @@
+{
+  "name": "@phantomcore/core-deployer",
+  "description": "Deployer for PHANTOM Core",
+  "version": "0.1.1",
+  "contributors": [
+    "Brian Faust <brian@ark.io>",
+    "Alex Barnsley <alex@ark.io>"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "bin": {
+    "phantom:deployer": "./bin/deployer"
+  },
+  "scripts": {
+    "start": "./bin/deployer",
+    "test": "PHANTOM_ENV=test jest --forceExit",
+    "test:coverage": "PHANTOM_ENV=test jest --coverage --forceExit",
+    "test:debug": "PHANTOMNTOM_ENV=test node --inspect-brk ../../node_modules/.bin/jest --runInBand --watch",
+    "test:watch": "PHANTOM_ENV=test jest --runInBand --watch",
+    "test:watch:all": "PHANTOM_ENV=test jest --runInBand --watchAll",
+    "lint": "eslint ./ --fix",
+    "depcheck": "depcheck ./ --ignores=commander"
+  },
+  "dependencies": {
+    "phantomjs": "https://github.com/PhantomCore/phantom-js#master",
+    "bigi": "^1.4.2",
+    "bip39": "^2.5.0",
+    "bytebuffer": "^5.0.1",
+    "commander": "^2.15.1",
+    "envfile": "^2.3.0",
+    "expand-home-dir": "0.0.3",
+    "fs-extra": "^6.0.1",
+    "joi": "^13.3.0",
+    "lodash": "^4.17.10",
+    "pino": "^4.16.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
