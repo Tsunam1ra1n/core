@@ -1,9 +1,12 @@
-'use strict'
-
 const Boom = require('boom')
-const database = require('@phantomcore/core-container').resolvePlugin('database')
+const database = require('@phantomchain/core-container').resolvePlugin(
+  'database',
+)
 const utils = require('../utils')
 const schema = require('../schema/wallets')
+const {
+  transactions: transactionsRepository,
+} = require('../../../repositories')
 
 /**
  * @type {Object}
@@ -14,14 +17,17 @@ exports.index = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
-    const wallets = await database.wallets.findAll(utils.paginate(request))
+  async handler(request, h) {
+    const wallets = await database.wallets.findAll({
+      ...request.query,
+      ...utils.paginate(request),
+    })
 
     return utils.toPagination(request, wallets, 'wallet')
   },
   options: {
-    validate: schema.index
-  }
+    validate: schema.index,
+  },
 }
 
 /**
@@ -33,11 +39,12 @@ exports.top = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const wallets = await database.wallets.top(utils.paginate(request))
 
     return utils.toPagination(request, wallets, 'wallet')
-  }
+  },
+  // TODO: create top schema
 }
 
 /**
@@ -49,18 +56,18 @@ exports.show = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const wallet = await database.wallets.findById(request.params.id)
 
     if (!wallet) {
-      return Boom.notFound()
+      return Boom.notFound('Wallet not found')
     }
 
     return utils.respondWithResource(request, wallet, 'wallet')
   },
   options: {
-    validate: schema.show
-  }
+    validate: schema.show,
+  },
 }
 
 /**
@@ -72,25 +79,24 @@ exports.transactions = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const wallet = await database.wallets.findById(request.params.id)
 
     if (!wallet) {
-      return Boom.notFound()
+      return Boom.notFound('Wallet not found')
     }
 
-    const transactions = await database.transactions.findAllByWallet(
-      wallet, {
-        ...request.params,
-        ...utils.paginate(request)
-      }
-    )
+    const transactions = await transactionsRepository.findAllByWallet(wallet, {
+      ...request.query,
+      ...request.params,
+      ...utils.paginate(request),
+    })
 
     return utils.toPagination(request, transactions, 'transaction')
   },
   options: {
-    validate: schema.transactions
-  }
+    validate: schema.transactions,
+  },
 }
 
 /**
@@ -102,25 +108,30 @@ exports.transactionsSent = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const wallet = await database.wallets.findById(request.params.id)
 
     if (!wallet) {
-      return Boom.notFound()
+      return Boom.notFound('Wallet not found')
     }
 
-    const transactions = await database.transactions.findAllBySender(
-      wallet.publicKey, {
+    // NOTE: We unset this value because it otherwise will produce a faulty SQL query
+    delete request.params.id
+
+    const transactions = await transactionsRepository.findAllBySender(
+      wallet.publicKey,
+      {
+        ...request.query,
         ...request.params,
-        ...utils.paginate(request)
-      }
+        ...utils.paginate(request),
+      },
     )
 
     return utils.toPagination(request, transactions, 'transaction')
   },
   options: {
-    validate: schema.transactionsSent
-  }
+    validate: schema.transactionsSent,
+  },
 }
 
 /**
@@ -132,25 +143,30 @@ exports.transactionsReceived = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const wallet = await database.wallets.findById(request.params.id)
 
     if (!wallet) {
-      return Boom.notFound()
+      return Boom.notFound('Wallet not found')
     }
 
-    const transactions = await database.transactions.findAllByRecipient(
-      wallet.address, {
+    // NOTE: We unset this value because it otherwise will produce a faulty SQL query
+    delete request.params.id
+
+    const transactions = await transactionsRepository.findAllByRecipient(
+      wallet.address,
+      {
+        ...request.query,
         ...request.params,
-        ...utils.paginate(request)
-      }
+        ...utils.paginate(request),
+      },
     )
 
     return utils.toPagination(request, transactions, 'transaction')
   },
   options: {
-    validate: schema.transactionsReceived
-  }
+    validate: schema.transactionsReceived,
+  },
 }
 
 /**
@@ -162,25 +178,29 @@ exports.votes = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const wallet = await database.wallets.findById(request.params.id)
 
     if (!wallet) {
-      return Boom.notFound()
+      return Boom.notFound('Wallet not found')
     }
 
-    const transactions = await database.transactions.allVotesBySender(
-      wallet.publicKey, {
+    // NOTE: We unset this value because it otherwise will produce a faulty SQL query
+    delete request.params.id
+
+    const transactions = await transactionsRepository.allVotesBySender(
+      wallet.publicKey,
+      {
         ...request.params,
-        ...utils.paginate(request)
-      }
+        ...utils.paginate(request),
+      },
     )
 
     return utils.toPagination(request, transactions, 'transaction')
   },
   options: {
-    validate: schema.votes
-  }
+    validate: schema.votes,
+  },
 }
 
 /**
@@ -192,16 +212,16 @@ exports.search = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const wallets = await database.wallets.search({
       ...request.payload,
       ...request.query,
-      ...utils.paginate(request)
+      ...utils.paginate(request),
     })
 
     return utils.toPagination(request, wallets, 'wallet')
   },
   options: {
-    validate: schema.search
-  }
+    validate: schema.search,
+  },
 }

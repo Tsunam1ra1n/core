@@ -1,13 +1,14 @@
 {
-  "name": "@phantomcore/crypto",
+  "name": "@phantomchain/crypto",
   "description": "Crypto utilities for the PHANTOM blockchain",
-  "version": "0.1.1",
+  "version": "0.2.4",
   "contributors": [
     "François-Xavier Thoorens <fx.thoorens@ark.io>",
     "Brian Faust <brian@ark.io>",
     "Alex Barnsley <alex@ark.io>",
     "Lúcio Rubens <lucio@ark.io>",
-    "Juan A. Martín <juan@ark.io>"
+    "Juan A. Martín <juan@ark.io>",
+    "Joshua Noack <joshua@ark.io>"
   ],
   "license": "MIT",
   "main": "lib/index.js",
@@ -26,34 +27,36 @@
     "test:debug": "PHANTOM_ENV=test node --inspect-brk ../../node_modules/.bin/jest --runInBand --watch",
     "test:watch": "jest --watch",
     "test:watch:all": "jest --watchAll",
-    "lint": "eslint -c ../../.eslintrc --ignore-pattern dist ./ --fix",
-    "depcheck": "depcheck ./"
+    "flow:coverage": "flow-coverage-report --config ../../.flowcoverage.json",
+    "flow:check": "flow check ./lib",
+    "flow:deps": "flow-typed install",
+    "lint": "eslint ./ --fix",
+    "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomcore/validation": "^0.1.1",
-    "phantomjsv1": "phantomcore/phantom-js#master",
-    "bigi": "^1.4.2",
+    "bignumber.js": "^8.0.1",
+    "bip32": "^1.0.2",
     "bip38": "^2.0.2",
-    "bip66": "^1.1.5",
-    "bs58check": "^2.1.1",
+    "bip39": "^2.5.0",
+    "bs58check": "^2.1.2",
     "bytebuffer": "^5.0.1",
     "create-hash": "^1.2.0",
-    "create-hmac": "^1.1.7",
-    "deepmerge": "^2.1.0",
-    "ecurve": "^1.0.6",
-    "lodash": "^4.17.10",
-    "moment": "^2.22.1",
-    "node-forge": "^0.7.5",
-    "otplib": "^9.0.0",
-    "randombytes": "^2.0.6",
-    "secp256k1": "^3.5.0",
-    "tiny-glob": "^0.2.2",
-    "typeforce": "^1.12.0",
-    "webpack-merge": "^4.1.3",
+    "deepmerge": "^2.2.1",
+    "joi": "^14.0.4",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "node-forge": "^0.7.6",
+    "otplib": "^10.0.1",
+    "secp256k1": "^3.5.2",
+    "tiny-glob": "^0.2.3",
+    "webpack-merge": "^4.1.4",
     "webpack-node-externals": "^1.7.2",
     "wif": "^2.0.6"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.86.0"
   }
 }

@@ -25,5 +25,4 @@ services:
      POSTGRES_USER: phantom_development
 
 volumes:
-  redis:
   postgres:

@@ -1,25 +1,28 @@
-'use strict'
+const { Block, Transaction, Wallet } = require('@phantomchain/crypto').models
+const { Bignum, crypto, transactionBuilder } = require('@phantomchain/crypto')
+const {
+  PHANTOMTOSHI,
+  TRANSACTION_TYPES,
+} = require('@phantomchain/crypto').constants
 
+const block3 = require('@phantomchain/core-test-utils/fixtures/testnet/blocks.2-100')[1]
 const app = require('./__support__/setup')
 
-const { Block, Transaction, Wallet } = require('@phantomcore/crypto').models
-const { transactionBuilder } = require('@phantomcore/crypto')
-const { TRANSACTION_TYPES } = require('@phantomcore/crypto').constants
-
-const block = new Block(require('./__fixtures__/block.json')) // eslint-disable-line no-unused-vars
+const block = new Block(block3)
 const walletData1 = require('./__fixtures__/wallets.json')[0]
 const walletData2 = require('./__fixtures__/wallets.json')[1]
-const walletDataFake = require('./__fixtures__/wallets.json')[2]
 
 let genesisBlock // eslint-disable-line no-unused-vars
 let walletManager
 
-beforeAll(async (done) => {
+beforeAll(async done => {
   await app.setUp()
 
   // Create the genesis block after the setup has finished or else it uses a potentially
   // wrong network config.
-  genesisBlock = require('./__fixtures__/genesisBlock')
+  genesisBlock = new Block(
+    require('@phantomchain/core-test-utils/config/testnet/genesisBlock.json'),
+  )
 
   walletManager = new (require('../lib/wallet-manager'))()
 
@@ -30,7 +33,7 @@ beforeEach(() => {
   walletManager = new (require('../lib/wallet-manager'))()
 })
 
-afterAll(async (done) => {
+afterAll(async done => {
   await app.tearDown()
 
   done()
@@ -50,10 +53,10 @@ describe('Wallet Manager', () => {
       const wallet = new Wallet(walletData1.address)
 
       walletManager.reindex(wallet)
-      expect(walletManager.getLocalWallets()).toEqual([wallet])
+      expect(walletManager.all()).toEqual([wallet])
 
       walletManager.reset()
-      expect(walletManager.getLocalWallets()).toEqual([])
+      expect(walletManager.all()).toEqual([])
     })
   })
 
@@ -65,10 +68,10 @@ describe('Wallet Manager', () => {
     it('should index the wallets', () => {
       const wallet = new Wallet(walletData1.address)
 
-      expect(walletManager.getLocalWallets()).toEqual([])
+      expect(walletManager.all()).toEqual([])
 
       walletManager.reindex(wallet)
-      expect(walletManager.getLocalWallets()).toEqual([wallet])
+      expect(walletManager.all()).toEqual([wallet])
     })
   })
 
@@ -76,7 +79,7 @@ describe('Wallet Manager', () => {
     let delegateMock
     let block2
 
-    const delegatePublicKey = '036a520acf24036ff691a4f8ba19514828e9b5aa36ca4ba0452e9012023caccfef'
+    const delegatePublicKey = block3.generatorPublicKey // '0299deebff24ebf2bb53ad78f3ea3ada5b3c8819132e191b02c263ee4aa4af3d9b'
 
     const txs = []
     for (let i = 0; i < 3; i++) {
@@ -89,7 +92,7 @@ describe('Wallet Manager', () => {
 
     beforeEach(() => {
       delegateMock = { applyBlock: jest.fn(), publicKey: delegatePublicKey }
-      walletManager.getWalletByPublicKey = jest.fn(() => delegateMock)
+      walletManager.findByPublicKey = jest.fn(() => delegateMock)
       walletManager.applyTransaction = jest.fn()
       walletManager.revertTransaction = jest.fn()
 
@@ -111,7 +114,9 @@ describe('Wallet Manager', () => {
       await walletManager.applyBlock(block2)
 
       block2.transactions.forEach((transaction, i) => {
-        expect(walletManager.applyTransaction.mock.calls[i][0]).toBe(block2.transactions[i])
+        expect(walletManager.applyTransaction.mock.calls[i][0]).toBe(
+          block2.transactions[i],
+        )
       })
     })
 
@@ -138,7 +143,9 @@ describe('Wallet Manager', () => {
         } catch (_error) {
           expect(walletManager.revertTransaction).toHaveBeenCalledTimes(2)
           block2.transactions.slice(0, 1).forEach((transaction, i) => {
-            expect(walletManager.revertTransaction.mock.calls[1 - i][0]).toEqual(block2.transactions[i])
+            expect(
+              walletManager.revertTransaction.mock.calls[1 - i][0],
+            ).toEqual(block2.transactions[i])
           })
         }
       })
@@ -149,7 +156,7 @@ describe('Wallet Manager', () => {
         })
 
         try {
-          await walletManager.applyBlock(block)
+          await walletManager.applyBlock(block2)
 
           expect(null).toBe('this should fail if no error is thrown')
         } catch (error) {
@@ -159,17 +166,13 @@ describe('Wallet Manager', () => {
       })
     })
 
-    xdescribe('the delegate of the block is not indexed', () => {
+    describe.skip('the delegate of the block is not indexed', () => {
       describe('not genesis block', () => {
-        it('throw an Error', () => {
-
-        })
+        it('throw an Error', () => {})
       })
 
       describe('genesis block', () => {
-        it('generates a new wallet', () => {
-
-        })
+        it('generates a new wallet', () => {})
       })
     })
   })
@@ -179,12 +182,9 @@ describe('Wallet Manager', () => {
       expect(walletManager.revertBlock).toBeFunction()
     })
 
-    it('should revert all transactions of the block', () => {
-    })
+    it('should revert all transactions of the block', () => {})
 
-    it('should revert the block of the delegate', () => {
-
-    })
+    it('should revert the block of the delegate', () => {})
   })
 
   describe('applyTransaction', () => {
@@ -192,11 +192,10 @@ describe('Wallet Manager', () => {
       expect(walletManager.applyTransaction).toBeFunction()
     })
 
-    describe('when the recipient is a cold wallet', () => {
-    })
+    describe('when the recipient is a cold wallet', () => {})
 
     describe('when the transaction is a transfer', () => {
-      const amount = 96579
+      const amount = new Bignum(96579)
 
       let sender
       let recipient
@@ -225,40 +224,95 @@ describe('Wallet Manager', () => {
       })
 
       it('should apply the transaction to the sender & recipient', async () => {
-        const balance = 100000000
+        const balance = new Bignum(100000000)
         sender.balance = balance
 
-        expect(sender.balance).toBe(balance)
-        expect(recipient.balance).toBe(0)
+        expect(+sender.balance.toFixed()).toBe(100000000)
+        expect(+recipient.balance.toFixed()).toBe(0)
 
         await walletManager.applyTransaction(transaction)
 
-        expect(sender.balance).toBe(balance - amount - transaction.fee)
-        expect(recipient.balance).toBe(amount)
+        expect(sender.balance).toEqual(
+          balance.minus(amount).minus(transaction.fee),
+        )
+        expect(recipient.balance).toEqual(amount)
       })
 
       it('should fail if the transaction cannot be applied', async () => {
-        const balance = 1
+        const balance = Bignum.ONE
         sender.balance = balance
 
-        expect(sender.balance).toBe(balance)
-        expect(recipient.balance).toBe(0)
+        expect(+sender.balance.toFixed()).toBe(1)
+        expect(+recipient.balance.toFixed()).toBe(0)
 
         try {
           expect(async () => {
             await walletManager.applyTransaction(transaction)
-          }).toThrowError(/apply transaction/)
+          }).toThrow(/apply transaction/)
 
           expect(null).toBe('this should fail if no error is thrown')
         } catch (error) {
-          expect(sender.balance).toBe(balance)
-          expect(recipient.balance).toBe(0)
+          expect(+sender.balance.toFixed()).toBe(1)
+          expect(+recipient.balance.toFixed()).toBe(0)
         }
       })
     })
 
-    describe('when the transaction is not a transfer', () => {
+    describe('when the transaction is a delegate registration', () => {
+      const username = 'delegate_1'
+
+      let sender
+      let transaction
+
+      beforeEach(() => {
+        sender = new Wallet(walletData1.address)
+
+        // NOTE: the order is important: we sign a transaction with a random pass
+        // to override the sender public key with a fake one
+
+        transaction = transactionBuilder
+          .delegateRegistration()
+          .usernameAsset(username)
+          .sign(Math.random().toString(36))
+          .build()
+
+        sender.publicKey = transaction.senderPublicKey
+
+        walletManager.reindex(sender)
+      })
+
+      it('should apply the transaction to the sender', async () => {
+        const balance = new Bignum(30 * PHANTOMTOSHI)
+        sender.balance = balance
+
+        expect(+sender.balance.toFixed()).toBe(30 * PHANTOMTOSHI)
+
+        await walletManager.applyTransaction(transaction)
+
+        expect(sender.balance).toEqual(balance.minus(transaction.fee))
+        expect(sender.username).toBe(username)
+        expect(walletManager.findByUsername(username)).toBe(sender)
+      })
+
+      it('should fail if the transaction cannot be applied', async () => {
+        const balance = Bignum.ONE
+        sender.balance = balance
+
+        expect(sender.balance).toBe(balance)
+
+        try {
+          expect(async () => {
+            await walletManager.applyTransaction(transaction)
+          }).toThrow(/apply transaction/)
+
+          expect(null).toBe('this should fail if no error is thrown')
+        } catch (error) {
+          expect(sender.balance).toEqual(balance)
+        }
+      })
     })
+
+    describe('when the transaction is not a transfer', () => {})
   })
 
   describe('revertTransaction', () => {
@@ -274,49 +328,57 @@ describe('Wallet Manager', () => {
         recipientId: 'AHXtmB84sTZ9Zd35h9Y1vfFvPE2Xzqj8ri',
         timestamp: 0,
         asset: {},
-        senderPublicKey: '035b63b4668ee261c16ca91443f3371e2fe349e131cb7bf5f8a3e93a3ddfdfc788',
-        signature: '304402205fcb0677e06bde7aac3dc776665615f4b93ef8c3ed0fddecef9900e74fcb00f302206958a0c9868ea1b1f3d151bdfa92da1ce24de0b1fcd91933e64fb7971e92f48d',
+        senderPublicKey:
+          '035b63b4668ee261c16ca91443f3371e2fe349e131cb7bf5f8a3e93a3ddfdfc788',
+        signature:
+          '304402205fcb0677e06bde7aac3dc776665615f4b93ef8c3ed0fddecef9900e74fcb00f302206958a0c9868ea1b1f3d151bdfa92da1ce24de0b1fcd91933e64fb7971e92f48d',
         id: 'db1aa687737858cc9199bfa336f9b1c035915c30aaee60b1e0f8afadfdb946bd',
-        senderId: 'APnhwwyTbMiykJwYbGhYjNgtHiVJDSEhSn'
+        senderId: 'APnhwwyTbMiykJwYbGhYjNgtHiVJDSEhSn',
       })
 
-      const sender = walletManager.getWalletByPublicKey(transaction.data.senderPublicKey)
-      const recipient = walletManager.getWalletByAddress(transaction.data.recipientId)
+      const sender = walletManager.findByPublicKey(
+        transaction.data.senderPublicKey,
+      )
+      const recipient = walletManager.findByAddress(
+        transaction.data.recipientId,
+      )
       recipient.balance = transaction.data.amount
 
-      expect(sender.balance).toBe(0)
-      expect(recipient.balance).toBe(transaction.data.amount)
+      expect(sender.balance).toEqual(Bignum.ZERO)
+      expect(recipient.balance).toEqual(transaction.data.amount)
 
       await walletManager.revertTransaction(transaction)
 
-      expect(sender.balance).toBe(transaction.data.amount)
-      expect(recipient.balance).toBe(0)
+      expect(sender.balance).toEqual(transaction.data.amount)
+      expect(recipient.balance).toEqual(Bignum.ZERO)
     })
   })
 
-  describe('getWalletByAddress', () => {
+  describe('findByAddress', () => {
     it('should be a function', () => {
-      expect(walletManager.getWalletByAddress).toBeFunction()
+      expect(walletManager.findByAddress).toBeFunction()
     })
 
     it('should index it by address', () => {
       const wallet = new Wallet(walletData1.address)
 
       walletManager.reindex(wallet)
-      expect(Object.keys(walletManager.walletsByAddress)[0]).toBe(wallet.address)
+      expect(walletManager.byAddress[wallet.address]).toBe(wallet)
     })
 
     it('should return it by address', () => {
       const wallet = new Wallet(walletData1.address)
 
       walletManager.reindex(wallet)
-      expect(walletManager.getWalletByAddress(wallet.address).address).toBe(wallet.address)
+      expect(walletManager.findByAddress(wallet.address).address).toBe(
+        wallet.address,
+      )
     })
   })
 
-  describe('getWalletByPublicKey', () => {
+  describe('findByPublicKey', () => {
     it('should be a function', () => {
-      expect(walletManager.getWalletByPublicKey).toBeFunction()
+      expect(walletManager.findByPublicKey).toBeFunction()
     })
 
     it('should index it by publicKey', () => {
@@ -324,7 +386,7 @@ describe('Wallet Manager', () => {
       wallet.publicKey = walletData1.publicKey
 
       walletManager.reindex(wallet)
-      expect(Object.keys(walletManager.walletsByPublicKey)[0]).toBe(wallet.publicKey)
+      expect(walletManager.byPublicKey[wallet.publicKey]).toBe(wallet)
     })
 
     it('should return it by publicKey', () => {
@@ -332,13 +394,15 @@ describe('Wallet Manager', () => {
       wallet.publicKey = 'dummy-public-key'
 
       walletManager.reindex(wallet)
-      expect(walletManager.getWalletByPublicKey(wallet.publicKey).publicKey).toBe(wallet.publicKey)
+      expect(walletManager.findByPublicKey(wallet.publicKey).publicKey).toBe(
+        wallet.publicKey,
+      )
     })
   })
 
-  describe('getWalletByUsername', () => {
+  describe('findByUsername', () => {
     it('should be a function', () => {
-      expect(walletManager.getWalletByUsername).toBeFunction()
+      expect(walletManager.findByUsername).toBeFunction()
     })
 
     it('should index it by username', () => {
@@ -346,7 +410,7 @@ describe('Wallet Manager', () => {
       wallet.username = 'dummy-username'
 
       walletManager.reindex(wallet)
-      expect(Object.keys(walletManager.walletsByUsername)[0]).toBe(wallet.username)
+      expect(walletManager.byUsername[wallet.username]).toBe(wallet)
     })
 
     it('should return it by username', () => {
@@ -354,13 +418,15 @@ describe('Wallet Manager', () => {
       wallet.username = 'dummy-username'
 
       walletManager.reindex(wallet)
-      expect(walletManager.getWalletByUsername(wallet.username).username).toBe(wallet.username)
+      expect(walletManager.findByUsername(wallet.username).username).toBe(
+        wallet.username,
+      )
     })
   })
 
-  describe('getLocalWallets', () => {
+  describe('all', () => {
     it('should be a function', () => {
-      expect(walletManager.getLocalWallets).toBeFunction()
+      expect(walletManager.all).toBeFunction()
     })
 
     it('should return indexed', () => {
@@ -370,7 +436,7 @@ describe('Wallet Manager', () => {
       const wallet2 = new Wallet(walletData2.address)
       walletManager.reindex(wallet2)
 
-      expect(walletManager.getLocalWallets()).toEqual([wallet1, wallet2])
+      expect(walletManager.all()).toEqual([wallet1, wallet2])
     })
   })
 
@@ -378,7 +444,7 @@ describe('Wallet Manager', () => {
     it('should be removed if all criteria are satisfied', async () => {
       const wallet = new Wallet(walletData1.address)
 
-      expect(walletManager.__canBePurged(wallet)).toBeTruthy()
+      expect(walletManager.__canBePurged(wallet)).toBeTrue()
     })
 
     it('should not be removed if wallet.secondPublicKey is set', async () => {
@@ -386,7 +452,7 @@ describe('Wallet Manager', () => {
       wallet.secondPublicKey = 'secondPublicKey'
 
       expect(wallet.secondPublicKey).toBe('secondPublicKey')
-      expect(walletManager.__canBePurged(wallet)).toBeFalsy()
+      expect(walletManager.__canBePurged(wallet)).toBeFalse()
     })
 
     it('should not be removed if wallet.multisignature is set', async () => {
@@ -394,7 +460,7 @@ describe('Wallet Manager', () => {
       wallet.multisignature = 'multisignature'
 
       expect(wallet.multisignature).toBe('multisignature')
-      expect(walletManager.__canBePurged(wallet)).toBeFalsy()
+      expect(walletManager.__canBePurged(wallet)).toBeFalse()
     })
 
     it('should not be removed if wallet.username is set', async () => {
@@ -402,7 +468,7 @@ describe('Wallet Manager', () => {
       wallet.username = 'username'
 
       expect(wallet.username).toBe('username')
-      expect(walletManager.__canBePurged(wallet)).toBeFalsy()
+      expect(walletManager.__canBePurged(wallet)).toBeFalse()
     })
   })
 
@@ -423,7 +489,7 @@ describe('Wallet Manager', () => {
 
       walletManager.purgeEmptyNonDelegates()
 
-      expect(walletManager.getLocalWallets()).toEqual([wallet2])
+      expect(walletManager.all()).toEqual([wallet2])
     })
 
     it('should not be purged if wallet.secondPublicKey is set', async () => {
@@ -439,7 +505,7 @@ describe('Wallet Manager', () => {
 
       walletManager.purgeEmptyNonDelegates()
 
-      expect(walletManager.getLocalWallets()).toEqual([wallet1, wallet2])
+      expect(walletManager.all()).toEqual([wallet1, wallet2])
     })
 
     it('should not be purged if wallet.multisignature is set', async () => {
@@ -455,7 +521,7 @@ describe('Wallet Manager', () => {
 
       walletManager.purgeEmptyNonDelegates()
 
-      expect(walletManager.getLocalWallets()).toEqual([wallet1, wallet2])
+      expect(walletManager.all()).toEqual([wallet1, wallet2])
     })
 
     it('should not be purged if wallet.username is set', async () => {
@@ -471,25 +537,44 @@ describe('Wallet Manager', () => {
 
       walletManager.purgeEmptyNonDelegates()
 
-      expect(walletManager.getLocalWallets()).toEqual([wallet1, wallet2])
+      expect(walletManager.all()).toEqual([wallet1, wallet2])
     })
   })
 
-  describe('isGenesis', () => {
+  describe('buildVoteBalances', () => {
     it('should be a function', () => {
-      expect(walletManager.isGenesis).toBeFunction()
+      expect(walletManager.buildVoteBalances).toBeFunction()
     })
 
-    it('should be truthy', async () => {
-      const wallet = new Wallet(walletData1.address)
+    it('should update vote balance of delegates', async () => {
+      for (let i = 0; i < 5; i++) {
+        const delegateKey = i.toString().repeat(66)
+        const delegate = {
+          address: crypto.getAddress(delegateKey),
+          publicKey: delegateKey,
+          username: `delegate${i}`,
+          voteBalance: Bignum.ZERO,
+        }
 
-      expect(walletManager.isGenesis(wallet)).toBeTruthy()
-    })
+        const voter = {
+          address: crypto.getAddress((i + 5).toString().repeat(66)),
+          balance: new Bignum((i + 1) * 1000 * PHANTOMTOSHI),
+          publicKey: `v${delegateKey}`,
+          vote: delegateKey,
+        }
 
-    it('should be falsy', async () => {
-      const wallet = new Wallet(walletDataFake.address)
+        walletManager.index([delegate, voter])
+      }
 
-      expect(walletManager.isGenesis(wallet)).toBeFalsy()
+      walletManager.buildVoteBalances()
+
+      const delegates = walletManager.allByUsername()
+      for (let i = 0; i < 5; i++) {
+        const delegate = delegates[4 - i]
+        expect(delegate.voteBalance).toEqual(
+          new Bignum((5 - i) * 1000 * PHANTOMTOSHI),
+        )
+      }
     })
   })
 })

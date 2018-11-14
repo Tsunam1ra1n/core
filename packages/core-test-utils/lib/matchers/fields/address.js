@@ -1,6 +1,6 @@
 'use strict'
 
-const { crypto } = require('@phantomcore/crypto')
+const { crypto } = require('@phantomchain/crypto')
 
 /**
  * Verify if the given value is an phantom address.
@@ -8,9 +8,11 @@ const { crypto } = require('@phantomcore/crypto')
  * @param  {String} argument
  * @return {Boolean}
  */
-module.exports = (received, argument) => {
-  return {
-    message: () => 'Expected value to be a valid address',
-    pass: crypto.validateAddress(received, argument)
-  }
-}
+const toBeArkAddress = (received, argument) => ({
+  message: () => 'Expected value to be a valid address',
+  pass: crypto.validateAddress(received, argument),
+})
+
+expect.extend({
+  toBeArkAddress,
+})

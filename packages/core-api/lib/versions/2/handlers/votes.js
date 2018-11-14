@@ -1,9 +1,10 @@
-'use strict'
-
-const { TRANSACTION_TYPES } = require('@phantomcore/crypto').constants
-const database = require('@phantomcore/core-container').resolvePlugin('database')
+const Boom = require('boom')
+const { TRANSACTION_TYPES } = require('@phantomchain/crypto').constants
 const utils = require('../utils')
 const schema = require('../schema/votes')
+const {
+  transactions: transactionsRepository,
+} = require('../../../repositories')
 
 /**
  * @type {Object}
@@ -14,14 +15,20 @@ exports.index = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
-    const transactions = await database.transactions.findAllByType(TRANSACTION_TYPES.VOTE, utils.paginate(request))
+  async handler(request, h) {
+    const transactions = await transactionsRepository.findAllByType(
+      TRANSACTION_TYPES.VOTE,
+      {
+        ...request.query,
+        ...utils.paginate(request),
+      },
+    )
 
     return utils.toPagination(request, transactions, 'transaction')
   },
   options: {
-    validate: schema.index
-  }
+    validate: schema.index,
+  },
 }
 
 /**
@@ -33,12 +40,19 @@ exports.show = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
-    const transaction = await database.transactions.findByTypeAndId(TRANSACTION_TYPES.VOTE, request.params.id)
+  async handler(request, h) {
+    const transaction = await transactionsRepository.findByTypeAndId(
+      TRANSACTION_TYPES.VOTE,
+      request.params.id,
+    )
+
+    if (!transaction) {
+      return Boom.notFound('Vote not found')
+    }
 
     return utils.respondWithResource(request, transaction, 'transaction')
   },
   options: {
-    validate: schema.show
-  }
+    validate: schema.show,
+  },
 }

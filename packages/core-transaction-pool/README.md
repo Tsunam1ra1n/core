@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-transaction-pool
+yarn add @phantomchain/core-transaction-pool
 ```
 
 ## Security

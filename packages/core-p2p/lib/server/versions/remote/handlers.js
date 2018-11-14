@@ -1,6 +1,6 @@
 'use strict'
 
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 
 /**
  * Respond with a blockchain event.

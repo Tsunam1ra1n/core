@@ -1,11 +1,11 @@
 'use strict'
 
-const { TransactionPoolInterface } = require('@phantomcore/core-transaction-pool')
+const { TransactionPoolInterface } = require('@phantomchain/core-transaction-pool')
 const Redis = require('ioredis')
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 const logger = container.resolvePlugin('logger')
 const emitter = container.resolvePlugin('event-emitter')
-const phantom = require('@phantomcore/crypto')
+const phantom = require('@phantomchain/crypto')
 const { Transaction } = phantom.models
 
 module.exports = class TransactionPool extends TransactionPoolInterface {

@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const phantom = require('@phantomcore/crypto')
+const phantom = require('@phantomchain/crypto')
 const bip39 = require('bip39')
 const bip38 = require('bip38')
 const database = require('../../../services/database')

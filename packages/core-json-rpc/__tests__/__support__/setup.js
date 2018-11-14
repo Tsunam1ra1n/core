@@ -1,31 +1,21 @@
-'use strict'
-
-const path = require('path')
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
+const containerHelper = require('@phantomchain/core-test-utils/lib/helpers/container')
 
 jest.setTimeout(60000)
 
-beforeAll(async () => {
-  await container.setUp({
-    data: '~/.phantom',
-    config: path.resolve(__dirname, '../../../core/lib/config/mainnet'),
-    token: 'phantom',
-    network: 'mainnet'
-  }, {
-    exclude: [
-      '@phantomcore/core-api',
-      '@phantomcore/core-webhooks',
-      '@phantomcore/core-graphql',
-      '@phantomcore/core-forger'
-    ],
-    options: {
-      '@phantomcore/core-json-rpc': {
-        enabled: true
-      }
-    }
-  })
-})
+exports.setUp = async () => {
+  process.env.PHANTOM_JSON_RPC_ENABLED = true
 
-afterAll(async () => {
+  await containerHelper.setUp({
+    exclude: [
+      '@phantomchain/core-api',
+      '@phantomchain/core-webhooks',
+      '@phantomchain/core-graphql',
+      '@phantomchain/core-forger',
+    ],
+  })
+}
+
+exports.tearDown = async () => {
   await container.tearDown()
-})
+}

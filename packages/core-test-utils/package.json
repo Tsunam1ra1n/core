@@ -1,5 +1,5 @@
 {
-  "name": "@phantomcore/core-test-utils",
+  "name": "@phantomchain/core-test-utils",
   "description": "Test Utilities for PHANTOM Core",
   "version": "0.1.1",
   "contributors": [
@@ -13,19 +13,27 @@
     "test:debug": "PHANTOM_ENV=test node --inspect-brk ../../node_modules/.bin/jest --runInBand --watch",
     "test:watch": "PHANTOM_ENV=test jest --runInBand --watch",
     "test:watch:all": "PHANTOM_ENV=test jest --runInBand --watchAll",
+    "flow:coverage": "flow-coverage-report --config ../../.flowcoverage.json",
+    "flow:check": "flow check ./lib",
+    "flow:deps": "flow-typed install",
     "lint": "eslint ./ --fix",
-    "depcheck": "depcheck ./"
+    "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomcore/crypto": "^0.1.1",
-    "phantomjscore": "^0.2.1",
+    "@phantomchain/core-container": "^0.1.1",
+    "@phantomchain/crypto": "^0.2.4",
     "bip39": "^2.5.0",
-    "chalk": "^2.4.1",
-    "lodash": "^4.17.10",
-    "superheroes": "^1.0.0",
-    "xstate": "^3.3.3"
+    "lodash": "^4.17.11",
+    "superheroes": "^2.0.0",
+    "xstate": "^4.0.1"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">=10.x"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.86.0"
   }
 }

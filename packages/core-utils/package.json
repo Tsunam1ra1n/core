@@ -1,0 +1,37 @@
+{
+  "name": "@phantomchain/core-utils",
+  "description": "Utilities for Phantom Core",
+  "version": "0.1.0",
+  "contributors": [
+    "Brian Faust <brian@ark.io>"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "cross-env PHANTOM_ENV=test jest --runInBand --detectOpenHandles",
+    "test:coverage": "cross-env PHANTOM_ENV=test jest --coverage --coveragePathIgnorePatterns='/(defaults.js|index.js)$' --runInBand --detectOpenHandles",
+    "test:debug": "cross-env PHANTOM_ENV=test node --inspect-brk ../../node_modules/.bin/jest --runInBand",
+    "test:watch": "cross-env PHANTOM_ENV=test jest --runInBand --watch",
+    "test:watch:all": "cross-env PHANTOM_ENV=test jest --runInBand --watchAll",
+    "flow:coverage": "flow-coverage-report --config ../../.flowcoverage.json",
+    "flow:check": "flow check ./lib",
+    "flow:deps": "flow-typed install",
+    "lint": "eslint ./ --fix",
+    "depcheck": "depcheck ./ --ignores=flow-bin"
+  },
+  "dependencies": {
+    "@phantomchain/core-container": "^0.1.1",
+    "@phantomchain/crypto": "^0.2.4",
+    "cli-table3": "^0.5.1",
+    "moment": "^2.22.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=10.x"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.86.0"
+  }
+}

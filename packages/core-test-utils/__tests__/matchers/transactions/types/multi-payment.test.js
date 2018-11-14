@@ -1,8 +1,6 @@
-const { MULTI_PAYMENT } = require('@phantomcore/crypto').constants
+const { MULTI_PAYMENT } = require('@phantomchain/crypto').constants
 
-expect.extend({
-  toBeMultiPaymentType: require('../../../../lib/matchers/transactions/types/multi-payment')
-})
+require('../../../../lib/matchers/transactions/types/multi-payment')
 
 describe('.toBeMultiPaymentType', () => {
   test('passes when given a valid transaction', () => {

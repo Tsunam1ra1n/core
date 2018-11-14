@@ -1,8 +1,6 @@
-const { DELEGATE_RESIGNATION } = require('@phantomcore/crypto').constants
+const { DELEGATE_RESIGNATION } = require('@phantomchain/crypto').constants
 
-expect.extend({
-  toBeDelegateResignationType: require('../../../../lib/matchers/transactions/types/delegate-resignation')
-})
+require('../../../../lib/matchers/transactions/types/delegate-resignation')
 
 describe('.toBeDelegateResignationType', () => {
   test('passes when given a valid transaction', () => {

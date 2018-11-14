@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-tester-cli
+yarn add @phantomchain/core-tester-cli
 ```
 
 ## Security

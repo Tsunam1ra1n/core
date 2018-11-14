@@ -1,10 +1,12 @@
 'use strict'
 
-const { MULTI_PAYMENT } = require('@phantomcore/crypto').constants
+const { MULTI_PAYMENT } = require('@phantomchain/crypto').constants
 
-module.exports = (received) => {
-  return {
-    message: () => 'Expected value to be a valid MULTI_PAYMENT transaction.',
-    pass: received.type === MULTI_PAYMENT
-  }
-}
+const toBeMultiPaymentType = received => ({
+  message: () => 'Expected value to be a valid MULTI_PAYMENT transaction.',
+  pass: received.type === MULTI_PAYMENT,
+})
+
+expect.extend({
+  toBeMultiPaymentType,
+})

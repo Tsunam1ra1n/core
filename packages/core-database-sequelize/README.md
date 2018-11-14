@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-database-sequelize
+yarn add @phantomchain/core-database-sequelize
 ```
 
 ## Configuration
@@ -15,8 +15,10 @@ yarn add @phantomcore/core-database-sequelize
 ```js
 module.exports = {
   dialect: 'sqlite',
-  storage: `${process.env.ARK_PATH_DATA}/database/${process.env.ARK_NETWORK_NAME}.sqlite`,
-  logging: process.env.ARK_DB_LOGGING
+  storage: `${process.env.PHANTOM_PATH_DATA}/database/${
+    process.env.PHANTOM_NETWORK_NAME
+  }.sqlite`,
+  logging: process.env.PHANTOM_DB_LOGGING,
 }
 ```
 

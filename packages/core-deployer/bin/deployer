@@ -87,7 +87,7 @@ let networkConfig = {
       epoch: options.epoch,
       activeDelegates: options.activeDelegates,
       fees: {
-        dynamic : false,
+        dynamic: false,
         transfer: options.feeTransfer,
         secondSignature: options.feeVote,
         delegateRegistration: options.feeSecondSignature,
@@ -114,7 +114,7 @@ let networkConfig = {
   client: {
     token: options.token,
     symbol: options.symbol,
-    explorer: options.explorerUrl,
+    explorer: options.explorerUrl
   },
   exceptions: {}
 }
@@ -140,7 +140,7 @@ const requestNodeIp = options.nodeIp === '0.0.0.0' ? '127.0.0.1' : options.nodeI
 
 updateConfig('network.json', networkConfig, options.configPath)
 updateConfig('peers.json', {
-  minimumVersion: '>=1.1.1',
+  minimumVersion: '>=1.3.3',
   minimumNetworkReach: 1,
   list: [{
     ip: requestNodeIp,
@@ -170,29 +170,28 @@ const plugins = {}
 for (let plugin in pluginsOriginal) {
   plugins[plugin] = {}
 }
-plugins['@phantomcore/core-p2p'] = {
+plugins['@phantomchain/core-p2p'] = {
   host: options.nodeIp,
   port: options.p2pPort,
   whitelist: ['127.0.0.1', '192.168.*']
 }
-plugins['@phantomcore/core-api'] = {
+plugins['@phantomchain/core-api'] = {
   enabled: true,
   host: options.nodeIp,
   port: options.apiPort,
   whitelist: ['*']
 }
-plugins['@phantomcore/core-database-sequelize'] = {
+plugins['@phantomchain/core-database-postgres'] = {
   host: options.dbHost,
   port: options.dbPort,
   username: options.dbUsername,
   password: options.dbPassword,
-  database: options.dbDatabase,
-  dialect: 'postgres'
+  database: options.dbDatabase
 }
-plugins['@phantomcore/core-blockchain'] = {
+plugins['@phantomchain/core-blockchain'] = {
   fastRebuild: false
 }
-plugins['@phantomcore/core-forger'] = {
+plugins['@phantomchain/core-forger'] = {
   hosts: [`http://${requestNodeIp}:${options.p2pPort}`]
 }
 

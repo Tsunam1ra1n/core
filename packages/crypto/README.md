@@ -1,17 +1,25 @@
+<<<<<<< HEAD
 ![PHANTOM Core](banner.png)
+=======
 
-# ARK - Crypto
+# Ark - Crypto
+
+> > > > > > > f5226bda8a9b3a1de6fdbc5742bf74a51bbcfb71
+
+<p align="center">
+    <img src="./banner.png?sanitize=true" />
+</p>
 
 ## Installation
 
 ```bash
-yarn add @phantomcore/crypto
+yarn add @phantomchain/crypto
 ```
 
 If you want to use the CDN version:
 
 ```html
-<script src="https://unpkg.com/@phantomcore/crypto/dist/index.umd.js"></script>
+<script src="https://unpkg.com/@phantomchain/crypto/dist/index.umd.js"></script>
 ```
 
 ## Usage
@@ -19,13 +27,13 @@ If you want to use the CDN version:
 Import the library in node.js:
 
 ```
-import ArkCrypto from @phantomcore/crypto
+import ArkCrypto from @phantomchain/crypto
 ```
 
 Use the library:
 
 ```
-const constants = ArkCrypto.constants
+const constants = ArkEcosytemCrypto.constants
 ```
 
 ## Security

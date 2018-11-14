@@ -5,17 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-database
-```
-
-## Configuration
-
-### Defaults
-
-```js
-module.exports = {
-  snapshots: `${process.env.ARK_PATH_DATA}/${process.env.ARK_NETWORK_NAME}/snapshots`
-}
+yarn add @phantomchain/core-database
 ```
 
 ## Security

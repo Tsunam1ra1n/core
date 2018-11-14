@@ -3,7 +3,7 @@
 const Boom = require('boom')
 const requestIp = require('request-ip')
 const mm = require('micromatch')
-const logger = require('@phantomcore/core-container').resolvePlugin('logger')
+const logger = require('@phantomchain/core-container').resolvePlugin('logger')
 
 /**
  * The register method used by hapi.js.

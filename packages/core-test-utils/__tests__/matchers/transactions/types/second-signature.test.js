@@ -1,8 +1,6 @@
-const { SECOND_SIGNATURE } = require('@phantomcore/crypto').constants
+const { SECOND_SIGNATURE } = require('@phantomchain/crypto').constants
 
-expect.extend({
-  toBeSecondSignatureType: require('../../../../lib/matchers/transactions/types/second-signature')
-})
+require('../../../../lib/matchers/transactions/types/second-signature')
 
 describe('.toBeSecondSignatureType', () => {
   test('passes when given a valid transaction', () => {

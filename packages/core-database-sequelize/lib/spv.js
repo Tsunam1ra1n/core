@@ -1,6 +1,6 @@
-const { Transaction } = require('@phantomcore/crypto').models
-const { TRANSACTION_TYPES } = require('@phantomcore/crypto').constants
-const container = require('@phantomcore/core-container')
+const { Transaction } = require('@phantomchain/crypto').models
+const { TRANSACTION_TYPES } = require('@phantomchain/crypto').constants
+const container = require('@phantomchain/core-container')
 const logger = container.resolvePlugin('logger')
 const config = container.resolvePlugin('config')
 

@@ -1,16 +1,11 @@
-'use strict'
-
-const path = require('path')
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
+const containerHelper = require('@phantomchain/core-test-utils/lib/helpers/container')
 
 jest.setTimeout(60000)
 
 exports.setUp = async () => {
-  await container.setUp({
-    data: '~/.phantom',
-    config: path.resolve(__dirname, './config')
-  }, {
-    exit: '@phantomcore/core-blockchain'
+  await containerHelper.setUp({
+    exit: '@phantomchain/core-blockchain',
   })
 }
 

@@ -1,4 +1,4 @@
-const { Block } = require('@phantomcore/crypto').models
+const { Block } = require('@phantomchain/crypto').models
 
 module.exports = new Block({
   'version': 0,

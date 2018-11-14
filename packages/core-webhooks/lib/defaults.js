@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
   enabled: process.env.PHANTOM_WEBHOOKS_ENABLED,
   database: {
@@ -18,9 +16,7 @@ module.exports = {
     whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*'],
     pagination: {
       limit: 100,
-      include: [
-        '/api/webhooks'
-      ]
-    }
-  }
+      include: ['/api/webhooks'],
+    },
+  },
 }

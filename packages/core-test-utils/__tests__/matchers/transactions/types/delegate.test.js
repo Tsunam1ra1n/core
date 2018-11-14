@@ -1,8 +1,6 @@
-const { DELEGATE } = require('@phantomcore/crypto').constants
+const { DELEGATE } = require('@phantomchain/crypto').constants
 
-expect.extend({
-  toBeDelegateType: require('../../../../lib/matchers/transactions/types/delegate')
-})
+require('../../../../lib/matchers/transactions/types/delegate')
 
 describe('.toBeDelegateType', () => {
   test('passes when given a valid transaction', () => {

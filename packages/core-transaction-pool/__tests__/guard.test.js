@@ -1,5 +1,3 @@
-'use strict'
-
 const app = require('./__support__/setup')
 
 let guard
@@ -28,6 +26,24 @@ describe('Transaction Guard', () => {
     })
   })
 
+  describe('invalidate', () => {
+    it('should be a function', () => {
+      expect(guard.invalidate).toBeFunction()
+    })
+
+    it('should invalidate transactions', () => {
+      guard.invalidate([{ id: 1 }, { id: 2 }], 'Invalid.')
+
+      expect(guard.invalid).toHaveLength(2)
+      expect(guard.invalid).toEqual([{ id: 1 }, { id: 2 }])
+      expect(guard.errors).toBeObject()
+      expect(Object.keys(guard.errors)).toHaveLength(2)
+      expect(guard.errors['1']).toEqual([
+        { message: 'Invalid.', type: 'ERR_INVALID' },
+      ])
+    })
+  })
+
   describe('getIds', () => {
     it('should be a function', () => {
       expect(guard.getIds).toBeFunction()
@@ -45,7 +61,7 @@ describe('Transaction Guard', () => {
         accept: [2],
         excess: [3],
         invalid: [4],
-        broadcast: [5]
+        broadcast: [5],
       })
     })
 
@@ -73,7 +89,7 @@ describe('Transaction Guard', () => {
         accept: [{ id: 2 }],
         excess: [{ id: 3 }],
         invalid: [{ id: 4 }],
-        broadcast: [{ id: 5 }]
+        broadcast: [{ id: 5 }],
       })
     })
 
@@ -81,6 +97,47 @@ describe('Transaction Guard', () => {
       guard.excess = [{ id: 3 }]
 
       expect(guard.getTransactions('excess')).toEqual([{ id: 3 }])
+    })
+  })
+
+  describe('toJson', () => {
+    it('should be a function', () => {
+      expect(guard.toJson).toBeFunction()
+    })
+
+    it('should be ok', () => {
+      guard.transactions = [{ id: 1 }]
+      guard.accept = [{ id: 2 }]
+      guard.excess = [{ id: 3 }]
+      guard.broadcast = [{ id: 5 }]
+
+      expect(guard.toJson()).toEqual({
+        data: {
+          accept: [2],
+          excess: [3],
+          invalid: [],
+          broadcast: [5],
+        },
+        errors: null,
+      })
+    })
+
+    it('should be ok with error', () => {
+      guard.transactions = [{ id: 1 }]
+      guard.accept = [{ id: 2 }]
+      guard.excess = [{ id: 3 }]
+      guard.invalidate({ id: 4 }, 'Invalid.')
+      guard.broadcast = [{ id: 5 }]
+
+      expect(guard.toJson()).toEqual({
+        data: {
+          accept: [2],
+          excess: [3],
+          invalid: [4],
+          broadcast: [5],
+        },
+        errors: { 4: [{ message: 'Invalid.', type: 'ERR_INVALID' }] },
+      })
     })
   })
 
@@ -92,13 +149,13 @@ describe('Transaction Guard', () => {
     it('should be ok', () => {
       guard.excess = [{ id: 1 }, { id: 2 }]
 
-      expect(guard.has('excess', 2)).toBeTruthy()
+      expect(guard.has('excess', 2)).toBeTrue()
     })
 
     it('should not be ok', () => {
       guard.excess = [{ id: 1 }, { id: 2 }]
 
-      expect(guard.has('excess', 1)).toBeFalsy()
+      expect(guard.has('excess', 1)).toBeFalse()
     })
   })
 
@@ -110,13 +167,13 @@ describe('Transaction Guard', () => {
     it('should be ok', () => {
       guard.excess = [{ id: 1 }, { id: 2 }]
 
-      expect(guard.hasAtLeast('excess', 2)).toBeTruthy()
+      expect(guard.hasAtLeast('excess', 2)).toBeTrue()
     })
 
     it('should not be ok', () => {
       guard.excess = [{ id: 1 }]
 
-      expect(guard.hasAtLeast('excess', 2)).toBeFalsy()
+      expect(guard.hasAtLeast('excess', 2)).toBeFalse()
     })
   })
 
@@ -128,19 +185,19 @@ describe('Transaction Guard', () => {
     it('should be ok', () => {
       guard.excess = [{ id: 1 }]
 
-      expect(guard.hasAny('excess')).toBeTruthy()
+      expect(guard.hasAny('excess')).toBeTrue()
     })
 
     it('should not be ok', () => {
       guard.excess = []
 
-      expect(guard.hasAny('excess')).toBeFalsy()
+      expect(guard.hasAny('excess')).toBeFalse()
     })
   })
 
-  describe('__transformAndFilterTransations', () => {
+  describe('__transformAndFilterTransactions', () => {
     it('should be a function', () => {
-      expect(guard.__transformAndFilterTransations).toBeFunction()
+      expect(guard.__transformAndFilterTransactions).toBeFunction()
     })
   })
 
@@ -150,15 +207,53 @@ describe('Transaction Guard', () => {
     })
   })
 
+  describe('__determineExcessTransactions', () => {
+    it('should be a function', () => {
+      expect(guard.__determineExcessTransactions).toBeFunction()
+    })
+  })
+
   describe('__determineFeeMatchingTransactions', () => {
     it('should be a function', () => {
       expect(guard.__determineFeeMatchingTransactions).toBeFunction()
     })
   })
 
-  describe('__determineExcessTransactions', () => {
+  describe('__pushError', () => {
     it('should be a function', () => {
-      expect(guard.__determineExcessTransactions).toBeFunction()
+      expect(guard.__pushError).toBeFunction()
+    })
+
+    it('should have error for transaction', () => {
+      expect(guard.errors).toBeEmpty()
+
+      guard.__pushError({ id: 1 }, 'ERR_INVALID', 'Invalid.')
+
+      expect(guard.errors).toBeObject()
+      expect(guard.errors['1']).toBeArray()
+      expect(guard.errors['1']).toHaveLength(1)
+      expect(guard.errors['1']).toEqual([
+        { message: 'Invalid.', type: 'ERR_INVALID' },
+      ])
+      expect(guard.invalid).toHaveLength(1)
+      expect(guard.invalid).toEqual([{ id: 1 }])
+    })
+
+    it('should have multiple errors for transaction', () => {
+      expect(guard.errors).toBeEmpty()
+
+      guard.__pushError({ id: 1 }, 'ERR_INVALID', 'Invalid 1.')
+      guard.__pushError({ id: 1 }, 'ERR_INVALID', 'Invalid 2.')
+
+      expect(guard.errors).toBeObject()
+      expect(guard.errors['1']).toBeArray()
+      expect(guard.errors['1']).toHaveLength(2)
+      expect(guard.errors['1']).toEqual([
+        { message: 'Invalid 1.', type: 'ERR_INVALID' },
+        { message: 'Invalid 2.', type: 'ERR_INVALID' },
+      ])
+      expect(guard.invalid).toHaveLength(1)
+      expect(guard.invalid).toEqual([{ id: 1 }])
     })
   })
 

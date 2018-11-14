@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-logger
+yarn add @phantomchain/core-logger
 ```
 
 ## Security

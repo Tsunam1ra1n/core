@@ -1,12 +1,12 @@
 'use strict'
 
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 const config = container.resolvePlugin('config')
 const requestIp = require('request-ip')
 const logger = container.resolvePlugin('logger')
 
-const { slots } = require('@phantomcore/crypto')
-const { Transaction } = require('@phantomcore/crypto').models
+const { slots } = require('@phantomchain/crypto')
+const { Transaction } = require('@phantomchain/crypto').models
 
 /**
  * @type {Object}

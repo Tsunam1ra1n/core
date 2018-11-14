@@ -1,19 +1,24 @@
 'use strict'
 
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 
 /**
  * Start a relay.
  * @param  {Object} options
  * @return {void}
  */
-module.exports = async (options) => {
+module.exports = async options => {
   await container.setUp(options, {
-    exclude: ['@phantomcore/core-forger'],
+    exclude: ['@phantomchain/core-forger'],
     options: {
-      '@phantomcore/core-blockchain': {
-        networkStart: options.networkStart
-      }
-    }
+      '@phantomchain/core-p2p': {
+        networkStart: options.networkStart,
+        disableDiscovery: options.disableDiscovery,
+        skipDiscovery: options.skipDiscovery,
+      },
+      '@phantomchain/core-blockchain': {
+        networkStart: options.networkStart,
+      },
+    },
   })
 }

@@ -1,6 +1,4 @@
-'use strict'
-
-const handlers = require('./handlers')
+const blockchain = require('./handlers/blockchain')
 
 /**
  * Register remote routes.
@@ -10,7 +8,7 @@ const handlers = require('./handlers')
  */
 const register = async (server, options) => {
   server.route([
-    { method: 'GET', path: '/blockchain/{event}', ...handlers.sendBlockchainEvent }
+    { method: 'GET', path: '/blockchain/{event}', ...blockchain.emitEvent },
   ])
 }
 
@@ -21,5 +19,5 @@ const register = async (server, options) => {
 exports.plugin = {
   name: 'PHANTOM P2P API - Remote',
   version: '0.1.0',
-  register
+  register,
 }

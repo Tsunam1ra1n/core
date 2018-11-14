@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const phantom = require('@phantomcore/crypto')
+const phantom = require('@phantomchain/crypto')
 
 module.exports = {
   name: 'accounts.create',

@@ -1,7 +1,7 @@
 'use strict'
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 const bs58check = require('bs58check')
-const { configManager } = require('@phantomcore/crypto')
+const { configManager } = require('@phantomchain/crypto')
 const logger = container.resolvePlugin('logger')
 const database = container.resolvePlugin('database')
 

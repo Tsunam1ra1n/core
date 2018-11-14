@@ -6,7 +6,7 @@ module.exports = class NetworkManager {
    * Get all network types.
    * @return {Object}
    */
-  static getAll () {
+  static getAll() {
     return networks
   }
 
@@ -16,7 +16,7 @@ module.exports = class NetworkManager {
    * @param  {String} [token=phantom]
    * @return {Object}
    */
-  static findByName (name, token = 'phantom') {
+  static findByName(name, token = 'phantom') {
     return get(networks, `${token.toLowerCase()}.${name}`)
   }
 }

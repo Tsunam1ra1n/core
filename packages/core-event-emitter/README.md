@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-event-emitter
+yarn add @phantomchain/core-event-emitter
 ```
 
 ## Security

@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-transaction-pool-redis
+yarn add @phantomchain/core-transaction-pool-redis
 ```
 
 ## Configuration
@@ -19,9 +19,9 @@ module.exports = {
   maxTransactionsPerSender: 100,
   allowedSenders: [],
   redis: {
-    host: process.env.ARK_REDIS_HOST || 'localhost',
-    port: process.env.ARK_REDIS_PORT || 6379
-  }
+    host: process.env.PHANTOM_REDIS_HOST || 'localhost',
+    port: process.env.PHANTOM_REDIS_PORT || 6379,
+  },
 }
 ```
 

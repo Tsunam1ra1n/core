@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-test-utils
+yarn add @phantomchain/core-test-utils
 ```
 
 ## Security

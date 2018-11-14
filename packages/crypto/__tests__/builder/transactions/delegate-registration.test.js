@@ -13,12 +13,35 @@ beforeEach(() => {
 })
 
 describe('Delegate Registration Transaction', () => {
+  describe('verify', () => {
+    it('should be valid with a signature', () => {
+      const actual = builder.usernameAsset('homer').sign('dummy passphrase')
+
+      expect(actual.build().verify()).toBeTrue()
+    })
+
+    it('should be valid with a second signature', () => {
+      const actual = builder
+        .usernameAsset('homer')
+        .sign('dummy passphrase')
+        .secondSign('dummy passphrase')
+
+      expect(actual.build().verify()).toBeTrue()
+    })
+  })
+
   transactionBuilderTests()
 
   it('should have its specific properties', () => {
-    expect(builder).toHaveProperty('data.type', TRANSACTION_TYPES.DELEGATE_REGISTRATION)
+    expect(builder).toHaveProperty(
+      'data.type',
+      TRANSACTION_TYPES.DELEGATE_REGISTRATION,
+    )
     expect(builder).toHaveProperty('data.amount', 0)
-    expect(builder).toHaveProperty('data.fee', feeManager.get(TRANSACTION_TYPES.DELEGATE_REGISTRATION))
+    expect(builder).toHaveProperty(
+      'data.fee',
+      feeManager.get(TRANSACTION_TYPES.DELEGATE_REGISTRATION),
+    )
     expect(builder).toHaveProperty('data.recipientId', null)
     expect(builder).toHaveProperty('data.senderPublicKey', null)
     expect(builder).toHaveProperty('data.asset', { delegate: {} })
@@ -62,8 +85,10 @@ describe('Delegate Registration Transaction', () => {
       })
 
       // NOTE: V2
-      xit('generates and returns the bytes as hex', () => {
-        expect(builder.getStruct().hex).toBe(crypto.getBytes(builder).toString('hex'))
+      it.skip('generates and returns the bytes as hex', () => {
+        expect(builder.getStruct().hex).toBe(
+          crypto.getBytes(builder).toString('hex'),
+        )
       })
       it('returns the id', () => {
         expect(builder.getStruct().id).toBe(crypto.getId(builder))
@@ -72,7 +97,9 @@ describe('Delegate Registration Transaction', () => {
         expect(builder.getStruct().signature).toBe(builder.signature)
       })
       it('returns the second signature', () => {
-        expect(builder.getStruct().secondSignature).toBe(builder.secondSignature)
+        expect(builder.getStruct().secondSignature).toBe(
+          builder.secondSignature,
+        )
       })
       it('returns the timestamp', () => {
         expect(builder.getStruct().timestamp).toBe(builder.timestamp)
@@ -84,7 +111,9 @@ describe('Delegate Registration Transaction', () => {
         expect(builder.getStruct().fee).toBe(builder.fee)
       })
       it('returns the sender public key', () => {
-        expect(builder.getStruct().senderPublicKey).toBe(builder.senderPublicKey)
+        expect(builder.getStruct().senderPublicKey).toBe(
+          builder.senderPublicKey,
+        )
       })
 
       it('returns the amount', () => {

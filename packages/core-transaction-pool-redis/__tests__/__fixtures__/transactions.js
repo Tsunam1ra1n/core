@@ -1,4 +1,4 @@
-const phantom = require('@phantomcore/crypto')
+const phantom = require('@phantomchain/crypto')
 const { slots } = phantom
 const { Transaction } = phantom.models
 

@@ -1,20 +1,17 @@
-'use strict'
+const container = require('@phantomchain/core-container')
+const containerHelper = require('@phantomchain/core-test-utils/lib/helpers/container')
 
-const path = require('path')
-const container = require('@phantomcore/core-container')
+jest.setTimeout(60000)
 
 exports.setUp = async () => {
-  await container.setUp({
-    data: '~/.phantom',
-    config: path.resolve(__dirname, '../../../core/lib/config/testnet'),
-    token: 'phantom',
-    network: 'testnet'
-  }, {
-    exit: '@phantomcore/core-p2p',
-    exclude: ['@phantomcore/core-blockchain']
+  await containerHelper.setUp({
+    exit: '@phantomchain/core-p2p',
+    exclude: ['@phantomchain/core-blockchain'],
   })
 
   return container
 }
 
-exports.tearDown = async () => container.tearDown()
+exports.tearDown = async () => {
+  await container.tearDown()
+}

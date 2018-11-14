@@ -5,7 +5,20 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-blockchain
+yarn add @phantomchain/core-blockchain
+```
+
+## Configuration
+
+```js
+module.exports = {
+  version: '2.0.0',
+  fastRebuild: false,
+  databaseRollback: {
+    maxBlockRewind: 10000,
+    steps: 1000,
+  },
+}
 ```
 
 ## Security

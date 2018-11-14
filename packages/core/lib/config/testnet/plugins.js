@@ -1,8 +1,8 @@
 module.exports = {
-  '@phantomcore/core-event-emitter': {},
-  '@phantomcore/core-config': {},
-  '@phantomcore/core-logger': {},
-  '@phantomcore/core-logger-winston': {
+  '@phantomchain/core-event-emitter': {},
+  '@phantomchain/core-config': {},
+  '@phantomchain/core-logger': {},
+  '@phantomchain/core-logger-winston': {
     transports: {
       console: {
         options: {
@@ -20,10 +20,10 @@ module.exports = {
       }
     }
   },
-  '@phantomcore/core-database': {
+  '@phantomchain/core-database': {
     snapshots: `${process.env.PHANTOM_PATH_DATA}/snapshots/${process.env.PHANTOM_NETWORK_NAME}`
   },
-  '@phantomcore/core-database-sequelize': {
+  '@phantomchain/core-database-sequelize': {
     dialect: 'sqlite',
     storage: process.env.PHANTOM_DB_STORAGE || `${process.env.PHANTOM_PATH_DATA}/database/${process.env.PHANTOM_NETWORK_NAME}_.sqlite`,
     // host: process.env.PHANTOM_DB_HOST || 'localhost',
@@ -37,8 +37,8 @@ module.exports = {
       port: process.env.PHANTOM_REDIS_PORT || 6379
     }
   },
-  '@phantomcore/core-transaction-pool': {},
-  '@phantomcore/core-transaction-pool-redis': {
+  '@phantomchain/core-transaction-pool': {},
+  '@phantomchain/core-transaction-pool-redis': {
     enabled: !process.env.PHANTOM_TRANSACTION_POOL_DISABLED,
     key: 'phantom-testnet',
     maxTransactionsPerSender: process.env.PHANTOM_TRANSACTION_POOL_MAX_PER_SENDER || 100,
@@ -48,21 +48,43 @@ module.exports = {
       port: process.env.PHANTOM_REDIS_PORT || 6379
     }
   },
-  '@phantomcore/core-p2p': {
+  '@phantomchain/core-database-postgres': {
+    connection: {
+      host: process.env.PHANTOM_DB_HOST || 'localhost',
+      port: process.env.PHANTOM_DB_PORT || 5432,
+      database:
+        process.env.PHANTOM_DB_DATABASE || `ark_${process.env.PHANTOM_NETWORK_NAME}`,
+      user: process.env.PHANTOM_DB_USERNAME || 'ark',
+      password: process.env.PHANTOM_DB_PASSWORD || 'password',
+    },
+  },
+  '@phantomchain/core-transaction-pool-mem': {
+    enabled: true,
+    storage: `${process.env.PHANTOM_PATH_DATA}/database/transaction-pool-${
+      process.env.PHANTOM_NETWORK_NAME
+    }.sqlite`,
+    maxTransactionsPerSender:
+      process.env.PHANTOM_TRANSACTION_POOL_MAX_PER_SENDER || 300,
+    whitelist: [],
+    allowedSenders: [],
+    maxTransactionsPerRequest: 40,
+    maxTransactionAge: 2700,
+  },
+  '@phantomchain/core-p2p': {
     host: process.env.PHANTOM_P2P_HOST || '0.0.0.0',
     port: process.env.PHANTOM_P2P_PORT || 4000,
     whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*']
   },
-  '@phantomcore/core-blockchain': {
+  '@phantomchain/core-blockchain': {
     fastRebuild: true
   },
-  '@phantomcore/core-api': {
+  '@phantomchain/core-api': {
     enabled: !process.env.PHANTOM_API_DISABLED,
     host: process.env.PHANTOM_API_HOST || '0.0.0.0',
     port: process.env.PHANTOM_API_PORT || 4003,
     whitelist: ['*']
   },
-  '@phantomcore/core-webhooks': {
+  '@phantomchain/core-webhooks': {
     enabled: process.env.PHANTOM_WEBHOOKS_ENABLED,
     database: {
       dialect: 'sqlite',
@@ -80,17 +102,17 @@ module.exports = {
       whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*']
     }
   },
-  '@phantomcore/core-graphql': {
+  '@phantomchain/core-graphql': {
     enabled: process.env.PHANTOM_GRAPHQL_ENABLED,
     host: process.env.PHANTOM_GRAPHQL_HOST || '0.0.0.0',
     port: process.env.PHANTOM_GRAPHQL_PORT || 4005,
     path: '/graphql',
-    graphiql: true
+    graphiql: true,
   },
-  '@phantomcore/core-forger': {
+  '@phantomchain/core-forger': {
     hosts: ['http://127.0.0.1:4000']
   },
-  '@phantomcore/core-json-rpc': {
+  '@phantomchain/core-json-rpc': {
     enabled: process.env.PHANTOM_JSON_RPC_ENABLED,
     host: process.env.PHANTOM_JSON_RPC_HOST || '0.0.0.0',
     port: process.env.PHANTOM_JSON_RPC_PORT || 8080,

@@ -1,7 +1,7 @@
 'use strict'
 
 const rule = require('../../../../lib/rules/models/transactions/delegate-registration')
-const { constants, transactionBuilder } = require('@phantomcore/crypto')
+const { constants, transactionBuilder } = require('@phantomchain/crypto')
 
 let transaction
 beforeEach(() => {

@@ -1,5 +1,5 @@
 {
-  "name": "@phantomcore/core-database-sequelize",
+  "name": "@phantomchain/core-database-sequelize",
   "description": "Sequelize ORM for PHANTOM Core",
   "version": "0.1.1",
   "contributors": [
@@ -21,9 +21,9 @@
     "depcheck": "depcheck ./ --ignores mysql2,pg,pg-hstore,sqlite3"
   },
   "dependencies": {
-    "@phantomcore/core-container": "^0.1.1",
-    "@phantomcore/core-database": "^0.1.1",
-    "@phantomcore/crypto": "^0.1.1",
+    "@phantomchain/core-container": "^0.1.1",
+    "@phantomchain/core-database": "^0.1.1",
+    "@phantomchain/crypto": "^0.1.1",
     "fs-extra": "^6.0.1",
     "ioredis": "^3.2.2",
     "lodash": "^4.17.10",

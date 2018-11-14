@@ -3,7 +3,7 @@
 const app = require('./__support__/setup')
 const delay = require('delay')
 const mockData = require('./__fixtures__/transactions')
-const { Transaction } = require('@phantomcore/crypto').models
+const { Transaction } = require('@phantomchain/crypto').models
 const defaultConfig = require('../lib/defaults')
 
 let connection

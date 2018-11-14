@@ -1,35 +1,37 @@
 'use strict'
 
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 const config = container.resolvePlugin('config')
 const blockchain = container.resolvePlugin('blockchain')
 
-const { crypto } = require('@phantomcore/crypto')
-const { Transaction } = require('@phantomcore/crypto').models
+const { crypto } = require('@phantomchain/crypto')
+const { Transaction } = require('@phantomchain/crypto').models
 
-const formatTimestamp = require('./utils/format-timestamp')
+const { bignumify, formatTimestamp } = require('@phantomchain/core-utils')
 
 /**
  * Turns a "transaction" object into a generic object.
  * @param  {Object} model
  * @return {Object}
  */
-module.exports = (model) => {
-  const data = Transaction.deserialize(model.serialized.toString('hex'))
+module.exports = model => {
+  const data = new Transaction(model.serialized.toString('hex'))
   const lastBlock = blockchain.getLastBlock()
 
   return {
     id: data.id,
     blockId: model.blockId,
     type: data.type,
-    amount: data.amount,
-    fee: data.fee,
+    amount: +bignumify(data.amount).toFixed(),
+    fee: +bignumify(data.fee).toFixed(),
     sender: crypto.getAddress(data.senderPublicKey, config.network.pubKeyHash),
     recipient: data.recipientId,
     signature: data.signature,
+    signSignature: data.signSignature,
+    signatures: data.signatures,
     vendorField: data.vendorField,
     asset: data.asset,
     confirmations: model.block ? lastBlock.data.height - model.block.height : 0,
-    timestamp: formatTimestamp(data.timestamp)
+    timestamp: formatTimestamp(data.timestamp),
   }
 }

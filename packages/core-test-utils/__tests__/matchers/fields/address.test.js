@@ -1,6 +1,4 @@
-expect.extend({
-  toBePhantomAddress: require('../../../lib/matchers/fields/address')
-})
+require('../../../lib/matchers/fields/address')
 
 describe('.toBePhantomAddress', () => {
   test('passes when given a valid address', () => {

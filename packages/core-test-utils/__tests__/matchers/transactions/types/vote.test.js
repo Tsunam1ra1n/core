@@ -1,8 +1,6 @@
-const { vote } = require('@phantomcore/crypto').constants
+const { vote } = require('@phantomchain/crypto').constants
 
-expect.extend({
-  toBeVoteType: require('../../../../lib/matchers/transactions/types/vote')
-})
+require('../../../../lib/matchers/transactions/types/vote')
 
 describe('.toBeVoteType', () => {
   test('passes when given a valid transaction', () => {

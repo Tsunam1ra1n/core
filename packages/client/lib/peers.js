@@ -1,23 +1,23 @@
 /*
- * List from https://github.com/PhantomCore/peers
+ * List from https://github.com/PhantomChain/peers
  */
 module.exports = {
   devnet: [
     {
       ip: '167.114.29.51',
-      port: 4002
+      port: 4003
     }, {
       ip: '167.114.29.52',
-      port: 4002
+      port: 4003
     }, {
       ip: '167.114.29.53',
-      port: 4002
+      port: 4003
     }, {
       ip: '167.114.29.54',
-      port: 4002
+      port: 4003
     }, {
       ip: '167.114.29.55',
-      port: 4002
+      port: 4003
     }
   ],
   mainnet: [

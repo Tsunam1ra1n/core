@@ -1,10 +1,12 @@
 'use strict'
 
-const { DELEGATE_RESIGNATION } = require('@phantomcore/crypto').constants
+const { DELEGATE_RESIGNATION } = require('@phantomchain/crypto').constants
 
-module.exports = (received) => {
-  return {
-    message: () => 'Expected value to be a valid DELEGATE_RESIGNATION transaction.',
-    pass: received.type === DELEGATE_RESIGNATION
-  }
-}
+const toBeDelegateResignationType = received => ({
+  message: () => 'Expected value to be a valid DELEGATE_RESIGNATION transaction.',
+  pass: received.type === DELEGATE_RESIGNATION,
+})
+
+expect.extend({
+  toBeDelegateResignationType,
+})

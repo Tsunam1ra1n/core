@@ -1,8 +1,6 @@
-const { MULTI_SIGNATURE } = require('@phantomcore/crypto').constants
+const { MULTI_SIGNATURE } = require('@phantomchain/crypto').constants
 
-expect.extend({
-  toBeMultiSignatureType: require('../../../../lib/matchers/transactions/types/multi-signature')
-})
+require('../../../../lib/matchers/transactions/types/multi-signature')
 
 describe('.toBeMultiSignatureType', () => {
   test('passes when given a valid transaction', () => {

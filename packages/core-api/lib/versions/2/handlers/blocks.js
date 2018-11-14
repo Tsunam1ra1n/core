@@ -1,9 +1,11 @@
-'use strict'
-
 const Boom = require('boom')
-const database = require('@phantomcore/core-container').resolvePlugin('database')
 const utils = require('../utils')
 const schema = require('../schema/blocks')
+
+const {
+  blocks: blocksRepository,
+  transactions: transactionsRepository,
+} = require('../../../repositories')
 
 /**
  * @type {Object}
@@ -14,14 +16,17 @@ exports.index = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
-    const blocks = await database.blocks.findAll(utils.paginate(request))
+  async handler(request, h) {
+    const blocks = await blocksRepository.findAll({
+      ...request.query,
+      ...utils.paginate(request),
+    })
 
     return utils.toPagination(request, blocks, 'block')
   },
   options: {
-    validate: schema.index
-  }
+    validate: schema.index,
+  },
 }
 
 /**
@@ -33,14 +38,18 @@ exports.show = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
-    const block = await database.blocks.findById(request.params.id)
+  async handler(request, h) {
+    const block = await blocksRepository.findById(request.params.id)
+
+    if (!block) {
+      return Boom.notFound('Block not found')
+    }
 
     return utils.respondWithResource(request, block, 'block')
   },
   options: {
-    validate: schema.show
-  }
+    validate: schema.show,
+  },
 }
 
 /**
@@ -52,20 +61,23 @@ exports.transactions = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
-    const block = await database.blocks.findById(request.params.id)
+  async handler(request, h) {
+    const block = await blocksRepository.findById(request.params.id)
 
     if (!block) {
-      return Boom.notFound()
+      return Boom.notFound('Block not found')
     }
 
-    const transactions = await database.transactions.findAllByBlock(block.id, utils.paginate(request))
+    const transactions = await transactionsRepository.findAllByBlock(block.id, {
+      ...request.query,
+      ...utils.paginate(request),
+    })
 
     return utils.toPagination(request, transactions, 'transaction')
   },
   options: {
-    validate: schema.transactions
-  }
+    validate: schema.transactions,
+  },
 }
 
 /**
@@ -77,16 +89,16 @@ exports.search = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
-    const blocks = await database.blocks.search({
+  async handler(request, h) {
+    const blocks = await blocksRepository.search({
       ...request.payload,
       ...request.query,
-      ...utils.paginate(request)
+      ...utils.paginate(request),
     })
 
     return utils.toPagination(request, blocks, 'block')
   },
   options: {
-    validate: schema.search
-  }
+    validate: schema.search,
+  },
 }

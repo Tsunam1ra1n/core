@@ -1,5 +1,5 @@
 {
-  "name": "@phantomcore/core",
+  "name": "@phantomchain/core",
   "description": "Core of the PHANTOM Blockchain",
   "version": "0.1.1",
   "contributors": [
@@ -45,32 +45,43 @@
     "full:testnet:2tier:2": "PHANTOM_ENV=test ./bin/phantom start --config ./lib/config/testnet.2 --network testnet --network-start",
     "full:testnet:2tier:1": "PHANTOM_ENV=test ./bin/phantom start --config ./lib/config/testnet.1 --network testnet --network-start",
     "full:testnet:2tier": "PHANTOM_ENV=test ./bin/phantom start --config ./lib/config/testnet.1 --network testnet --network-start && ./bin/phantom start --config ./lib/config/testnet.2 --network testnet --network-start",
+    "flow:coverage": "flow-coverage-report --config ../../.flowcoverage.json",
+    "flow:check": "flow check ./lib",
+    "flow:deps": "flow-typed install",
     "lint": "eslint ./ --fix",
-    "depcheck": "depcheck ./ --ignores commander,bip38,fs,wif,@phantomcore/core-api,@phantomcore/core-blockchain,@phantomcore/core-config,@phantomcore/core-database,@phantomcore/core-database-sequelize,@phantomcore/core-forger,@phantomcore/core-graphql,@phantomcore/core-json-rpc,@phantomcore/core-logger,@phantomcore/core-logger-winston,@phantomcore/core-p2p,@phantomcore/core-transaction-pool,@phantomcore/core-transaction-pool-redis,@phantomcore/core-webhooks,@phantomcore/crypto"
+    "depcheck": "depcheck ./ --ignores commander,bip38,fs,wif,@phantomchain/core-api,@phantomchain/core-blockchain,@phantomchain/core-config,@phantomchain/core-database,@phantomchain/core-database-sequelize,@phantomchain/core-forger,@phantomchain/core-graphql,@phantomchain/core-json-rpc,@phantomchain/core-logger,@phantomchain/core-logger-winston,@phantomchain/core-p2p,@phantomchain/core-transaction-pool,@phantomchain/core-transaction-pool-redis,@phantomchain/core-webhooks,@phantomchain/crypto"
   },
   "dependencies": {
-    "@phantomcore/core-api": "^0.1.1",
-    "@phantomcore/core-blockchain": "^0.1.1",
-    "@phantomcore/core-config": "^0.1.1",
-    "@phantomcore/core-container": "^0.1.1",
-    "@phantomcore/core-database": "^0.1.1",
-    "@phantomcore/core-database-sequelize": "^0.1.1",
-    "@phantomcore/core-forger": "^0.1.1",
-    "@phantomcore/core-graphql": "^0.1.1",
-    "@phantomcore/core-json-rpc": "^0.1.1",
-    "@phantomcore/core-logger": "^0.1.1",
-    "@phantomcore/core-logger-winston": "^0.1.1",
-    "@phantomcore/core-p2p": "^0.1.1",
-    "@phantomcore/core-transaction-pool": "^0.1.1",
-    "@phantomcore/core-transaction-pool-redis": "^0.1.1",
-    "@phantomcore/core-webhooks": "^0.1.1",
-    "@phantomcore/crypto": "^0.1.1",
+    "@phantomchain/core-api": "^0.1.1",
+    "@phantomchain/core-blockchain": "^0.1.1",
+    "@phantomchain/core-config": "^0.1.1",
+    "@phantomchain/core-container": "^0.1.1",
+    "@phantomchain/core-database": "^0.1.1",
+    "@phantomchain/core-database-sequelize": "^0.1.1",
+    "@phantomchain/core-database-postgres": "^0.1.0",
+    "@phantomchain/core-forger": "^0.1.1",
+    "@phantomchain/core-graphql": "^0.1.1",
+    "@phantomchain/core-json-rpc": "^0.1.1",
+    "@phantomchain/core-logger": "^0.1.1",
+    "@phantomchain/core-logger-winston": "^0.1.1",
+    "@phantomchain/core-p2p": "^0.1.1",
+    "@phantomchain/core-transaction-pool": "^0.1.1",
+    "@phantomchain/core-transaction-pool-redis": "^0.1.1",
+    "@phantomchain/core-transaction-pool-mem": "^0.1.1",
+    "@phantomchain/core-webhooks": "^0.1.1",
+    "@phantomchain/crypto": "^0.1.1",
     "bip38": "^2.0.2",
-    "commander": "^2.15.1",
+    "commander": "^2.19.0",
     "fs": "^0.0.1-security",
     "wif": "^2.0.6"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">=10.x"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.86.0"
   }
 }

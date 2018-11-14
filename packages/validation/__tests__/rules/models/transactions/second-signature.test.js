@@ -1,7 +1,7 @@
 'use strict'
 
 const rule = require('../../../../lib/rules/models/transactions/second-signature')
-const { constants, transactionBuilder } = require('@phantomcore/crypto')
+const { constants, transactionBuilder } = require('@phantomchain/crypto')
 
 let transaction
 beforeEach(() => {

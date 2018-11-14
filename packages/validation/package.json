@@ -1,5 +1,5 @@
 {
-  "name": "@phantomcore/validation",
+  "name": "@phantomchain/validation",
   "description": "Validation for PHANTOM Core",
   "version": "0.1.1",
   "contributors": [
@@ -25,6 +25,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@phantomcore/crypto": "^0.1.1"
+    "@phantomchain/crypto": "^0.1.1"
   }
 }

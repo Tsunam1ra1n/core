@@ -1,5 +1,5 @@
 {
-  "name": "@phantomcore/core-transaction-pool-redis",
+  "name": "@phantomchain/core-transaction-pool-redis",
   "description": "Transaction Pool - Redis Implementation for PHANTOM Core",
   "version": "0.1.1",
   "contributors": [
@@ -20,9 +20,9 @@
     "depcheck": "depcheck ./"
   },
   "dependencies": {
-    "@phantomcore/core-container": "^0.1.1",
-    "@phantomcore/core-transaction-pool": "^0.1.1",
-    "@phantomcore/crypto": "^0.1.1",
+    "@phantomchain/core-container": "^0.1.1",
+    "@phantomchain/core-transaction-pool": "^0.1.1",
+    "@phantomchain/crypto": "^0.1.1",
     "delay": "^3.0.0",
     "ioredis": "^3.2.2"
   },

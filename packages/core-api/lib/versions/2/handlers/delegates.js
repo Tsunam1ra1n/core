@@ -1,10 +1,11 @@
-'use strict'
-
 const Boom = require('boom')
 const orderBy = require('lodash/orderBy')
-const database = require('@phantomcore/core-container').resolvePlugin('database')
+const database = require('@phantomchain/core-container').resolvePlugin(
+  'database',
+)
 const utils = require('../utils')
 const schema = require('../schema/delegates')
+const { blocks: blocksRepository } = require('../../../repositories')
 
 /**
  * @type {Object}
@@ -15,14 +16,17 @@ exports.index = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
-    const delegates = await database.delegates.paginate(utils.paginate(request))
+  async handler(request, h) {
+    const delegates = await database.delegates.paginate({
+      ...request.query,
+      ...utils.paginate(request),
+    })
 
     return utils.toPagination(request, delegates, 'delegate')
   },
   options: {
-    validate: schema.index
-  }
+    validate: schema.index,
+  },
 }
 
 /**
@@ -34,18 +38,18 @@ exports.show = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const delegate = await database.delegates.findById(request.params.id)
 
     if (!delegate) {
-      return Boom.notFound()
+      return Boom.notFound('Delegate not found')
     }
 
     return utils.respondWithResource(request, delegate, 'delegate')
   },
   options: {
-    validate: schema.show
-  }
+    validate: schema.show,
+  },
 }
 
 /**
@@ -57,18 +61,18 @@ exports.search = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const delegates = await database.delegates.search({
       ...request.payload,
       ...request.query,
-      ...utils.paginate(request)
+      ...utils.paginate(request),
     })
 
     return utils.toPagination(request, delegates, 'delegate')
   },
   options: {
-    validate: schema.search
-  }
+    validate: schema.search,
+  },
 }
 
 /**
@@ -80,20 +84,23 @@ exports.blocks = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const delegate = await database.delegates.findById(request.params.id)
 
     if (!delegate) {
-      return Boom.notFound()
+      return Boom.notFound('Delegate not found')
     }
 
-    const blocks = await database.blocks.findAllByGenerator(delegate.publicKey, utils.paginate(request))
+    const blocks = await blocksRepository.findAllByGenerator(
+      delegate.publicKey,
+      utils.paginate(request),
+    )
 
     return utils.toPagination(request, blocks, 'block')
   },
   options: {
-    validate: schema.blocks
-  }
+    validate: schema.blocks,
+  },
 }
 
 /**
@@ -105,20 +112,23 @@ exports.voters = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const delegate = await database.delegates.findById(request.params.id)
 
     if (!delegate) {
-      return Boom.notFound()
+      return Boom.notFound('Delegate not found')
     }
 
-    const wallets = await database.wallets.findAllByVote(delegate.publicKey, utils.paginate(request))
+    const wallets = await database.wallets.findAllByVote(
+      delegate.publicKey,
+      utils.paginate(request),
+    )
 
     return utils.toPagination(request, wallets, 'wallet')
   },
   options: {
-    validate: schema.voters
-  }
+    validate: schema.voters,
+  },
 }
 
 /**
@@ -130,24 +140,25 @@ exports.voterBalances = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  async handler (request, h) {
+  async handler(request, h) {
     const delegate = await database.delegates.findById(request.params.id)
 
     if (!delegate) {
-      return Boom.notFound()
+      return Boom.notFound('Delegate not found')
     }
 
     const wallets = await database.wallets
-      .getLocalWallets()
+      .all()
       .filter(wallet => wallet.vote === delegate.publicKey)
 
     const voters = {}
-    orderBy(wallets, ['balance'], ['desc'])
-      .forEach(wallet => (voters[wallet.address] = wallet.balance))
+    orderBy(wallets, ['balance'], ['desc']).forEach(
+      wallet => (voters[wallet.address] = +wallet.balance.toFixed()),
+    )
 
     return { data: voters }
   },
   options: {
-    validate: schema.voterBalances
-  }
+    validate: schema.voterBalances,
+  },
 }

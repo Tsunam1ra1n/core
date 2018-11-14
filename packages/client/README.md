@@ -11,7 +11,7 @@ yarn add @phnatomcore/client
 If you want to use the CDN version:
 
 ```html
-<script src="https://unpkg.com/@phantomcore/client/dist/bundle.umd.js"></script>
+<script src="https://unpkg.com/@phantomchain/client/dist/bundle.umd.js"></script>
 ```
 
 ## Usage
@@ -19,13 +19,13 @@ If you want to use the CDN version:
 Import the library in node.js:
 
 ```
-import PhantomCoreClient from @phantomcore/client
+import PhantomChainClient from @phantomchain/client
 ```
 
 Use the library:
 
 ```
-const client = new PhantomCoreClient('<your host here>')
+const client = new PhantomChainClient('<your host here>')
 ```
 
 ## Security

@@ -34,10 +34,8 @@ services:
     privileged: true
     links:
      - postgres
-     - redis
     depends_on:
       - postgres
-      - redis
     command:
       - /bin/sh
       - -c
@@ -45,7 +43,6 @@ services:
           /entrypoint.sh
 
 volumes:
-  redis:
   postgres:
   phantom-core:
     driver_opts:

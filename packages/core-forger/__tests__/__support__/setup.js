@@ -1,16 +1,9 @@
-'use strict'
-
-const path = require('path')
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
+const containerHelper = require('@phantomchain/core-test-utils/lib/helpers/container')
 
 exports.setUp = async () => {
-  await container.setUp({
-    data: '~/.phantom',
-    config: path.resolve(__dirname, '../../../core/lib/config/testnet'),
-    token: 'phantom',
-    network: 'testnet'
-  }, {
-    exit: '@phantomcore/core-blockchain'
+  await containerHelper.setUp({
+    exit: '@phantomchain/core-logger-winston',
   })
 }
 

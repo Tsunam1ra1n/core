@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/core-config
+yarn add @phantomchain/core-config
 ```
 
 ## Security

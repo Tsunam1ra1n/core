@@ -8,14 +8,14 @@ const glob = require('tiny-glob')
 const path = require('path')
 const fs = require('fs-extra')
 
-const { ConnectionInterface } = require('@phantomcore/core-database')
+const { ConnectionInterface } = require('@phantomchain/core-database')
 
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 const config = container.resolvePlugin('config')
 const logger = container.resolvePlugin('logger')
 const emitter = container.resolvePlugin('event-emitter')
 
-const { Block, Transaction } = require('@phantomcore/crypto').models
+const { Block, Transaction } = require('@phantomchain/crypto').models
 
 const SPV = require('./spv')
 const QueryBuilder = require('./query-builder')

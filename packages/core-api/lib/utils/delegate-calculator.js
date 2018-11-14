@@ -1,6 +1,6 @@
 'use strict'
 
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 const blockchain = container.resolvePlugin('blockchain')
 const config = container.resolvePlugin('config')
 
@@ -14,7 +14,7 @@ exports.calculateApproval = (delegate) => {
   const constants = config.getConstants(lastBlock.data.height)
   const totalSupply = config.genesisBlock.totalAmount + (lastBlock.data.height - constants.height) * constants.reward
 
-  return +((delegate.balance / totalSupply) * 100).toFixed(2)
+  return +((delegate.votebalance / totalSupply) * 100).toFixed(2)
 }
 
 /**

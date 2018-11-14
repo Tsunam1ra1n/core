@@ -1,30 +1,21 @@
-'use strict'
+const container = require('@phantomchain/core-container')
 
-const Promise = require('bluebird')
-
-const container = require('@phantomcore/core-container')
 const logger = container.resolvePlugin('logger')
-const database = container.resolvePlugin('database')
 
-const phantom = require('@phantomcore/crypto')
-const { slots } = phantom
-const { TRANSACTION_TYPES } = phantom.constants
-
-const memory = require('./memory')
-const PoolWalletManager = require('./pool-wallet-manager')
-const helpers = require('./utils/validation-helpers')
 const moment = require('moment')
-const uniq = require('lodash/uniq')
+const PoolWalletManager = require('./pool-wallet-manager')
+
+const database = container.resolvePlugin('database')
+const dynamicFeeMatch = require('./utils/dynamicfee-matcher')
 
 module.exports = class TransactionPoolInterface {
   /**
    * Create a new transaction pool instance.
    * @param  {Object} options
    */
-  constructor (options) {
+  constructor(options) {
     this.options = options
     this.walletManager = new PoolWalletManager()
-    this.memory = memory
 
     this.blockedByPublicKey = {}
   }
@@ -33,7 +24,7 @@ module.exports = class TransactionPoolInterface {
    * Get a driver instance.
    * @return {TransactionPoolInterface}
    */
-  driver () {
+  driver() {
     return this.driver
   }
 
@@ -41,7 +32,7 @@ module.exports = class TransactionPoolInterface {
    * Get the number of transactions in the pool.
    * @return {Number}
    */
-  async getPoolSize () {
+  getPoolSize() {
     throw new Error('Method [getPoolSize] not implemented!')
   }
 
@@ -50,7 +41,7 @@ module.exports = class TransactionPoolInterface {
    * @param  {String} senderPublicKey
    * @return {Number}
    */
-  async getSenderSize (senderPublicKey) {
+  getSenderSize(senderPublicKey) {
     throw new Error('Method [getSenderSize] not implemented!')
   }
 
@@ -58,7 +49,7 @@ module.exports = class TransactionPoolInterface {
    * Add a transaction to the pool.
    * @param {Transaction} transaction
    */
-  async addTransaction (transaction) {
+  addTransaction(transaction) {
     throw new Error('Method [addTransaction] not implemented!')
   }
 
@@ -67,7 +58,7 @@ module.exports = class TransactionPoolInterface {
    * @param  {Transaction} transaction
    * @return {void}
    */
-  async removeTransaction (transaction) {
+  removeTransaction(transaction) {
     throw new Error('Method [removeTransaction] not implemented!')
   }
 
@@ -76,17 +67,17 @@ module.exports = class TransactionPoolInterface {
    * @param  {Number} id
    * @return {void}
    */
-  async removeTransactionById (id) {
+  removeTransactionById(id) {
     throw new Error('Method [removeTransactionById] not implemented!')
   }
 
   /**
-   * Remove multiple transactions from the pool.
-   * @param  {Array} transactions
-   * @return {void}
+   * Get all transactions that are ready to be forged.
+   * @param  {Number} blockSize
+   * @return {(Array|void)}
    */
-  async removeTransactions (transactions) {
-    throw new Error('Method [removeTransactions] not implemented!')
+  async getTransactionsForForging(blockSize) {
+    throw new Error('Method [getTransactionsForForging] not implemented!')
   }
 
   /**
@@ -94,7 +85,7 @@ module.exports = class TransactionPoolInterface {
    * @param  {Number} id
    * @return {(Transaction|String)}
    */
-  async getTransaction (id) {
+  getTransaction(id) {
     throw new Error('Method [getTransaction] not implemented!')
   }
 
@@ -104,18 +95,18 @@ module.exports = class TransactionPoolInterface {
    * @param  {Number} size
    * @return {Array}
    */
-  async getTransactions (start, size) {
+  getTransactions(start, size) {
     throw new Error('Method [getTransactions] not implemented!')
   }
 
   /**
-   * Get all transactions IDs within the specified range.
+   * Get all cleans transactions IDs within the specified range from transaction pool.
    * @param  {Number} start
    * @param  {Number} size
    * @return {Array}
    */
-  async getTransactionsIds (start, size) {
-    throw new Error('Method [getTransactionsIds] not implemented!')
+  async getTransactionIdsForForging(start, size) {
+    throw new Error('Method [getTransactionIdsForForging] not implemented!')
   }
 
   /**
@@ -123,7 +114,7 @@ module.exports = class TransactionPoolInterface {
    * @param  {String} senderPublicKey
    * @return {void}
    */
-  async removeTransactionsForSender (senderPublicKey) {
+  removeTransactionsForSender(senderPublicKey) {
     throw new Error('Method [removeTransactionsForSender] not implemented!')
   }
 
@@ -132,7 +123,7 @@ module.exports = class TransactionPoolInterface {
    * @param {Array}   transactions
    * @param {Boolean} isBroadcast
    */
-  async addTransactions (transactions, isBroadcast) {
+  addTransactions(transactions, isBroadcast) {
     throw new Error('Method [addTransactions] not implemented!')
   }
 
@@ -141,7 +132,7 @@ module.exports = class TransactionPoolInterface {
    * @param  {String} transaction
    * @return {(Boolean|void)}
    */
-  async hasExceededMaxTransactions (transaction) {
+  hasExceededMaxTransactions(transaction) {
     throw new Error('Method [hasExceededMaxTransactions] not implemented!')
   }
 
@@ -150,7 +141,7 @@ module.exports = class TransactionPoolInterface {
    * @param  {Transaction} transaction
    * @return {Boolean}
    */
-  async transactionExists (transaction) {
+  transactionExists(transaction) {
     throw new Error('Method [transactionExists] not implemented!')
   }
 
@@ -159,7 +150,7 @@ module.exports = class TransactionPoolInterface {
    * @param  {String} senderPublicKey
    * @return {Boolean}
    */
-  isSenderBlocked (senderPublicKey) {
+  isSenderBlocked(senderPublicKey) {
     if (!this.blockedByPublicKey[senderPublicKey]) {
       return false
     }
@@ -177,87 +168,18 @@ module.exports = class TransactionPoolInterface {
    * @param  {String} senderPublicKey
    * @return {Time} blockReleaseTime
    */
-  blockSender (senderPublicKey) {
+  blockSender(senderPublicKey) {
     const blockReleaseTime = moment().add(1, 'hours')
 
     this.blockedByPublicKey[senderPublicKey] = blockReleaseTime
 
-    logger.warn(`Sender ${senderPublicKey} blocked until ${this.blockedByPublicKey[senderPublicKey]} :stopwatch:`)
+    logger.warn(
+      `Sender ${senderPublicKey} blocked until ${
+        this.blockedByPublicKey[senderPublicKey]
+      } :stopwatch:`,
+    )
 
     return blockReleaseTime
-  }
-
-  /**
-   * Get all transactions that are ready to be forged.
-   * @param  {Number} start
-   * @param  {Number} size
-   * @return {(Array|void)}
-   */
-  async getTransactionsForForging (start, size) {
-    try {
-      let transactionIds = await this.getTransactionsIds(start, size)
-      transactionIds = await this.removeForgedAndGetPending(transactionIds)
-      transactionIds = uniq(transactionIds)
-
-      let transactions = []
-      for (const id of transactionIds) {
-        const transaction = await this.getTransaction(id)
-
-        if (!transaction) {
-          continue
-        }
-
-        if (!helpers.canApplyToBlockchain(transaction)) {
-          await this.removeTransaction(transaction)
-
-          logger.debug(`Unsufficient funds for transaction ${id}. Possible double spending attack :bomb:`)
-
-          await this.purgeByPublicKey(transaction.senderPublicKey)
-          this.blockSender(transaction.senderPublicKey)
-
-          continue
-        }
-
-        if (transaction.type === TRANSACTION_TYPES.TIMELOCK_TRANSFER) { // timelock is defined
-          const actions = {
-            0: () => { // timestamp lock defined
-              if (transaction.timelock <= slots.getTime()) {
-                logger.debug(`Timelock for ${id} released - timestamp: ${transaction.timelock} :unlock:`)
-                transactions.push(transaction.serialized.toString('hex'))
-              }
-            },
-            1: () => { // block height time lock
-              if (transaction.timelock <= container.resolvePlugin('blockchain').getLastBlock().data.height) {
-                logger.debug(`Timelock for ${id} released - block height: ${transaction.timelock} :unlock:`)
-                transactions.push(transaction.serialized.toString('hex'))
-              }
-            }
-          }
-          actions[transaction.timelockType]()
-        } else {
-          transactions.push(transaction.serialized.toString('hex'))
-        }
-      }
-
-      return transactions
-    } catch (error) {
-      logger.error('Could not get transactions for forging from Redis: ', error, error.stack)
-    }
-  }
-
-  /**
-   * Removes any transactions in the pool that have already been forged.
-   * @param  {Array} transactionIds
-   * @return {Array} IDs of pending transactions that have yet to be forged.
-   */
-  async removeForgedAndGetPending (transactionIds) {
-    const forgedIdsSet = new Set(await database.getForgedTransactionsIds(transactionIds))
-
-    await Promise.each(forgedIdsSet, async (transactionId) => {
-        await this.removeTransactionById(transactionId)
-    })
-
-    return transactionIds.filter(id => !forgedIdsSet.has(id))
   }
 
   /**
@@ -267,18 +189,25 @@ module.exports = class TransactionPoolInterface {
    * @param  {Object} block
    * @return {void}
    */
-  async acceptChainedBlock (block) {
+  acceptChainedBlock(block) {
     for (const transaction of block.transactions) {
-      const exists = await this.transactionExists(transaction.id)
+      const exists = this.transactionExists(transaction.id)
       if (!exists) {
-        const senderWallet = this.walletManager.exists(transaction.senderPublicKey) ? this.walletManager.getWalletByPublicKey(transaction.senderPublicKey) : false
+        const senderWallet = this.walletManager.exists(
+          transaction.senderPublicKey,
+        )
+          ? this.walletManager.findByPublicKey(transaction.senderPublicKey)
+          : false
         // if wallet in pool we try to apply transaction
-        if (senderWallet || this.walletManager.exists(transaction.recipientId)) {
+        if (
+          senderWallet
+          || this.walletManager.exists(transaction.recipientId)
+        ) {
           try {
-            await this.walletManager.applyPoolTransaction(transaction)
+            this.walletManager.applyPoolTransaction(transaction)
           } catch (error) {
             logger.error(`AcceptChainedBlock in pool: ${error}`)
-            await this.purgeByPublicKey(transaction.senderPublicKey)
+            this.purgeByPublicKey(transaction.senderPublicKey)
             this.blockSender(transaction.senderPublicKey)
           }
 
@@ -287,10 +216,10 @@ module.exports = class TransactionPoolInterface {
           }
         }
       } else {
-        await this.removeTransaction(transaction)
+        this.removeTransaction(transaction)
       }
 
-      if (await this.getSenderSize(transaction.senderPublicKey) === 0) {
+      if (this.getSenderSize(transaction.senderPublicKey) === 0) {
         this.walletManager.deleteWallet(transaction.senderPublicKey)
       }
     }
@@ -304,34 +233,93 @@ module.exports = class TransactionPoolInterface {
    * It waits for the node to sync, and then check the transactions in pool and validates them and apply to the pool manager
    * @return {void}
    */
-  async buildWallets () {
-    this.walletManager.purgeAll()
-    const poolTransactions = await this.getTransactionsIds(0, 0)
+  async buildWallets() {
+    this.walletManager.reset()
+    const poolTransactions = await this.getTransactionIdsForForging(
+      0,
+      this.getPoolSize(),
+    )
 
-    const unconfirmedTransactions = await this.removeForgedAndGetPending(poolTransactions)
-
-    await Promise.each(unconfirmedTransactions, async (transactionId) => {
-      const transaction = await this.getTransaction(transactionId)
+    poolTransactions.forEach(transactionId => {
+      const transaction = this.getTransaction(transactionId)
 
       if (!transaction) {
         return
       }
 
       try {
-        await this.walletManager.applyPoolTransaction(transaction)
+        this.walletManager.applyPoolTransaction(transaction)
       } catch (error) {
         logger.error('BuildWallets from pool:', error)
-        await this.purgeByPublicKey(transaction.senderPublicKey)
+        this.purgeByPublicKey(transaction.senderPublicKey)
       }
     })
     logger.info('Transaction Pool Manager build wallets complete')
   }
 
-  async purgeByPublicKey (senderPublicKey) {
+  purgeByPublicKey(senderPublicKey) {
     logger.debug(`Purging sender: ${senderPublicKey} from pool wallet manager`)
 
-    await this.removeTransactionsForSender(senderPublicKey)
+    this.removeTransactionsForSender(senderPublicKey)
 
     this.walletManager.deleteWallet(senderPublicKey)
+  }
+
+  checkApplyToBlockchain(transaction) {
+    if (
+      !database.walletManager
+        .findByPublicKey(transaction.senderPublicKey)
+        .canApply(transaction)
+    ) {
+      this.removeTransaction(transaction)
+
+      logger.debug(
+        `CanApply transaction test failed from transaction pool for transaction ${
+          transaction.id
+        }. Possible double spending attack :bomb:`,
+      )
+
+      this.purgeByPublicKey(transaction.senderPublicKey)
+      this.blockSender(transaction.senderPublicKey)
+
+      return false
+    }
+
+    return true
+  }
+
+  checkDynamicFeeMatch(transaction) {
+    return dynamicFeeMatch(transaction)
+  }
+
+  /**
+   * Check whether a given sender has any transactions of the specified type
+   * in the pool.
+   * @param {String} senderPublicKey public key of the sender
+   * @param {Number} transactionType transaction type, must be one of
+   * TRANSACTION_TYPES.* and is compared against transaction.type.
+   * @return {Boolean} true if exist
+   */
+  senderHasTransactionsOfType(senderPublicKey, transactionType) {
+    throw new Error('Method [senderHasTransactionsOfType] not implemented!')
+  }
+
+  /**
+   * Check each of a set of transactions for eligibility to enter the pool.
+   * This method is quick and is used to drop transactions early at the entrance
+   * for which we can quickly assess that will not be allowed to enter the pool.
+   *
+   * So we can avoid the costy validation process only to discover later that a
+   * transaction is not allowed to enter the pool.
+   *
+   * @param {Array} transactions An array of Transaction objects to be checked.
+   * @return { eligible, notEligible } where:
+   * - eligible is an array of Transaction objects, a subset of the input array
+   * - notEligible is an array of objects { transaction, reason } where:
+   *   - transaction is a Transaction object, from the input
+   *   - reason is a String describing why the transaction is not eligible
+   */
+  checkEligibility(transactions) {
+    throw new Error('Method [checkEligibility] not implemented!')
   }
 }

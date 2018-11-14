@@ -1,6 +1,6 @@
 const async = require('async')
-const logger = require('@phantomcore/core-container').resolvePlugin('logger')
-const { Block } = require('@phantomcore/crypto').models
+const logger = require('@phantomchain/core-container').resolvePlugin('logger')
+const { Block } = require('@phantomchain/crypto').models
 const QueueInterface = require('./interface')
 
 module.exports = class RebuildQueue extends QueueInterface {
@@ -9,20 +9,20 @@ module.exports = class RebuildQueue extends QueueInterface {
    * @param  {Blockchain} blockchain
    * @return {void}
    */
-  constructor (blockchain, event) {
+  constructor(blockchain, event) {
     super(blockchain, event)
 
-    this.queue = async.queue(
-      (block, cb) => {
-        if (this.queue.paused) return cb()
-        try {
-          return blockchain.rebuildBlock(new Block(block), cb)
-        } catch (error) {
-          logger.error(`Failed to rebuild block in RebuildQueue: ${block.height.toLocaleString()}`)
-          return cb()
-        }
-      }, 1
-    )
+    this.queue = async.queue((block, cb) => {
+      if (this.queue.paused) return cb()
+      try {
+        return blockchain.rebuildBlock(new Block(block), cb)
+      } catch (error) {
+        logger.error(
+          `Failed to rebuild block in RebuildQueue: ${block.height.toLocaleString()}`,
+        )
+        return cb()
+      }
+    }, 1)
 
     this.drain()
   }

@@ -1,7 +1,7 @@
 const phantom = require('phantomjscore')
 const assert = require('assert')
-const { client, crypto } = require('@phantomcore/crypto')
-const { TRANSACTION_TYPES } = require('@phantomcore/crypto').constants
+const { client, crypto } = require('@phantomchain/crypto')
+const { TRANSACTION_TYPES } = require('@phantomchain/crypto').constants
 const config = require('../../config')
 const superheroes = require('superheroes')
 

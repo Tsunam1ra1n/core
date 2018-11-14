@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add @phantomcore/validation
+yarn add @phantomchain/validation
 ```
 
 ## Security

@@ -1,6 +1,6 @@
 'use strict'
 
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 const config = container.resolvePlugin('config')
 const blockchain = container.resolvePlugin('blockchain')
 
@@ -15,9 +15,10 @@ exports.fee = {
    * @param  {Hapi.Toolkit} h
    * @return {Hapi.Response}
    */
-  handler (request, h) {
+  handler(request, h) {
     return utils.respondWith({
-      fee: config.getConstants(blockchain.getLastBlock().data.height).fees.secondSignature
+      fee: config.getConstants(blockchain.getLastBlock().data.height).fees
+        .secondSignature,
     })
-  }
+  },
 }

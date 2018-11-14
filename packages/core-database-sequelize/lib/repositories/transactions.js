@@ -2,8 +2,8 @@
 
 const { Op } = require('sequelize')
 const moment = require('moment')
-const { slots } = require('@phantomcore/crypto')
-const { TRANSACTION_TYPES } = require('@phantomcore/crypto').constants
+const { slots } = require('@phantomchain/crypto')
+const { TRANSACTION_TYPES } = require('@phantomchain/crypto').constants
 const buildFilterQuery = require('./utils/filter-query')
 const Repository = require('./repository')
 

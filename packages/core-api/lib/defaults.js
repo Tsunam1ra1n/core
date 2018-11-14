@@ -1,12 +1,14 @@
-'use strict'
+const path = require('path')
 
 module.exports = {
   enabled: false,
   host: process.env.PHANTOM_API_HOST || '0.0.0.0',
   port: process.env.PHANTOM_API_PORT || 4003,
   versions: {
-    default: 1,
-    valid: [1, 2]
+    validVersions: [1, 2],
+    defaultVersion: 1,
+    basePath: '/api/',
+    vendorName: 'ark.core-api',
   },
   cache: {
     enabled: false,
@@ -19,11 +21,16 @@ module.exports = {
       expiresIn: 60000
     }
   },
+  // @see https://github.com/wraithgar/hapi-rate-limit
   rateLimit: {
-    enabled: false,
-    limit: 300,
-    expires: 60000
+    enabled: !process.env.PHANTOM_API_RATE_LIMIT,
+    pathLimit: false,
+    userLimit: 300,
+    userCache: {
+      expiresIn: 60000,
+    },
   },
+  // @see https://github.com/fknop/hapi-pagination
   pagination: {
     limit: 100,
     include: [
@@ -45,11 +52,18 @@ module.exports = {
       '/api/v2/wallets/{id}/transactions/received',
       '/api/v2/wallets/{id}/transactions/sent',
       '/api/v2/wallets/{id}/votes',
-      '/api/v2/wallets/search'
-    ]
+      '/api/v2/wallets/search',
+    ],
   },
-  whitelist: [
-    '127.0.0.1',
-    '::ffff:127.0.0.1'
-  ]
+  whitelist: ['127.0.0.1', '::ffff:127.0.0.1'],
+  plugins: [
+    {
+      plugin: path.resolve(__dirname, './versions/1'),
+      routes: { prefix: '/api/v1' },
+    },
+    {
+      plugin: path.resolve(__dirname, './versions/2'),
+      routes: { prefix: '/api/v2' },
+    },
+  ],
 }

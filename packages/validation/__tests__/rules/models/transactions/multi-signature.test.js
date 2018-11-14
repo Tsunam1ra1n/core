@@ -1,7 +1,7 @@
 'use strict'
 
 const rule = require('../../../../lib/rules/models/transactions/multi-signature')
-const { constants, crypto, transactionBuilder } = require('@phantomcore/crypto')
+const { constants, crypto, transactionBuilder } = require('@phantomchain/crypto')
 const passphrase = 'passphrase 1'
 const publicKey = '+03e8021105a6c202097e97e6c6d650942d913099bf6c9f14a6815df1023dde3b87'
 const passphrases = [

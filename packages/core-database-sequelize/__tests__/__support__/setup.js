@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path')
-const container = require('@phantomcore/core-container')
+const container = require('@phantomchain/core-container')
 
 exports.setUp = async () => {
   jest.setTimeout(10000)
@@ -14,11 +14,11 @@ exports.setUp = async () => {
     token: 'phantom',
     network: 'testnet'
   }, {
-    exit: '@phantomcore/core-blockchain',
+    exit: '@phantomchain/core-blockchain',
     exclude: [
-      '@phantomcore/core-p2p',
-      '@phantomcore/core-transaction-pool',
-      '@phantomcore/core-transaction-pool-redis'
+      '@phantomchain/core-p2p',
+      '@phantomchain/core-transaction-pool',
+      '@phantomchain/core-transaction-pool-redis'
     ]
   })
 }

@@ -1,52 +1,57 @@
-'use strict'
-
 const _ = require('lodash')
+const { Bignum, crypto } = require('@phantomchain/crypto')
+const { Block } = require('@phantomchain/crypto').models
 const app = require('../__support__/setup')
-const { crypto } = require('@phantomcore/crypto')
 
 let genesisBlock
 let genesisSenders
 let repository
 let walletManager
 
-beforeAll(async (done) => {
+beforeAll(async done => {
   await app.setUp()
 
   // Create the genesis block after the setup has finished or else it uses a potentially
   // wrong network config.
-  genesisBlock = require('../__fixtures__/genesisBlock')
-  genesisSenders = _.uniq(_.compact(genesisBlock.transactions.map(tx => tx.senderPublicKey)))
+  genesisBlock = new Block(
+    require('@phantomchain/core-test-utils/config/testnet/genesisBlock.json'),
+  )
+  genesisSenders = _.uniq(
+    _.compact(genesisBlock.transactions.map(tx => tx.senderPublicKey)),
+  )
 
   done()
 })
 
-afterAll(async (done) => {
+afterAll(async done => {
   await app.tearDown()
 
   done()
 })
 
-beforeEach(async (done) => {
+beforeEach(async done => {
   walletManager = new (require('../../lib/wallet-manager'))()
-  repository = new (require('../../lib/repositories/wallets'))({ walletManager })
+  repository = new (require('../../lib/repositories/wallets'))({
+    walletManager,
+  })
 
   done()
 })
 
-function generateWallets () {
-  return genesisSenders.map(senderPublicKey => ({
-    address: crypto.getAddress(senderPublicKey)
-  }))
-}
-
-function generateVotes () {
+function generateWallets() {
   return genesisSenders.map(senderPublicKey => ({
     address: crypto.getAddress(senderPublicKey),
-    vote: genesisBlock.transactions[0].senderPublicKey
   }))
 }
 
-function generateFullWallets () {
+function generateVotes() {
+  return genesisSenders.map(senderPublicKey => ({
+    address: crypto.getAddress(senderPublicKey),
+    vote: genesisBlock.transactions[0].senderPublicKey,
+  }))
+}
+
+function generateFullWallets() {
   return genesisSenders.map(senderPublicKey => {
     const address = crypto.getAddress(senderPublicKey)
 
@@ -57,7 +62,7 @@ function generateFullWallets () {
       vote: `vote-${address}`,
       username: `username-${address}`,
       balance: 100,
-      votebalance: 200
+      voteBalance: 200,
     }
   })
 }
@@ -67,15 +72,15 @@ describe('Wallet Repository', () => {
     expect(repository).toBeObject()
   })
 
-  describe('getLocalWallets', () => {
+  describe('all', () => {
     it('should be a function', () => {
-      expect(repository.getLocalWallets).toBeFunction()
+      expect(repository.all).toBeFunction()
     })
 
     it('should return the local wallets of the connection', () => {
-      repository.connection.walletManager.getLocalWallets = jest.fn()
-      repository.getLocalWallets()
-      expect(repository.connection.walletManager.getLocalWallets).toHaveBeenCalled()
+      repository.connection.walletManager.all = jest.fn()
+      repository.all()
+      expect(repository.connection.walletManager.all).toHaveBeenCalled()
     })
   })
 
@@ -154,7 +159,10 @@ describe('Wallet Repository', () => {
     })
 
     it('should be ok with params', () => {
-      const { count, rows } = repository.findAllByVote(vote, { offset: 10, limit: 10 })
+      const { count, rows } = repository.findAllByVote(vote, {
+        offset: 10,
+        limit: 10,
+      })
       expect(count).toBe(17)
       expect(rows).toHaveLength(7)
     })
@@ -166,7 +174,10 @@ describe('Wallet Repository', () => {
     })
 
     it('should be ok with params (offset = 0)', () => {
-      const { count, rows } = repository.findAllByVote(vote, { offset: 0, limit: 1 })
+      const { count, rows } = repository.findAllByVote(vote, {
+        offset: 0,
+        limit: 1,
+      })
       expect(count).toBe(17)
       expect(rows).toHaveLength(1)
     })
@@ -179,7 +190,7 @@ describe('Wallet Repository', () => {
   })
 
   describe('findById', async () => {
-    const expectWallet = (key) => {
+    const expectWallet = key => {
       const wallets = generateFullWallets()
       walletManager.index(wallets)
 
@@ -222,9 +233,9 @@ describe('Wallet Repository', () => {
 
   describe('top', () => {
     beforeEach(() => {
-      walletManager.reindex({ address: 'dummy-1', balance: 1000 })
-      walletManager.reindex({ address: 'dummy-2', balance: 2000 })
-      walletManager.reindex({ address: 'dummy-3', balance: 3000 })
+      walletManager.reindex({ address: 'dummy-1', balance: new Bignum(1000) })
+      walletManager.reindex({ address: 'dummy-2', balance: new Bignum(2000) })
+      walletManager.reindex({ address: 'dummy-3', balance: new Bignum(3000) })
     })
 
     it('should be a function', () => {
@@ -236,9 +247,9 @@ describe('Wallet Repository', () => {
 
       expect(count).toBe(3)
       expect(rows.length).toBe(3)
-      expect(rows[0].balance).toBe(3000)
-      expect(rows[1].balance).toBe(2000)
-      expect(rows[2].balance).toBe(1000)
+      expect(rows[0].balance).toEqual(new Bignum(3000))
+      expect(rows[1].balance).toEqual(new Bignum(2000))
+      expect(rows[2].balance).toEqual(new Bignum(1000))
     })
 
     it('should be ok with params', () => {
@@ -246,8 +257,8 @@ describe('Wallet Repository', () => {
 
       expect(count).toBe(3)
       expect(rows.length).toBe(2)
-      expect(rows[0].balance).toBe(2000)
-      expect(rows[1].balance).toBe(1000)
+      expect(rows[0].balance).toEqual(new Bignum(2000))
+      expect(rows[1].balance).toEqual(new Bignum(1000))
     })
 
     it('should be ok with params (offset = 0)', () => {
@@ -255,8 +266,8 @@ describe('Wallet Repository', () => {
 
       expect(count).toBe(3)
       expect(rows.length).toBe(2)
-      expect(rows[0].balance).toBe(3000)
-      expect(rows[1].balance).toBe(2000)
+      expect(rows[0].balance).toEqual(new Bignum(3000))
+      expect(rows[1].balance).toEqual(new Bignum(2000))
     })
 
     it('should be ok with params (no offset)', () => {
@@ -264,8 +275,8 @@ describe('Wallet Repository', () => {
 
       expect(count).toBe(3)
       expect(rows.length).toBe(2)
-      expect(rows[0].balance).toBe(3000)
-      expect(rows[1].balance).toBe(2000)
+      expect(rows[0].balance).toEqual(new Bignum(3000))
+      expect(rows[1].balance).toEqual(new Bignum(2000))
     })
 
     it('should be ok with params (no limit)', () => {
@@ -273,8 +284,8 @@ describe('Wallet Repository', () => {
 
       expect(count).toBe(3)
       expect(rows.length).toBe(2)
-      expect(rows[0].balance).toBe(2000)
-      expect(rows[1].balance).toBe(1000)
+      expect(rows[0].balance).toEqual(new Bignum(2000))
+      expect(rows[1].balance).toEqual(new Bignum(1000))
     })
 
     it('should be ok with legacy', () => {
@@ -282,9 +293,9 @@ describe('Wallet Repository', () => {
 
       expect(count).toBe(3)
       expect(rows.length).toBe(3)
-      expect(rows[0].balance).toBe(3000)
-      expect(rows[1].balance).toBe(2000)
-      expect(rows[2].balance).toBe(1000)
+      expect(rows[0].balance).toEqual(new Bignum(3000))
+      expect(rows[1].balance).toEqual(new Bignum(2000))
+      expect(rows[2].balance).toEqual(new Bignum(1000))
     })
   })
 
@@ -354,31 +365,39 @@ describe('Wallet Repository', () => {
       })
       walletManager.index(wallets)
 
-      expectSearch({
-        balance: {
-          from: 53,
-          to: 99
-        }
-      }, 36, 36)
+      expectSearch(
+        {
+          balance: {
+            from: 53,
+            to: 99,
+          },
+        },
+        36,
+        36,
+      )
     })
 
-    it('should search wallets by the specified closed interval (included) of votebalance', () => {
+    it('should search wallets by the specified closed interval (included) of voteBalance', () => {
       const wallets = generateFullWallets()
       wallets.forEach((wallet, i) => {
         if (i < 17) {
-          wallet.votebalance = 12
+          wallet.voteBalance = 12
         } else if (i < 29) {
-          wallet.votebalance = 17
+          wallet.voteBalance = 17
         }
       })
       walletManager.index(wallets)
 
-      expectSearch({
-        votebalance: {
-          from: 11,
-          to: 18
-        }
-      }, 29, 29)
+      expectSearch(
+        {
+          voteBalance: {
+            from: 11,
+            to: 18,
+          },
+        },
+        29,
+        29,
+      )
     })
   })
 })

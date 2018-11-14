@@ -1,5 +1,5 @@
 {
-  "name": "@phantomcore/client",
+  "name": "@phantomchain/client",
   "description": "A JavaScript library to interact with the PHANTOM Blockchain",
   "version": "0.1.1",
   "contributors": [
@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "prepublish": "yarn run lint && yarn run test && yarn run build",
-    "build": "rm -rf dist && NODE_ENV=production webpack --config build/webpack.config.js",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.config.js",
     "build:docs": "../../node_modules/.bin/jsdoc -c jsdoc.json",
     "test": "PHANTOM_ENV=test jest --forceExit",
     "test:coverage": "PHANTOM_ENV=test jest --coverage --forceExit",
