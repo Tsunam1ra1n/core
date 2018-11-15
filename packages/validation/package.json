@@ -25,6 +25,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@phantomchain/crypto": "^0.1.1"
+    "@phantomchain/crypto": "^0.2.4"
   }
 }

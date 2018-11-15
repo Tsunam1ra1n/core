@@ -22,7 +22,7 @@
   "dependencies": {
     "@phantomchain/core-container": "^0.1.1",
     "@phantomchain/core-transaction-pool": "^0.1.1",
-    "@phantomchain/crypto": "^0.1.1",
+    "@phantomchain/crypto": "^0.2.4",
     "delay": "^3.0.0",
     "ioredis": "^3.2.2"
   },

@@ -11,7 +11,7 @@
     "test:coverage": "cross-env PHANTOM_ENV=test jest --coverage --forceExit"
   },
   "devDependencies": {
-    "@phantomchain/eslint-config-base": "https://github.com/ArkEcosystem/eslint-config-base",
+    "@phantomchain/eslint-config-base": "https://github.com/PhantomChain/eslint-config-base",
     "@babel/core": "^7.1.5",
     "@babel/preset-env": "^7.1.5",
     "axios": "^0.18.0",
