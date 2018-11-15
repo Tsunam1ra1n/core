@@ -20,9 +20,9 @@
     "depcheck": "depcheck ./"
   },
   "dependencies": {
-    "@phantomcore/core-container": "^0.1.1",
-    "@phantomcore/core-transaction-pool": "^0.1.1",
-    "@phantomcore/crypto": "^0.1.1",
+    "@phantomchain/core-container": "^2.1.0",
+    "@phantomchain/core-transaction-pool": "^2.1.0",
+    "@phantomchain/crypto": "^2.1.0",
     "delay": "^3.0.0",
     "ioredis": "^3.2.2"
   },

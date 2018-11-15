@@ -45,7 +45,7 @@ describe('Delegate Registration Transaction', () => {
   })
 
   // FIXME problems with phantom-js V1
-  xdescribe('getStruct', () => {
+  describe.skip('getStruct', () => {
     it('should fail if the transaction is not signed', () => {
       try {
         expect(() => builder.getStruct()).toThrow(/transaction.*sign/)

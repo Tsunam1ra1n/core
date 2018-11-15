@@ -1,0 +1,8 @@
+/build/**
+/dist/**
+/packages/dist/**
+/.coverage/**
+/node_modules/**
+/docs/**
+/tmp/**
+!.eslintrc.js
