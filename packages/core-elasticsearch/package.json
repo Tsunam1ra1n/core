@@ -1,6 +1,6 @@
 {
-    "name": "@arkecosystem/core-elasticsearch",
-    "description": "A powerful Elasticsearch integration for Ark Core",
+    "name": "@phantomchain/core-elasticsearch",
+    "description": "A powerful Elasticsearch integration for PHANTOM Core",
     "version": "2.1.0",
     "contributors": [
         "Brian Faust <brian@ark.io>"
@@ -22,11 +22,11 @@
         "updates": "../../node_modules/npm-check-updates/bin/npm-check-updates -a"
     },
     "dependencies": {
-        "@arkecosystem/core-interfaces": "^2.1.0",
-        "@arkecosystem/core-container": "^2.1.0",
-        "@arkecosystem/core-database-postgres": "^2.1.0",
-        "@arkecosystem/core-http-utils": "^2.1.0",
-        "@arkecosystem/crypto": "^2.1.0",
+        "@phantomchain/core-interfaces": "^2.1.0",
+        "@phantomchain/core-container": "^2.1.0",
+        "@phantomchain/core-database-postgres": "^2.1.0",
+        "@phantomchain/core-http-utils": "^2.1.0",
+        "@phantomchain/crypto": "^2.1.0",
         "@types/elasticsearch": "^5.0.30",
         "@types/fs-extra": "^5.0.4",
         "@types/joi": "^14.0.1",

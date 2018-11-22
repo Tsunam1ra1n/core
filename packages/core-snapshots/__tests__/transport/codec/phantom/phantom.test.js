@@ -11,7 +11,7 @@ beforeAll(async () => {
   })
 })
 
-describe('Ark codec testing', () => {
+describe('Phantom codec testing', () => {
   test('Encode/Decode single block', () => {
     console.time('singleblock')
     const encoded = msgpack.encode(blocks[1], { codec: codec.blocks })

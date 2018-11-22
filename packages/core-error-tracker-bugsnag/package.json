@@ -1,6 +1,6 @@
 {
-    "name": "@arkecosystem/core-error-tracker-bugsnag",
-    "description": "Bugsnag error tracker integration for Ark Core.",
+    "name": "@phantomchain/core-error-tracker-bugsnag",
+    "description": "Bugsnag error tracker integration for PHANTOM Core.",
     "version": "2.1.0",
     "contributors": [
         "Brian Faust <brian@ark.io>"
@@ -23,7 +23,7 @@
     },
     "dependencies": {
         "@bugsnag/js": "^5.0.2",
-        "@arkecosystem/core-container": "^2.1.0"
+        "@phantomchain/core-container": "^2.1.0"
     },
     "publishConfig": {
         "access": "public"

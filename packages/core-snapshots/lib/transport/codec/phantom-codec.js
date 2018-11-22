@@ -1,7 +1,7 @@
 const msgpack = require('msgpack-lite')
 const phantomEncoders = require('./phantom')
 
-class ArkCodec {
+class PhantomCodec {
   get blocks() {
     const codec = msgpack.createCodec()
     codec.addExtPacker(0x3f, Object, phantomEncoders.blockEncode)
@@ -19,4 +19,4 @@ class ArkCodec {
   }
 }
 
-module.exports = new ArkCodec()
+module.exports = new PhantomCodec()
