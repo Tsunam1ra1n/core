@@ -7,54 +7,31 @@ module.exports = {
       console: {
         options: {
           colorize: true,
-          level: process.env.PHANTOM_LOG_LEVEL || 'debug'
-        }
+          level: process.env.PHANTOM_LOG_LEVEL || 'debug',
+        },
       },
       dailyRotate: {
         options: {
-          filename: process.env.PHANTOM_LOG_FILE || `${process.env.PHANTOM_PATH_DATA}/logs/core/${process.env.PHANTOM_NETWORK_NAME}/%DATE%.log`,
+          filename:
+            process.env.PHANTOM_LOG_FILE ||
+            `${process.env.PHANTOM_PATH_DATA}/logs/core/${
+              process.env.PHANTOM_NETWORK_NAME
+            }/%DATE%.log`,
           datePattern: 'YYYY-MM-DD',
           level: process.env.PHANTOM_LOG_LEVEL || 'debug',
-          zippedArchive: true
-        }
-      }
-    }
-  },
-  '@phantomchain/core-database': {
-    snapshots: `${process.env.PHANTOM_PATH_DATA}/snapshots/${process.env.PHANTOM_NETWORK_NAME}`
-  },
-  '@phantomchain/core-database-sequelize': {
-    // dialect: 'sqlite',
-    // storage: process.env.PHANTOM_DB_STORAGE || `${process.env.PHANTOM_PATH_DATA}/database/${process.env.PHANTOM_NETWORK_NAME}10.sqlite`,
-    host: process.env.PHANTOM_DB_HOST || 'localhost',
-    dialect: process.env.PHANTOM_DB_DIALECT || 'postgres',
-    username: process.env.PHANTOM_DB_USERNAME || 'phantom',
-    password: process.env.PHANTOM_DB_PASSWORD || 'password',
-    database: process.env.PHANTOM_DB_DATABASE || 'phantom_devnet',
-    logging: process.env.PHANTOM_DB_LOGGING,
-    redis: {
-      host: process.env.PHANTOM_REDIS_HOST || 'localhost',
-      port: process.env.PHANTOM_REDIS_PORT || 6379
-    }
-  },
-  '@phantomchain/core-transaction-pool': {},
-  '@phantomchain/core-transaction-pool-redis': {
-    enabled: !process.env.PHANTOM_TRANSACTION_POOL_DISABLED,
-    key: 'phantom',
-    maxTransactionsPerSender: process.env.PHANTOM_TRANSACTION_POOL_MAX_PER_SENDER || 100,
-    whitelist: [],
-    redis: {
-      host: process.env.PHANTOM_REDIS_HOST || 'localhost',
-      port: process.env.PHANTOM_REDIS_PORT || 6379
-    }
+          zippedArchive: true,
+        },
+      },
+    },
   },
   '@phantomchain/core-database-postgres': {
     connection: {
       host: process.env.PHANTOM_DB_HOST || 'localhost',
       port: process.env.PHANTOM_DB_PORT || 5432,
       database:
-        process.env.PHANTOM_DB_DATABASE || `ark_${process.env.PHANTOM_NETWORK_NAME}`,
-      user: process.env.PHANTOM_DB_USERNAME || 'ark',
+        process.env.PHANTOM_DB_DATABASE ||
+        `phantom_${process.env.PHANTOM_NETWORK_NAME}`,
+      user: process.env.PHANTOM_DB_USERNAME || 'phantom',
       password: process.env.PHANTOM_DB_PASSWORD || 'password',
     },
   },
@@ -73,34 +50,36 @@ module.exports = {
   '@phantomchain/core-p2p': {
     host: process.env.PHANTOM_P2P_HOST || '0.0.0.0',
     port: process.env.PHANTOM_P2P_PORT || 4002,
-    whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*']
+    whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*'],
   },
   '@phantomchain/core-blockchain': {
-    fastRebuild: true
+    fastRebuild: true,
   },
   '@phantomchain/core-api': {
     enabled: !process.env.PHANTOM_API_DISABLED,
     host: process.env.PHANTOM_API_HOST || '0.0.0.0',
     port: process.env.PHANTOM_API_PORT || 4003,
-    whitelist: ['*']
+    whitelist: ['*'],
   },
   '@phantomchain/core-webhooks': {
     enabled: process.env.PHANTOM_WEBHOOKS_ENABLED,
     database: {
       dialect: 'sqlite',
-      storage: `${process.env.PHANTOM_PATH_DATA}/database/${process.env.PHANTOM_NETWORK_NAME}/webhooks.sqlite`,
-      logging: process.env.PHANTOM_DB_LOGGING
+      storage: `${process.env.PHANTOM_PATH_DATA}/database/${
+        process.env.PHANTOM_NETWORK_NAME
+      }/webhooks.sqlite`,
+      logging: process.env.PHANTOM_DB_LOGGING,
     },
     redis: {
       host: process.env.PHANTOM_REDIS_HOST || 'localhost',
-      port: process.env.PHANTOM_REDIS_PORT || 6379
+      port: process.env.PHANTOM_REDIS_PORT || 6379,
     },
     server: {
       enabled: process.env.PHANTOM_WEBHOOKS_API_ENABLED,
       host: process.env.PHANTOM_WEBHOOKS_HOST || '0.0.0.0',
       port: process.env.PHANTOM_WEBHOOKS_PORT || 4004,
-      whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*']
-    }
+      whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*'],
+    },
   },
   '@phantomchain/core-graphql': {
     enabled: process.env.PHANTOM_GRAPHQL_ENABLED,
@@ -120,10 +99,10 @@ module.exports = {
     whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*'],
     database: {
       uri:
-        process.env.PHANTOM_JSON_RPC_DATABASE
-        || `sqlite://${process.env.PHANTOM_PATH_DATA}/database/json-rpc.sqlite`,
+        process.env.PHANTOM_JSON_RPC_DATABASE ||
+        `sqlite://${process.env.PHANTOM_PATH_DATA}/database/json-rpc.sqlite`,
       options: {},
     },
     '@phantomchain/core-snapshots': {},
-  }
+  },
 }

@@ -111,8 +111,8 @@ module.exports = class Command {
     const waitPerBlock = Math.round(this.config.constants.blocktime / 10) * 20
 
     return (
-      waitPerBlock
-      * Math.ceil(
+      waitPerBlock *
+      Math.ceil(
         transactions.length / this.config.constants.block.maxTransactions,
       )
     )
@@ -202,9 +202,10 @@ module.exports = class Command {
   static parseFee(fee) {
     if (typeof fee === 'string' && fee.indexOf('-') !== -1) {
       const feeRange = fee.split('-').map(
-        f => +bignumify(f)
-          .times(1e8)
-          .toFixed(),
+        f =>
+          +bignumify(f)
+            .times(1e8)
+            .toFixed(),
       )
       if (feeRange[1] < feeRange[0]) {
         return feeRange[0]
@@ -321,20 +322,20 @@ module.exports = class Command {
 
   /**
    * Convert PHANTOM to Arktoshi.
-   * @param  {Number} ark
+   * @param  {Number} phantom
    * @return {Bignum}
    */
-  static __arkToArktoshi(ark) {
-    return bignumify(ark * 1e8)
+  static __phantomToPhantomtoshi(phantom) {
+    return bignumify(phantom * 1e8)
   }
 
   /**
    * Convert Arktoshi to PHANTOM.
-   * @param  {Bignum} arktoshi
+   * @param  {Bignum} phantomtoshi
    * @return {String}
    */
-  static xphtoshiToXph(arktoshi) {
-    return formatPhantomtoshi(arktoshi)
+  static xphtoshiToXph(phantomtoshi) {
+    return formatPhantomtoshi(phantomtoshi)
   }
 
   /**

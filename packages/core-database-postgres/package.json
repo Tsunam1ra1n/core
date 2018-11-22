@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-database-postgres",
   "description": "PostgreSQL integration for Phantom Core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "contributors": [
     "Brian Faust <brian@ark.io>"
   ],
@@ -20,10 +20,10 @@
     "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomchain/core-container": "^0.1.1",
-    "@phantomchain/core-database": "^0.1.1",
-    "@phantomchain/core-utils": "^0.1.0",
-    "@phantomchain/crypto": "^0.2.4",
+    "@phantomchain/core-container": "^0.1.3",
+    "@phantomchain/core-database": "^0.1.3",
+    "@phantomchain/core-utils": "^0.1.2",
+    "@phantomchain/crypto": "^0.2.5",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11",
     "pg-promise": "^8.5.2",

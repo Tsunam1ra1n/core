@@ -3,7 +3,7 @@ const msgpack = require('msgpack-lite')
 
 const { blocks } = require('../../../fixtures/blocks')
 const { transactions } = require('../../../fixtures/transactions')
-const codec = require('../../../../lib/transport/codec').get('ark')
+const codec = require('../../../../lib/transport/codec').get('phantom')
 
 beforeAll(async () => {
   transactions.forEach(transaction => {
@@ -44,7 +44,7 @@ describe('Ark codec testing', () => {
   })
 
   test('Encode/Decode transfer transactions', () => {
-    console.time('transactions ark transfer')
+    console.time('transactions phantom transfer')
     const properties = [
       'id',
       'version',
@@ -71,7 +71,7 @@ describe('Ark codec testing', () => {
         expect(dest).toEqual(source)
       }
     }
-    console.timeEnd('transactions ark transfer')
+    console.timeEnd('transactions phantom transfer')
   })
 
   test('Encode/Decode transactions other than transfer', () => {

@@ -75,7 +75,8 @@ describe('Transaction Guard', () => {
         const sender = delegates[txNumber] // use txNumber so that we use a different delegate for each test case
         const receivers = generateWallets('testnet', 2)
         const amountPlusFee = Math.floor(sender.balance / txNumber)
-        const lastAmountPlusFee = sender.balance - (txNumber - 1) * amountPlusFee
+        const lastAmountPlusFee =
+          sender.balance - (txNumber - 1) * amountPlusFee
 
         const transactions = generateTransfers(
           'testnet',
@@ -102,14 +103,15 @@ describe('Transaction Guard', () => {
     )
 
     it.each([3, 5, 8])(
-      'should not validate emptying wallet with %i transactions when the last one is 1 arktoshi too much',
+      'should not validate emptying wallet with %i transactions when the last one is 1 phantomtoshi too much',
       async txNumber => {
         guard.__reset()
 
         const sender = delegates[txNumber + 1] // use txNumber + 1 so that we don't use the same delegates as the above test
         const receivers = generateWallets('testnet', 2)
         const amountPlusFee = Math.floor(sender.balance / txNumber)
-        const lastAmountPlusFee = sender.balance - (txNumber - 1) * amountPlusFee + 1
+        const lastAmountPlusFee =
+          sender.balance - (txNumber - 1) * amountPlusFee + 1
 
         const transactions = generateTransfers(
           'testnet',

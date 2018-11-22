@@ -33,7 +33,7 @@ module.exports = transaction => {
           .required(),
       ),
       senderId: engine.joi.phantomAddress(),
-      senderPublicKey: engine.joi.arkPublicKey().required(),
+      senderPublicKey: engine.joi.phantomPublicKey().required(),
       signature: engine.joi
         .string()
         .alphanum()

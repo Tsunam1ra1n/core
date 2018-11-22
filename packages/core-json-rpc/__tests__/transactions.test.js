@@ -78,10 +78,6 @@ describe('Transactions', () => {
         passphrase: 'this is a top secret passphrase',
       })
 
-<<<<<<< HEAD
-      await expect(response.data.result.recipientId).toBe('AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv')
-      await expect(phantom.crypto.verify(response.data.result)).toBeTruthy()
-=======
       expect(response.data.result.recipientId).toBe(
         'APnhwwyTbMiykJwYbGhYjNgtHiVJDSEhSn',
       )
@@ -104,7 +100,6 @@ describe('Transactions', () => {
       const response = await request('transactions.broadcast', {
         id: transaction.data.result.id,
       })
->>>>>>> f5226bda8a9b3a1de6fdbc5742bf74a51bbcfb71
 
       expect(crypto.verify(response.data.result)).toBeTrue()
     })
@@ -114,9 +109,6 @@ describe('Transactions', () => {
         id: 'e4311204acf8a86ba833e494f5292475c6e9e0913fc455a12601b4b6b55818d8',
       })
 
-<<<<<<< HEAD
-      await expect(phantom.crypto.verify(response.data.result[0])).toBeTruthy()
-=======
       expect(response.data.error.code).toBe(404)
       expect(response.data.error.message).toBe(
         'Transaction e4311204acf8a86ba833e494f5292475c6e9e0913fc455a12601b4b6b55818d8 could not be found.',
@@ -138,14 +130,13 @@ describe('Transactions', () => {
         bip38: 'this is a top secret passphrase',
         userId,
         amount: 1000000000,
-        recipientId: 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv',
+        recipientId: 'APnhwwyTbMiykJwYbGhYjNgtHiVJDSEhSn',
       })
 
       expect(response.data.result.recipientId).toBe(
-        'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv',
+        'APnhwwyTbMiykJwYbGhYjNgtHiVJDSEhSn',
       )
       expect(crypto.verify(response.data.result)).toBeTrue()
->>>>>>> f5226bda8a9b3a1de6fdbc5742bf74a51bbcfb71
     })
 
     it('should fail to create a new transaction', async () => {
@@ -153,17 +144,13 @@ describe('Transactions', () => {
         bip38: 'this is a top secret passphrase',
         userId: '123456789',
         amount: 1000000000,
-        recipientId: 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv',
+        recipientId: 'APnhwwyTbMiykJwYbGhYjNgtHiVJDSEhSn',
       })
 
-<<<<<<< HEAD
-      await expect(phantom.crypto.verify(response.data.result)).toBeTruthy()
-=======
       expect(response.data.error.code).toBe(404)
       expect(response.data.error.message).toBe(
         'User 123456789 could not be found.',
       )
->>>>>>> f5226bda8a9b3a1de6fdbc5742bf74a51bbcfb71
     })
   })
 })

@@ -23,7 +23,7 @@ module.exports = transaction => {
         .alternatives()
         .try(engine.joi.bignumber(), engine.joi.number().integer()),
       senderId: engine.joi.phantomAddress(),
-      senderPublicKey: engine.joi.arkPublicKey().required(),
+      senderPublicKey: engine.joi.phantomPublicKey().required(),
       signature: engine.joi
         .string()
         .alphanum()

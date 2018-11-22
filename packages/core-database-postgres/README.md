@@ -24,8 +24,8 @@ module.exports = {
     port: process.env.PHANTOM_DB_PORT || 5432,
     database:
       process.env.PHANTOM_DB_DATABASE ||
-      `ark_${process.env.PHANTOM_NETWORK_NAME}`,
-    user: process.env.PHANTOM_DB_USERNAME || 'ark',
+      `phantom_${process.env.PHANTOM_NETWORK_NAME}`,
+    user: process.env.PHANTOM_DB_USERNAME || 'phantom',
     password: process.env.PHANTOM_DB_PASSWORD || 'password',
   },
 }

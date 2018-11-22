@@ -12,8 +12,8 @@ module.exports = {
         options: {
           level: process.env.PHANTOM_LOG_LEVEL || 'debug',
           filename:
-            process.env.PHANTOM_LOG_FILE
-            || `${process.env.PHANTOM_PATH_DATA}/logs/core/${
+            process.env.PHANTOM_LOG_FILE ||
+            `${process.env.PHANTOM_PATH_DATA}/logs/core/${
               process.env.PHANTOM_NETWORK_NAME
             }/%DATE%.log`,
         },
@@ -24,8 +24,8 @@ module.exports = {
     connection: {
       host: process.env.PHANTOM_DB_HOST || 'localhost',
       port: process.env.PHANTOM_DB_PORT || 5432,
-      database: process.env.PHANTOM_DB_DATABASE || 'ark_development',
-      user: process.env.PHANTOM_DB_USERNAME || 'ark',
+      database: process.env.PHANTOM_DB_DATABASE || 'phantom_development',
+      user: process.env.PHANTOM_DB_USERNAME || 'phantom',
       password: process.env.PHANTOM_DB_PASSWORD || 'password',
     },
   },
@@ -91,8 +91,8 @@ module.exports = {
     whitelist: ['127.0.0.1', '::ffff:127.0.0.1'],
     database: {
       uri:
-        process.env.PHANTOM_JSON_RPC_DATABASE
-        || `sqlite://${process.env.PHANTOM_PATH_DATA}/database/json-rpc.sqlite`,
+        process.env.PHANTOM_JSON_RPC_DATABASE ||
+        `sqlite://${process.env.PHANTOM_PATH_DATA}/database/json-rpc.sqlite`,
       options: {},
     },
   },

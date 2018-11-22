@@ -7,7 +7,7 @@ module.exports = getDelegates()
  * @return {Array} array of objects like { secret, publicKey, address, balance }
  */
 function getDelegates() {
-  client.getConfigManager().setFromPreset('ark', 'testnet')
+  client.getConfigManager().setFromPreset('phantom', 'testnet')
 
   const delegatesConfig = require('../../config/testnet/delegates.json')
   const genesisTransactions = require('../../config/testnet/genesisBlock.json')
@@ -17,7 +17,8 @@ function getDelegates() {
     const publicKey = crypto.getKeys(secret).publicKey
     const address = crypto.getAddress(publicKey)
     const balance = genesisTransactions.find(
-      transaction => transaction.recipientId === address && transaction.type === 0,
+      transaction =>
+        transaction.recipientId === address && transaction.type === 0,
     ).amount
     return {
       secret,

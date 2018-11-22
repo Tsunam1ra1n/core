@@ -31,7 +31,7 @@ module.exports = (
     throw new Error('Invalid transaction type')
   }
 
-  client.getConfigManager().setFromPreset('ark', network)
+  client.getConfigManager().setFromPreset('phantom', network)
   address = address || crypto.getAddress(crypto.getKeys(passphrase).publicKey)
 
   const transactions = []

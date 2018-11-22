@@ -21,13 +21,14 @@ describe('GraphQL API { wallets }', () => {
       const data = response.data.data
       expect(data).toBeObject()
       expect(data.wallets.length).toBe(53)
-      // TODO why 53 ? From genesis block I can count 52, but there is an additional "AP6kAVdX1zQ3S8mfDnnHx9GaAohEqQUins" wallet. What did I miss ?
+      // TODO why 53 ? From genesis block I can count 52, but there is an additional "Ac9dCo9dFgAkkBdEBsoRAN4Mm6xMsgYdZx" wallet. What did I miss ?
     })
   })
 
   describe('GraphQL queries for Wallets - filter by vote', () => {
     it('should get all wallets with specific vote', async () => {
-      const query = '{ wallets(filter: { vote: "036f612457adc81041662e664ca4ae64f844b412065f2b7d2f9f7d305e59c908cd" }) { address } }'
+      const query =
+        '{ wallets(filter: { vote: "036f612457adc81041662e664ca4ae64f844b412065f2b7d2f9f7d305e59c908cd" }) { address } }'
       const response = await utils.request(query)
 
       expect(response).toBeSuccessfulResponse()
@@ -38,7 +39,8 @@ describe('GraphQL API { wallets }', () => {
     })
 
     it('should get no wallet with unknown vote', async () => {
-      const query = '{ wallets(filter: { vote: "unknownPublicKey" }) { address } }'
+      const query =
+        '{ wallets(filter: { vote: "unknownPublicKey" }) { address } }'
       const response = await utils.request(query)
 
       expect(response).toBeSuccessfulResponse()
@@ -51,7 +53,8 @@ describe('GraphQL API { wallets }', () => {
 
   describe('GraphQL queries for Wallets - using orderBy, limit', () => {
     it('should get 5 wallets in order of ASCending address', async () => {
-      const query = '{ wallets(orderBy: { field: "address", direction: ASC }, limit: 5 ) { address } }'
+      const query =
+        '{ wallets(orderBy: { field: "address", direction: ASC }, limit: 5 ) { address } }'
       const response = await utils.request(query)
 
       expect(response).toBeSuccessfulResponse()

@@ -1,14 +1,4 @@
-<<<<<<< HEAD
 ![PHANTOM Core](banner.png)
-=======
-
-# Ark - Crypto
-
-> > > > > > > f5226bda8a9b3a1de6fdbc5742bf74a51bbcfb71
-
-<p align="center">
-    <img src="./banner.png?sanitize=true" />
-</p>
 
 ## Installation
 

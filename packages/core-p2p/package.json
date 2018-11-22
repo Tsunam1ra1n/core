@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-p2p",
   "description": "P2P API for PHANTOM Core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "contributors": [
     "François-Xavier Thoorens <fx@ark.io>",
     "Kristjan Košič <kristjan@ark.io>",
@@ -24,10 +24,12 @@
     "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomchain/core-container": "^0.1.1",
-    "@phantomchain/core-http-utils": "^0.1.0",
-    "@phantomchain/core-transaction-pool": "^0.1.1",
-    "@phantomchain/crypto": "^0.2.4",
+    "@phantomchain/core-config": "^0.1.2",
+    "@phantomchain/core-container": "^0.1.3",
+    "@phantomchain/core-event-emitter": "^0.1.1",
+    "@phantomchain/core-http-utils": "^0.1.1",
+    "@phantomchain/core-transaction-pool": "^0.1.3",
+    "@phantomchain/crypto": "^0.2.5",
     "ajv": "^6.5.5",
     "axios": "^0.18.0",
     "boom": "^7.2.2",
@@ -44,7 +46,7 @@
     "sntp": "^3.0.2"
   },
   "devDependencies": {
-    "@phantomchain/core-test-utils": "^0.1.1",
+    "@phantomchain/core-test-utils": "^0.1.4",
     "axios-mock-adapter": "^1.15.0",
     "flow-bin": "^0.86.0"
   },

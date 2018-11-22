@@ -9,7 +9,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "bin": {
-    "ark:tester": "./bin/tester"
+    "phantom:tester": "./bin/tester"
   },
   "scripts": {
     "start": "./bin/tester",
@@ -25,8 +25,8 @@
     "depcheck": "depcheck ./ --ignores=flow-bin,commander,pino-pretty"
   },
   "dependencies": {
-    "@phantomchain/core-utils": "^0.1.0",
-    "@phantomchain/crypto": "^0.2.4",
+    "@phantomchain/core-utils": "^0.1.2",
+    "@phantomchain/crypto": "^0.2.5",
     "axios": "^0.18.0",
     "bip39": "^2.5.0",
     "clipboardy": "^1.2.3",

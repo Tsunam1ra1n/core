@@ -27,7 +27,7 @@ This repository contains all plugins that make up the PHANTOM Core.
 | [core-config](/packages/core-config)                                 | Configuration Loader                                         |
 | [core-container](/packages/core-container)                           | Container Management                                         |
 | [core-database](/packages/core-database)                             | Database Interface                                           |
-| [core-database-sequelize](/packages/core-database-sequelize)         | Sequelize Database Provider                                  |
+| [core-database-postgres](/packages/core-database-postgres)           | Postgres Database Provider                                   |
 | [core-deployer](/packages/core-deployer)                             | Deployer CLI                                                 |
 | [core-event-emitter](/packages/core-event-emitter)                   | Event Manager                                                |
 | [core-forger](/packages/core-forger)                                 | Forger Manager                                               |

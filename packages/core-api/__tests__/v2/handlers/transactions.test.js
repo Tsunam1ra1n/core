@@ -498,8 +498,10 @@ describe('API 2.0 - Transactions', () => {
       ['Accept', 'requestWithAcceptHeader'],
     ])('using the %s header', (header, request) => {
       it.skip('should POST a search for transactions with the exact specified vendorFieldHex', async () => {
-        const transactionId = '0000faa27b422f7648b1a2f634f15c7e5c8e96b84929624fda44abf716bdf784'
-        const vendorFieldHex = '64656c65676174653a20766f746572732073686172652e205468616e6b20796f7521207c74782062792061726b2d676f'
+        const transactionId =
+          '0000faa27b422f7648b1a2f634f15c7e5c8e96b84929624fda44abf716bdf784'
+        const vendorFieldHex =
+          '64656c65676174653a20766f746572732073686172652e205468616e6b20796f7521207c74782062792061726b2d676f'
 
         const response = await utils[request]('POST', 'transactions/search', {
           id: transactionId,
@@ -591,7 +593,8 @@ describe('API 2.0 - Transactions', () => {
         const sender = delegates[txNumber] // use txNumber so that we use a different delegate for each test case
         const receivers = generateWallets('testnet', 2)
         const amountPlusFee = Math.floor(sender.balance / txNumber)
-        const lastAmountPlusFee = sender.balance - (txNumber - 1) * amountPlusFee
+        const lastAmountPlusFee =
+          sender.balance - (txNumber - 1) * amountPlusFee
 
         const transactions = generateTransfers(
           'testnet',
@@ -634,12 +637,13 @@ describe('API 2.0 - Transactions', () => {
     )
 
     it.each([3, 5, 8])(
-      'should not accept the last of %i transactions emptying a wallet when the last one is 1 arktoshi too much',
+      'should not accept the last of %i transactions emptying a wallet when the last one is 1 phantomtoshi too much',
       async txNumber => {
         const sender = delegates[txNumber + 1] // use txNumber + 1 so that we don't use the same delegates as the above test
         const receivers = generateWallets('testnet', 2)
         const amountPlusFee = Math.floor(sender.balance / txNumber)
-        const lastAmountPlusFee = sender.balance - (txNumber - 1) * amountPlusFee + 1
+        const lastAmountPlusFee =
+          sender.balance - (txNumber - 1) * amountPlusFee + 1
 
         const transactions = generateTransfers(
           'testnet',

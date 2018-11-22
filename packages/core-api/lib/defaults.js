@@ -8,7 +8,7 @@ module.exports = {
     validVersions: [1, 2],
     defaultVersion: 1,
     basePath: '/api/',
-    vendorName: 'ark.core-api',
+    vendorName: 'phantom.core-api',
   },
   cache: {
     enabled: false,
@@ -18,8 +18,8 @@ module.exports = {
       host: process.env.PHANTOM_REDIS_HOST || 'localhost',
       port: process.env.PHANTOM_REDIS_PORT || 6379,
       partition: 'cache',
-      expiresIn: 60000
-    }
+      expiresIn: 60000,
+    },
   },
   // @see https://github.com/wraithgar/hapi-rate-limit
   rateLimit: {

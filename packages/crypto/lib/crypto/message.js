@@ -1,11 +1,12 @@
 const crypto = require('crypto')
-const arkCrypto = require('./crypto')
+const phantomCrypto = require('./crypto')
 const configManager = require('../managers/config')
 
-const createHash = message => crypto
-  .createHash('sha256')
-  .update(Buffer.from(message, 'utf-8'))
-  .digest()
+const createHash = message =>
+  crypto
+    .createHash('sha256')
+    .update(Buffer.from(message, 'utf-8'))
+    .digest()
 
 module.exports = class Message {
   /**
@@ -15,11 +16,11 @@ module.exports = class Message {
    * @return {Object}
    */
   static sign(message, passphrase) {
-    const keys = arkCrypto.getKeys(passphrase)
+    const keys = phantomCrypto.getKeys(passphrase)
 
     return {
       publicKey: keys.publicKey,
-      signature: arkCrypto.signHash(createHash(message), keys),
+      signature: phantomCrypto.signHash(createHash(message), keys),
       message,
     }
   }
@@ -36,11 +37,11 @@ module.exports = class Message {
       network = configManager.all()
     }
 
-    const keys = arkCrypto.getKeysFromWIF(wif, network)
+    const keys = phantomCrypto.getKeysFromWIF(wif, network)
 
     return {
       publicKey: keys.publicKey,
-      signature: arkCrypto.signHash(createHash(message), keys),
+      signature: phantomCrypto.signHash(createHash(message), keys),
       message,
     }
   }
@@ -53,6 +54,6 @@ module.exports = class Message {
    * @return {Boolean}
    */
   static verify({ message, publicKey, signature }) {
-    return arkCrypto.verifyHash(createHash(message), signature, publicKey)
+    return phantomCrypto.verifyHash(createHash(message), signature, publicKey)
   }
 }

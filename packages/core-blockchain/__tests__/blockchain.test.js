@@ -21,6 +21,7 @@ const app = require('./__support__/setup')
 
 beforeAll(async () => {
   container = await app.setUp()
+  console.log('=====> Blockchain setup:  ', container)
 
   // Backup logger.debug function as we are going to mock it in the test suite
   logger = container.resolvePlugin('logger')
@@ -477,8 +478,8 @@ async function __start() {
 
   await blockchain.start(true)
   while (
-    !blockchain.getLastBlock()
-    || blockchain.getLastBlock().data.height < 155
+    !blockchain.getLastBlock() ||
+    blockchain.getLastBlock().data.height < 155
   ) {
     await delay(1000)
   }
@@ -520,9 +521,10 @@ function __mockPeer() {
       peerMock.headers,
     ])
   axiosMock.onGet(/.*\/peer\/blocks/).reply(config => {
-    const blocks = config.params.lastBlockHeight === 1
-      ? blocks1to100
-      : config.params.lastBlockHeight === 100
+    const blocks =
+      config.params.lastBlockHeight === 1
+        ? blocks1to100
+        : config.params.lastBlockHeight === 100
         ? blocks101to155
         : []
 
@@ -541,7 +543,11 @@ function __mockPeer() {
       success: true,
       peers: [
         {
-          status: 200, ip: peerMock.ip, port: 4002, height: 155, delay: 8,
+          status: 200,
+          ip: peerMock.ip,
+          port: 4002,
+          height: 155,
+          delay: 8,
         },
       ],
     },

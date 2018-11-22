@@ -178,7 +178,7 @@ module.exports = class MultiSignatureCommand extends Command {
     logger.info('Sending transactions with signatures')
 
     const transactions = transfer.generateTransactions(
-      Command.__arkToArktoshi(2),
+      Command.__phantomToPhantomtoshi(2),
       wallets,
       approvalWallets,
     )
@@ -219,7 +219,7 @@ module.exports = class MultiSignatureCommand extends Command {
     )
 
     const transactions = transfer.generateTransactions(
-      Command.__arkToArktoshi(2),
+      Command.__phantomToPhantomtoshi(2),
       wallets,
       take(approvalWallets, min),
     )
@@ -261,7 +261,7 @@ module.exports = class MultiSignatureCommand extends Command {
     )
 
     const transactions = transfer.generateTransactions(
-      Command.__arkToArktoshi(2),
+      Command.__phantomToPhantomtoshi(2),
       wallets,
       take(approvalWallets, max),
     )
@@ -302,7 +302,7 @@ module.exports = class MultiSignatureCommand extends Command {
     logger.info('Sending transactions without signatures')
 
     const transactions = transfer.generateTransactions(
-      Command.__arkToArktoshi(2),
+      Command.__phantomToPhantomtoshi(2),
       wallets,
     )
 
@@ -342,7 +342,7 @@ module.exports = class MultiSignatureCommand extends Command {
     logger.info('Sending transactions with empty signatures')
 
     const transactions = transfer.generateTransactions(
-      Command.__arkToArktoshi(2),
+      Command.__phantomToPhantomtoshi(2),
       wallets,
     )
     for (const transaction of transactions) {

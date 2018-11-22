@@ -33,7 +33,7 @@ module.exports = transaction => {
       ),
       senderId: engine.joi.phantomAddress(),
       recipientId: engine.joi.empty(),
-      senderPublicKey: engine.joi.arkPublicKey().required(),
+      senderPublicKey: engine.joi.phantomPublicKey().required(),
       signature: engine.joi
         .string()
         .alphanum()
@@ -45,7 +45,7 @@ module.exports = transaction => {
           delegate: engine.joi
             .object({
               username: engine.joi.phantomUsername().required(),
-              publicKey: engine.joi.arkPublicKey(),
+              publicKey: engine.joi.phantomPublicKey(),
             })
             .required(),
         })

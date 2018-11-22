@@ -25,15 +25,15 @@ The plugin allows for manipulation, creation and import functionality of various
 
 ### Creating a fresh new snapshot
 
-The following action creates a new snapshot in ./ark/snapshots/devnet/ folder.
+The following action creates a new snapshot in ./phantom/snapshots/devnet/ folder.
 
 ```bash
 yarn create:devnet
 ```
 
-The command will generate snapshot files in your configured folder. By default this folder will be in `~./ark/snapshots/NETWORK_NAME`.
+The command will generate snapshot files in your configured folder. By default this folder will be in `~./phantom/snapshots/NETWORK_NAME`.
 Files names are following this pattern: `table.codec`. For example, command `yarn create:devnet` will create the following files in the folder:
-`~./ark/snapshots/NETWORK_NAME/0-331985/`
+`~./phantom/snapshots/NETWORK_NAME/0-331985/`
 
 - blocks.lite
 - transactions.lite
@@ -47,14 +47,14 @@ A snapshot can also be created by specifying `--start` and `--end` options where
 Snapshot creation supports three different codecs, to work with. Each of them is a balance between speed and size of the local snapshot. Currently we have:
 
 - lite codec: uses basic serialization with minimall storage informations. It is the default choice between size and speed
-- ark codec: uses Ark's block and transactions serialization/deserialization mechanism to store and import data. It is a bit slower than lite codec, but uses less data.
+- phantom codec: uses Phantom's block and transactions serialization/deserialization mechanism to store and import data. It is a bit slower than lite codec, but uses less data.
 - msgpack coded: uses msgpack's library default compression, giving us maximum speed, but also maximum disk size usage.
 
 ```bash
   yarn create:devnet --codec lite
 ```
 
-Snapshots created with a selected codec have their corresponding file extensions (`lite`, `ark` and `msgpack`), when naming files. For example a snapshot file created with lite codec would look like this: `blocks.lite`.
+Snapshots created with a selected codec have their corresponding file extensions (`lite`, `phantom` and `msgpack`), when naming files. For example a snapshot file created with lite codec would look like this: `blocks.lite`.
 
 ### Append data to an existing snapshot
 
@@ -66,7 +66,7 @@ When append is completed a new folder is created, while preserving the old snaps
 
 ### Importing a snapshot
 
-The following action imports a snapshot from .ark/snapshots/devnet/ folder. Snapshot filename must be specified. You specify only first filename - from the blocks.
+The following action imports a snapshot from .phantom/snapshots/devnet/ folder. Snapshot filename must be specified. You specify only first filename - from the blocks.
 
 > Make sure that your node is not running.
 
@@ -126,7 +126,7 @@ Above command will rollback the chain to block height of 350000.
 
 If the `-b` or `--block-height` argument is not set, the command will rollback the chain to the last completed round.
 
-Rollback command also makes a backup of forged transactions. Transactions are stored next to the snapshot files (in `./ark/snapshots/NETWORK_NAME`). File is named `rollbackTransactionBackup.startBlockHeight.endBlockHeight.json`, for example: rollbackTransactionBackup.53001.54978.json containes transactions from block 53001 to block 54978.
+Rollback command also makes a backup of forged transactions. Transactions are stored next to the snapshot files (in `./phantom/snapshots/NETWORK_NAME`). File is named `rollbackTransactionBackup.startBlockHeight.endBlockHeight.json`, for example: rollbackTransactionBackup.53001.54978.json containes transactions from block 53001 to block 54978.
 
 ## Security
 

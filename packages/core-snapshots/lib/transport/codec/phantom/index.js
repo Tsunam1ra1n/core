@@ -19,12 +19,13 @@ module.exports = {
     return decamelizeKeys(blockData)
   },
 
-  transactionEncode: transaction => msgpack.encode([
-    transaction.id,
-    transaction.block_id,
-    transaction.sequence,
-    transaction.serialized,
-  ]),
+  transactionEncode: transaction =>
+    msgpack.encode([
+      transaction.id,
+      transaction.block_id,
+      transaction.sequence,
+      transaction.serialized,
+    ]),
 
   transactionDecode: bufferData => {
     const [id, blockId, sequence, serialized] = msgpack.decode(bufferData)

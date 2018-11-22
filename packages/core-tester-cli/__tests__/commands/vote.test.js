@@ -32,7 +32,8 @@ describe('Commands - Vote', () => {
   })
 
   it('should vote for specified delegate', async () => {
-    const expectedDelegate = '03f294777f7376e970b2bd4805b4a90c8449b5935d530bdb566d02800ac44a4c00'
+    const expectedDelegate =
+      '03f294777f7376e970b2bd4805b4a90c8449b5935d530bdb566d02800ac44a4c00'
     const opts = {
       ...defaultOpts,
       number: 1,
@@ -53,7 +54,7 @@ describe('Commands - Vote', () => {
       {
         transactions: [
           expect.objectContaining({
-            fee: VoteCommand.__arkToArktoshi(opts.voteFee),
+            fee: VoteCommand.__phantomToPhantomtoshi(opts.voteFee),
             asset: {
               votes: [`+${expectedDelegate}`],
             },
@@ -65,7 +66,8 @@ describe('Commands - Vote', () => {
   })
 
   it('should vote random delegate if non specified', async () => {
-    const expectedDelegate = '03f294777f7376e970b2bd4805b4a90c8449b5935d530bdb566d02800ac44a4c00'
+    const expectedDelegate =
+      '03f294777f7376e970b2bd4805b4a90c8449b5935d530bdb566d02800ac44a4c00'
     const opts = {
       ...defaultOpts,
       number: 1,
@@ -93,7 +95,7 @@ describe('Commands - Vote', () => {
       {
         transactions: [
           expect.objectContaining({
-            fee: VoteCommand.__arkToArktoshi(opts.voteFee),
+            fee: VoteCommand.__phantomToPhantomtoshi(opts.voteFee),
             asset: {
               votes: [`+${expectedDelegate}`],
             },

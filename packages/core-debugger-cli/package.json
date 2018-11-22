@@ -8,7 +8,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "bin": {
-    "ark:debugger": "./bin/debugger"
+    "phantom:debugger": "./bin/debugger"
   },
   "scripts": {
     "start": "./bin/debugger",
@@ -24,7 +24,7 @@
     "depcheck": "depcheck ./ --ignores=flow-bin,commander"
   },
   "dependencies": {
-    "@phantomchain/crypto": "^0.2.4",
+    "@phantomchain/crypto": "^0.2.5",
     "clipboardy": "^1.2.3",
     "commander": "^2.19.0"
   },

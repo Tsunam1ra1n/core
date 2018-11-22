@@ -34,7 +34,7 @@ module.exports = transaction => {
       ),
       senderId: engine.joi.phantomAddress(),
       recipientId: engine.joi.phantomAddress().required(),
-      senderPublicKey: engine.joi.arkPublicKey().required(),
+      senderPublicKey: engine.joi.phantomPublicKey().required(),
       signature: engine.joi
         .string()
         .alphanum()

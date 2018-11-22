@@ -34,7 +34,9 @@ module.exports = class TransferCommand extends Command {
     }
 
     let totalDeductions = Bignum.ZERO
-    const transactionAmount = Command.__arkToArktoshi(this.options.amount || 2)
+    const transactionAmount = Command.__arkToPhantomtoshi(
+      this.options.amount || 2,
+    )
 
     const transactions = this.generateTransactions(
       transactionAmount,
@@ -77,10 +79,10 @@ module.exports = class TransferCommand extends Command {
       if (!this.options.floodAttempts) {
         const successfulTest = await this.__performRun(runOptions, 1)
         if (
-          successfulTest
-          && !this.options.skipSecondRun
-          && !this.options.skipValidation
-          && !this.options.skipTesting
+          successfulTest &&
+          !this.options.skipSecondRun &&
+          !this.options.skipValidation &&
+          !this.options.skipTesting
         ) {
           await this.__performRun(runOptions, 2, false, true)
         }
@@ -256,8 +258,8 @@ module.exports = class TransferCommand extends Command {
       const uniqueLength = unique(postResponse[key]).length
       if (dataLength !== uniqueLength) {
         logger.error(
-          `Response data for '${key}' has ${dataLength
-            - uniqueLength} duplicate transaction ids`,
+          `Response data for '${key}' has ${dataLength -
+            uniqueLength} duplicate transaction ids`,
         )
         successfulTest = false
       }
@@ -324,7 +326,7 @@ module.exports = class TransferCommand extends Command {
     logger.info('Testing VendorField value is set correctly')
 
     const transactions = this.generateTransactions(
-      Command.__xpsToArktoshi(2),
+      Command.__xpsToPhantomtoshi(2),
       wallets,
       null,
       null,
@@ -363,7 +365,7 @@ module.exports = class TransferCommand extends Command {
     logger.info('Testing empty VendorField value')
 
     const transactions = this.generateTransactions(
-      Command.__arkToArktoshi(2),
+      Command.__phantomToPhantomtoshi(2),
       wallets,
       null,
       null,

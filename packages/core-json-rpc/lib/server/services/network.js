@@ -17,7 +17,7 @@ class Network {
     configManager.setConfig(config.network)
 
     this.client = axios.create({
-      headers: { Accept: 'application/vnd.ark.core-api.v2+json' },
+      headers: { Accept: 'application/vnd.phantom.core-api.v2+json' },
       timeout: 3000,
     })
   }
@@ -94,9 +94,10 @@ class Network {
   }
 
   __loadRemotePeers() {
-    this.peers = this.network.name === 'testnet'
-      ? [{ ip: '127.0.0.1', port: container.resolveOptions('api').port }]
-      : p2p.getPeers()
+    this.peers =
+      this.network.name === 'testnet'
+        ? [{ ip: '127.0.0.1', port: container.resolveOptions('api').port }]
+        : p2p.getPeers()
 
     if (!this.peers.length) {
       logger.error('No peers found. Shutting down...')

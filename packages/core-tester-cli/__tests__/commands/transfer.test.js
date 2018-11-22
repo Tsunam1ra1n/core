@@ -58,8 +58,10 @@ describe('Commands - Transfer', async () => {
       expect.arrayContaining([
         expect.objectContaining({
           vendorField: 'foo bar',
-          amount: TransferCommand.__arkToArktoshi(expectedTransactionAmount),
-          fee: TransferCommand.__arkToArktoshi(expectedFee),
+          amount: TransferCommand.__phantomToPhantomtoshi(
+            expectedTransactionAmount,
+          ),
+          fee: TransferCommand.__phantomToPhantomtoshi(expectedFee),
           recipientId: expectedRecipientId,
         }),
       ]),
@@ -70,8 +72,8 @@ describe('Commands - Transfer', async () => {
     const expectedTxCount = 5
     const opts = {
       ...defaultOpts,
-      amount: TransferCommand.__arkToArktoshi(2),
-      transferFee: TransferCommand.__arkToArktoshi(0.1),
+      amount: TransferCommand.__phantomToPhantomtoshi(2),
+      transferFee: TransferCommand.__phantomToPhantomtoshi(0.1),
       number: expectedTxCount,
     }
     const command = await TransferCommand.init(opts)
@@ -98,8 +100,8 @@ describe('Commands - Transfer', async () => {
     const expectedRecipientId = 'DFyUhQW52sNB5PZdS7VD9HknwYrSNHPQDq'
     const opts = {
       ...defaultOpts,
-      amount: TransferCommand.__arkToArktoshi(2),
-      transferFee: TransferCommand.__arkToArktoshi(0.1),
+      amount: TransferCommand.__phantomToPhantomtoshi(2),
+      transferFee: TransferCommand.__phantomToPhantomtoshi(0.1),
       number: expectedTxCount,
       recipient: expectedRecipientId,
     }
@@ -121,8 +123,8 @@ describe('Commands - Transfer', async () => {
   })
 
   it('should sign with 2nd passphrase if specified', async () => {
-    const expectedTransactionAmount = TransferCommand.__arkToArktoshi(2)
-    const expectedFee = TransferCommand.__arkToArktoshi(0.1)
+    const expectedTransactionAmount = TransferCommand.__phantomToPhantomtoshi(2)
+    const expectedFee = TransferCommand.__phantomToPhantomtoshi(0.1)
     const opts = {
       ...defaultOpts,
       amount: expectedTransactionAmount,

@@ -1,5 +1,5 @@
-'use strict'
 const container = require('@phantomchain/core-container')
+
 const config = container.resolvePlugin('config')
 
 const { slots } = require('@phantomchain/crypto')
@@ -38,13 +38,8 @@ module.exports = (monitor, lastBlock) => {
     return createStateObject(0, true, true, overHeightBlockHeader)
   }
 
-<<<<<<< HEAD
-  if (process.env.PHANTOM_ENV === 'test') {
-    return {quorum: 1, nodeHeight: lastBlock.data.height, lastBlockId: lastBlock.data.id, overHeightBlockHeader: overHeightBlockHeader, minimumNetworkReach: true, coldStart: false}
-=======
   if (process.env.PHANTOM_ENV === 'test') {
     return createStateObject(1, true, false, overHeightBlockHeader)
->>>>>>> f5226bda8a9b3a1de6fdbc5742bf74a51bbcfb71
   }
 
   if (peers.length < minimumNetworkReach) {
@@ -54,9 +49,9 @@ module.exports = (monitor, lastBlock) => {
   for (const peer of peers) {
     if (peer.state.height === lastBlock.data.height) {
       if (
-        peer.state.header.id === lastBlock.data.id
-        && peer.state.currentSlot === currentSlot
-        && peer.state.forgingAllowed
+        peer.state.header.id === lastBlock.data.id &&
+        peer.state.currentSlot === currentSlot &&
+        peer.state.forgingAllowed
       ) {
         quorum += 1
       } else {

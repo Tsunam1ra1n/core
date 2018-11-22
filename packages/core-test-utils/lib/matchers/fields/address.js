@@ -1,5 +1,3 @@
-'use strict'
-
 const { crypto } = require('@phantomchain/crypto')
 
 /**
@@ -8,11 +6,11 @@ const { crypto } = require('@phantomchain/crypto')
  * @param  {String} argument
  * @return {Boolean}
  */
-const toBeArkAddress = (received, argument) => ({
+const toBePhantomAddress = (received, argument) => ({
   message: () => 'Expected value to be a valid address',
   pass: crypto.validateAddress(received, argument),
 })
 
 expect.extend({
-  toBeArkAddress,
+  toBePhantomAddress,
 })

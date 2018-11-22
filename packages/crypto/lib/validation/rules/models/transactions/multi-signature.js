@@ -5,9 +5,9 @@ module.exports = transaction => {
   let maxMinValue = 16
   let signaturesLength = 2
   if (
-    transaction.asset
-    && transaction.asset.multisignature
-    && Array.isArray(transaction.asset.multisignature.keysgroup)
+    transaction.asset &&
+    transaction.asset.multisignature &&
+    Array.isArray(transaction.asset.multisignature.keysgroup)
   ) {
     maxMinValue = transaction.asset.multisignature.keysgroup.length
     signaturesLength = maxMinValue
@@ -39,7 +39,7 @@ module.exports = transaction => {
       ),
       senderId: engine.joi.phantomAddress(),
       recipientId: engine.joi.empty(),
-      senderPublicKey: engine.joi.arkPublicKey().required(),
+      senderPublicKey: engine.joi.phantomPublicKey().required(),
       signature: engine.joi
         .string()
         .alphanum()
