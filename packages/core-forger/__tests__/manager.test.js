@@ -20,8 +20,10 @@ afterAll(async () => {
 
 beforeEach(() => {
   const ForgeManager = require('../lib/manager')
-  defaultConfig.hosts = ['http://127.0.0.1:4000']
-  manager = new ForgeManager(defaultConfig)
+  defaultConfig.hosts = [
+    `http://127.0.0.1:${process.env.PHANTOM_P2P_PORT || 4000}`,
+  ]
+  forgeManager = new ForgeManager(defaultConfig)
 })
 
 describe('Forger Manager', () => {
@@ -74,16 +76,23 @@ describe('Forger Manager', () => {
     })
 
     it('should be ok', async () => {
-      manager.delegates = [{
-        username: 'phantomxdev',
-        publicKey: '0310ad026647eed112d1a46145eed58b8c19c67c505a67f1199361a511ce7860c0'
-      }]
+      forgeManager.delegates = [
+        {
+          username: 'phantomxdev',
+          publicKey:
+            '0310ad026647eed112d1a46145eed58b8c19c67c505a67f1199361a511ce7860c0',
+        },
+      ]
 
-      const delegate = await manager.__isDelegateActivated('0310ad026647eed112d1a46145eed58b8c19c67c505a67f1199361a511ce7860c0')
+      const delegate = await forgeManager.__isDelegateActivated(
+        '0310ad026647eed112d1a46145eed58b8c19c67c505a67f1199361a511ce7860c0',
+      )
 
       expect(delegate).toBeObject()
       expect(delegate.username).toBe('phantomxdev')
-      expect(delegate.publicKey).toBe('0310ad026647eed112d1a46145eed58b8c19c67c505a67f1199361a511ce7860c0')
+      expect(delegate.publicKey).toBe(
+        '0310ad026647eed112d1a46145eed58b8c19c67c505a67f1199361a511ce7860c0',
+      )
     })
   })
 

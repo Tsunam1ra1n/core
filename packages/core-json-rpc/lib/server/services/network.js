@@ -15,7 +15,10 @@ class Network {
 
     client.setConfig(config.network)
 
-    return this.network
+    this.client = axios.create({
+      headers: { Accept: 'application/vnd.phantom.core-api.v2+json' },
+      timeout: 3000,
+    })
   }
 
   setServer () {
@@ -165,21 +168,11 @@ class Network {
     return sample(this.network.peers)
   }
 
-  __loadRemotePeers () {
-    const response = p2p.getPeers()
-
-    this.network.peers = response.map(peer => `${peer.ip}:${peer.port}`)
-  }
-
-  // TODO: adjust this to core-p2p
-  __filterPeers (peers) {
-    let filteredPeers = peers
-      .filter(peer => peer.status === 'OK')
-      .filter(peer => peer.ip !== '127.0.0.1')
-
-    filteredPeers = orderBy(filteredPeers, ['height', 'delay'], ['desc', 'asc'])
-
-    const networkHeight = filteredPeers[0].height
+  __loadRemotePeers() {
+    this.peers =
+      this.network.name === 'testnet'
+        ? [{ ip: '127.0.0.1', port: container.resolveOptions('api').port }]
+        : p2p.getPeers()
 
     return {
       networkHeight,

@@ -5,8 +5,10 @@ module.exports = {
   host: process.env.PHANTOM_API_HOST || '0.0.0.0',
   port: process.env.PHANTOM_API_PORT || 4003,
   versions: {
-    default: 1,
-    valid: [1, 2]
+    validVersions: [1, 2],
+    defaultVersion: 1,
+    basePath: '/api/',
+    vendorName: 'phantom.core-api',
   },
   cache: {
     enabled: false,
@@ -16,8 +18,8 @@ module.exports = {
       host: process.env.PHANTOM_REDIS_HOST || 'localhost',
       port: process.env.PHANTOM_REDIS_PORT || 6379,
       partition: 'cache',
-      expiresIn: 60000
-    }
+      expiresIn: 60000,
+    },
   },
   rateLimit: {
     enabled: false,

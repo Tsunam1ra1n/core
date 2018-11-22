@@ -15,7 +15,7 @@ yarn add @phantomcore/core-transaction-pool-redis
 ```js
 module.exports = {
   enabled: true,
-  key: 'ark',
+  key: 'phantom',
   maxTransactionsPerSender: 100,
   allowedSenders: [],
   redis: {

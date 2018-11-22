@@ -1,6 +1,6 @@
 {
-  "name": "@phantomcore/core-config",
-  "version": "0.1.1",
+  "name": "@phantomchain/core-config",
+  "version": "0.1.2",
   "description": "Configuration Loader for PHANTOM Core",
   "contributors": [
     "François-Xavier Thoorens <fx@ark.io>",
@@ -19,7 +19,7 @@
     "depcheck": "depcheck ./"
   },
   "dependencies": {
-    "@phantomcore/crypto": "^0.1.1",
+    "@phantomchain/crypto": "^2.1.0",
     "axios": "^0.18.0",
     "directory-tree": "^2.1.0",
     "fs-extra": "^6.0.1",

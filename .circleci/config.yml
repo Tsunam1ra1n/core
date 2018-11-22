@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test-node10-0:
+  test-node10:
     working_directory: ~/phantom-core
     docker:
       - image: 'circleci/node:10-browsers'
@@ -9,6 +9,7 @@ jobs:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: phantom_development
           POSTGRES_USER: phantom
+    parallelism: 1
     steps:
       - checkout
       - run:
@@ -212,14 +213,13 @@ jobs:
       - save_cache:
           key: 'core-node10-{{ checksum "checksum.txt" }}-1'
           paths:
-            - ./packages/client/node_modules
+            - ./packages/.DS_Store/node_modules
             - ./packages/core/node_modules
             - ./packages/core-api/node_modules
             - ./packages/core-blockchain/node_modules
             - ./packages/core-container/node_modules
             - ./packages/core-database/node_modules
             - ./packages/core-database-postgres/node_modules
-            - ./packages/core-database-sequelize/node_modules
             - ./packages/core-debugger-cli/node_modules
             - ./packages/core-elasticsearch/node_modules
             - ./packages/core-error-tracker-bugsnag/node_modules

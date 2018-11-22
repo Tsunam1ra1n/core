@@ -22,8 +22,7 @@
     "depcheck": "depcheck ./ --ignores=commander"
   },
   "dependencies": {
-    "phantomjscore": "^0.2.1",
-    "bigi": "^1.4.2",
+    "@phantomchain/crypto": "^2.1.0",
     "bip39": "^2.5.0",
     "bytebuffer": "^5.0.1",
     "commander": "^2.15.1",

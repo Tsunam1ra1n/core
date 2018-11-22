@@ -1,10 +1,10 @@
-'use strict'
+const { crypto } = require('@phantomchain/crypto')
 
-const { crypto } = require('@phantomcore/crypto')
+const toBePhantomPublicKey = received => ({
+  message: () => 'Expected value to be a valid public key',
+  pass: crypto.validatePublicKey(received),
+})
 
-module.exports = (received) => {
-  return {
-    message: () => 'Expected value to be a valid public key',
-    pass: crypto.validatePublicKey(received)
-  }
-}
+expect.extend({
+  toBePhantomPublicKey,
+})

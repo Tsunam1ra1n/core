@@ -9,9 +9,18 @@ class Helpers {
     const headers = { 'API-Version': 2 }
     const request = axios[method.toLowerCase()]
 
-    return ['GET', 'DELETE'].includes(method)
-      ? request(url, { params, headers })
-      : request(url, params, { headers })
+    const server = require('@phantomchain/core-container').resolvePlugin('api')
+
+    return apiHelpers.request(server, method, url, headers, params)
+  }
+
+  async requestWithAcceptHeader(method, path, params = {}) {
+    const url = `http://localhost:4003/api/${path}`
+    const headers = { Accept: 'application/vnd.phantom.core-api.v2+json' }
+
+    const server = require('@phantomchain/core-container').resolvePlugin('api')
+
+    return apiHelpers.request(server, method, url, headers, params)
   }
 
   expectJson (response) {
