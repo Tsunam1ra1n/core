@@ -1,6 +1,6 @@
 {
   "name": "@phantomchain/core-vote-report",
-  "description": "Vote Report for Ark Core",
+  "description": "Vote Report for Phantom Core",
   "version": "0.1.0",
   "contributors": [
     "Brian Faust <brian@ark.io>"

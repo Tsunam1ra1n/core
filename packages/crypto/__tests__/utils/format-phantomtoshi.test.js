@@ -1,7 +1,7 @@
 const { Bignum, formatPhantomtoshi } = require('../../lib/utils')
 const { PHANTOMTOSHI } = require('../../lib/constants')
 
-describe('Format Arktoshi', () => {
+describe('Format Phantomtoshi', () => {
   it('should format phantomtoshis', () => {
     expect(formatPhantomtoshi(PHANTOMTOSHI)).toBe('1 Ẕ')
     expect(formatPhantomtoshi(0.1 * PHANTOMTOSHI)).toBe('0.1 Ẕ')

@@ -1,4 +1,4 @@
-# Ark Core - PostgreSQL Database Provider
+# Phantom Core - PostgreSQL Database Provider
 
 <p align="center">
     <img src="../../banner.png?sanitize=true" />

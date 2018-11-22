@@ -13,7 +13,7 @@ const toBytesHex = data => {
 }
 
 /**
- * TODO copy some parts to ArkDocs
+ * TODO copy some parts to PhantomDocs
  * @classdesc This model holds the block data, its verification and serialization
  *
  * A Block model stores on the db:
@@ -54,15 +54,16 @@ module.exports = class Block {
       data.transactions = []
     }
     if (
-      data.numberOfTransactions > 0
-      && data.transactions.length === data.numberOfTransactions
+      data.numberOfTransactions > 0 &&
+      data.transactions.length === data.numberOfTransactions
     ) {
       delete data.transactionIds
     }
 
-    this.headerOnly = data.numberOfTransactions > 0
-      && data.transactionIds
-      && data.transactionIds.length === data.numberOfTransactions
+    this.headerOnly =
+      data.numberOfTransactions > 0 &&
+      data.transactionIds &&
+      data.transactionIds.length === data.numberOfTransactions
     if (this.headerOnly) {
       this.serialized = Block.serialize(data).toString('hex')
     } else {
@@ -110,9 +111,9 @@ module.exports = class Block {
     // order of transactions messed up in mainnet V1
     // TODO: move this to network constants exception using block ids
     if (
-      this.transactions
-      && this.data.numberOfTransactions === 2
-      && (this.data.height === 3084276 || this.data.height === 34420)
+      this.transactions &&
+      this.data.numberOfTransactions === 2 &&
+      (this.data.height === 3084276 || this.data.height === 34420)
     ) {
       const temp = this.transactions[0]
       this.transactions[0] = this.transactions[1]
@@ -291,7 +292,8 @@ module.exports = class Block {
         }
 
         if (this.transactionIds.length > constants.block.maxTransactions) {
-          if (block.height > 1) result.errors.push('Transactions length is too high')
+          if (block.height > 1)
+            result.errors.push('Transactions length is too high')
         }
 
         // Checking if transactions of the block adds up to block values.
@@ -312,7 +314,9 @@ module.exports = class Block {
         const invalidTransactions = this.transactions.filter(tx => !tx.verified)
         if (invalidTransactions.length > 0) {
           result.errors.push('One or more transactions are not verified:')
-          invalidTransactions.forEach(tx => result.errors.push(`=> ${tx.serialized}`))
+          invalidTransactions.forEach(tx =>
+            result.errors.push(`=> ${tx.serialized}`),
+          )
         }
 
         if (this.transactions.length !== block.numberOfTransactions) {
@@ -320,7 +324,8 @@ module.exports = class Block {
         }
 
         if (this.transactions.length > constants.block.maxTransactions) {
-          if (block.height > 1) result.errors.push('Transactions length is too high')
+          if (block.height > 1)
+            result.errors.push('Transactions length is too high')
         }
 
         // Checking if transactions of the block adds up to block values.
@@ -359,8 +364,8 @@ module.exports = class Block {
       }
 
       if (
-        !this.genesis
-        && payloadHash.digest().toString('hex') !== block.payloadHash
+        !this.genesis &&
+        payloadHash.digest().toString('hex') !== block.payloadHash
       ) {
         result.errors.push('Invalid payload hash')
       }
@@ -396,13 +401,14 @@ module.exports = class Block {
     block.payloadHash = hexString.substring(104, 104 + 64)
     block.generatorPublicKey = hexString.substring(104 + 64, 104 + 64 + 33 * 2)
 
-    const length = parseInt(
-      `0x${hexString.substring(
-        104 + 64 + 33 * 2 + 2,
-        104 + 64 + 33 * 2 + 4,
-      )}`,
-      16,
-    ) + 2
+    const length =
+      parseInt(
+        `0x${hexString.substring(
+          104 + 64 + 33 * 2 + 2,
+          104 + 64 + 33 * 2 + 4,
+        )}`,
+        16,
+      ) + 2
     block.blockSignature = hexString.substring(
       104 + 64 + 33 * 2,
       104 + 64 + 33 * 2 + length * 2,

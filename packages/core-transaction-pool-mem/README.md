@@ -1,4 +1,4 @@
-# Ark Core - Transaction Pool (Mem)
+# Phantom Core - Transaction Pool (Mem)
 
 <p align="center">
     <img src="../../banner.png?sanitize=true" />

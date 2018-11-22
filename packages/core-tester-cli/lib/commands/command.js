@@ -321,7 +321,7 @@ module.exports = class Command {
   }
 
   /**
-   * Convert PHANTOM to Arktoshi.
+   * Convert PHANTOM to Phantomtoshi.
    * @param  {Number} phantom
    * @return {Bignum}
    */
@@ -330,7 +330,7 @@ module.exports = class Command {
   }
 
   /**
-   * Convert Arktoshi to PHANTOM.
+   * Convert Phantomtoshi to PHANTOM.
    * @param  {Bignum} phantomtoshi
    * @return {String}
    */

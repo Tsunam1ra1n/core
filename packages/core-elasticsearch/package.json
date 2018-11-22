@@ -1,6 +1,6 @@
 {
   "name": "@phantomchain/core-elasticsearch",
-  "description": "A powerful Elasticsearch integration for Ark Core",
+  "description": "A powerful Elasticsearch integration for Phantom Core",
   "version": "0.1.0",
   "contributors": [
     "Brian Faust <brian@ark.io>"
