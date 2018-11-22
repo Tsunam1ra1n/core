@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-debugger-cli",
   "description": "Debugger CLI for Phantom Core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "contributors": [
     "Brian Faust <brian@ark.io>"
   ],
@@ -24,7 +24,7 @@
     "depcheck": "depcheck ./ --ignores=flow-bin,commander"
   },
   "dependencies": {
-    "@phantomchain/crypto": "^0.2.5",
+    "@phantomchain/crypto": "^0.2.6",
     "clipboardy": "^1.2.3",
     "commander": "^2.19.0"
   },

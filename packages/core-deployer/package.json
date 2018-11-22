@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-deployer",
   "description": "Deployer for PHANTOM Core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "contributors": [
     "Brian Faust <brian@ark.io>",
     "Alex Barnsley <alex@ark.io>"
@@ -25,7 +25,7 @@
     "depcheck": "depcheck ./ --ignores=flow-bin,commander,pino-pretty"
   },
   "dependencies": {
-    "@phantomchain/crypto": "^0.2.5",
+    "@phantomchain/crypto": "^0.2.6",
     "bip39": "^2.5.0",
     "bytebuffer": "^5.0.1",
     "commander": "^2.19.0",

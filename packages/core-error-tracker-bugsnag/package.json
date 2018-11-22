@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-error-tracker-bugsnag",
   "description": "Bugsnag error tracker integration for Phantom Core.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "contributors": [
     "Brian Faust <brian@ark.io>"
   ],

@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-elasticsearch",
   "description": "A powerful Elasticsearch integration for Phantom Core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "contributors": [
     "Brian Faust <brian@ark.io>"
   ],
@@ -20,9 +20,9 @@
     "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomchain/core-container": "^0.1.3",
-    "@phantomchain/core-http-utils": "^0.1.1",
-    "@phantomchain/crypto": "^0.2.5",
+    "@phantomchain/core-container": "^0.1.4",
+    "@phantomchain/core-http-utils": "^0.1.2",
+    "@phantomchain/crypto": "^0.2.6",
     "elasticsearch": "^15.2.0",
     "fs-extra": "^7.0.1",
     "joi": "^14.0.4",

@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-api",
   "description": "Public API for PHANTOM Core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "contributors": [
     "Kristjan Košič <kristjan@ark.io>",
     "Brian Faust <brian@ark.io>"
@@ -19,11 +19,11 @@
     "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomchain/core-container": "^0.1.1",
-    "@phantomchain/core-http-utils": "^0.1.1",
-    "@phantomchain/core-transaction-pool": "^0.1.3",
-    "@phantomchain/core-utils": "^0.1.2",
-    "@phantomchain/crypto": "^0.2.5",
+    "@phantomchain/core-container": "^0.1.4",
+    "@phantomchain/core-http-utils": "^0.1.2",
+    "@phantomchain/core-transaction-pool": "^0.1.4",
+    "@phantomchain/core-utils": "^0.1.3",
+    "@phantomchain/crypto": "^0.2.6",
     "ajv": "^6.5.5",
     "boom": "^7.2.2",
     "bs58check": "^2.1.2",
@@ -36,7 +36,7 @@
     "moment": "^2.22.2"
   },
   "devDependencies": {
-    "@phantomchain/core-test-utils": "^0.1.4",
+    "@phantomchain/core-test-utils": "^0.1.5",
     "axios": "^0.18.0",
     "flow-bin": "^0.86.0"
   },
