@@ -5,9 +5,9 @@
     "public": 46090600,
     "private": 46089520
   },
-  "pubKeyHash": 23,
-  "nethash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
-  "wif": 187,
+  "pubKeyHash": 56,
+  "nethash": "e62ee59508e610421d7d39567cca36479397fa3c63b1d2e9458e08dee9eb6481",
+  "wif": 188,
   "aip20": 0,
   "client": {
     "token": "XPH",

@@ -1,12 +1,9 @@
-'use strict'
-
-const Promise = require('bluebird')
-
-const { map, orderBy, sumBy } = require('lodash')
-const { crypto } = require('@phantomchain/crypto')
+const { crypto, formatPhantomtoshi } = require('@phantomchain/crypto')
 const { Wallet } = require('@phantomchain/crypto').models
 const { TRANSACTION_TYPES } = require('@phantomchain/crypto').constants
+const { roundCalculator } = require('@phantomchain/core-utils')
 const container = require('@phantomchain/core-container')
+
 const config = container.resolvePlugin('config')
 const logger = container.resolvePlugin('logger')
 
@@ -249,7 +246,9 @@ module.exports = class WalletManager {
             mapped,
             null,
             4,
-          )} have a matching vote balance of ${formatPhantomtoshi(voteBalance)}`,
+          )} have a matching vote balance of ${formatPhantomtoshi(
+            voteBalance,
+          )}`,
         )
       }
     }
@@ -406,16 +405,14 @@ module.exports = class WalletManager {
   applyTransaction(transaction) {
     /* eslint padded-blocks: "off" */
     const { data } = transaction
-    const {
-      type, asset, recipientId, senderPublicKey,
-    } = data
+    const { type, asset, recipientId, senderPublicKey } = data
 
     const sender = this.findByPublicKey(senderPublicKey)
     const recipient = this.findByAddress(recipientId)
 
     if (
-      type === TRANSACTION_TYPES.DELEGATE_REGISTRATION
-      && this.byUsername[asset.delegate.username.toLowerCase()]
+      type === TRANSACTION_TYPES.DELEGATE_REGISTRATION &&
+      this.byUsername[asset.delegate.username.toLowerCase()]
     ) {
       logger.error(
         `Can't apply transaction ${data.id}: delegate name already taken.`,
@@ -427,8 +424,8 @@ module.exports = class WalletManager {
 
       // NOTE: We use the vote public key, because vote transactions have the same sender and recipient
     } else if (
-      type === TRANSACTION_TYPES.VOTE
-      && !this.__isDelegate(asset.votes[0].slice(1))
+      type === TRANSACTION_TYPES.VOTE &&
+      !this.__isDelegate(asset.votes[0].slice(1))
     ) {
       logger.error(
         `Can't apply vote transaction: delegate ${
@@ -517,8 +514,8 @@ module.exports = class WalletManager {
           ? delegate.voteBalance.minus(sender.balance)
           : delegate.voteBalance.plus(sender.balance)
         : revert
-          ? delegate.voteBalance.plus(sender.balance.plus(transaction.fee))
-          : delegate.voteBalance.minus(sender.balance.plus(transaction.fee))
+        ? delegate.voteBalance.plus(sender.balance.plus(transaction.fee))
+        : delegate.voteBalance.minus(sender.balance.plus(transaction.fee))
     }
   }
 
@@ -570,10 +567,10 @@ module.exports = class WalletManager {
    */
   __canBePurged(wallet) {
     return (
-      wallet.balance.isZero()
-      && !wallet.secondPublicKey
-      && !wallet.multisignature
-      && !wallet.username
+      wallet.balance.isZero() &&
+      !wallet.secondPublicKey &&
+      !wallet.multisignature &&
+      !wallet.username
     )
   }
 

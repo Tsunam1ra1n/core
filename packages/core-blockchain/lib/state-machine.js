@@ -1,6 +1,5 @@
-'use strict'
-
 const container = require('@phantomchain/core-container')
+
 const config = container.resolvePlugin('config')
 const emitter = container.resolvePlugin('event-emitter')
 const logger = container.resolvePlugin('logger')
@@ -60,8 +59,8 @@ blockchainMachine.actionMap = blockchain => ({
     )
 
     if (
-      blockchain.rebuildQueue.length() > 10000
-      || blockchain.processQueue.length() > 10000
+      blockchain.rebuildQueue.length() > 10000 ||
+      blockchain.processQueue.length() > 10000
     ) {
       event = 'PAUSED'
     }
@@ -156,8 +155,10 @@ blockchainMachine.actionMap = blockchain => ({
     logger.info('The blockchain has been stopped :guitar:')
   },
 
-  exitApp () {
-    logger.error('Failed to startup blockchain. Exiting PHANTOM Core! :rotating_light:')
+  exitApp() {
+    logger.error(
+      'Failed to startup blockchain. Exiting PHANTOM Core! :rotating_light:',
+    )
     process.exit(1)
   },
 
@@ -220,11 +221,13 @@ blockchainMachine.actionMap = blockchain => ({
         return blockchain.dispatch('STARTED')
       }
 
-      state.rebuild = slots.getTime() - block.data.timestamp
-        > (constants.activeDelegates + 1) * constants.blocktime
+      state.rebuild =
+        slots.getTime() - block.data.timestamp >
+        (constants.activeDelegates + 1) * constants.blocktime
       // no fast rebuild if in last week
-      state.fastRebuild = slots.getTime() - block.data.timestamp > 3600 * 24 * 7
-        && !!container.resolveOptions('blockchain').fastRebuild
+      state.fastRebuild =
+        slots.getTime() - block.data.timestamp > 3600 * 24 * 7 &&
+        !!container.resolveOptions('blockchain').fastRebuild
 
       if (process.env.NODE_ENV === 'test') {
         logger.verbose(
