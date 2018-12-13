@@ -11,7 +11,6 @@ let blockchain
 
 beforeAll(async () => {
   container = await app.setUp()
-  console.log('=====> Blockchain setup:  ', container)
 
   // Create the genesis block after the setup has finished or else it uses a potentially
   // wrong network config.
