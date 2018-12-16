@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@phantomchain/core-container": "^0.1.4",
-    "@phantomchain/crypto": "^0.2.6",
+    "@phantomchain/crypto": "^0.2.7",
     "bip39": "^2.5.0",
     "lodash": "^4.17.11",
     "superheroes": "^2.0.0",

@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/crypto",
   "description": "Crypto utilities for the PHANTOM blockchain",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "contributors": [
     "François-Xavier Thoorens <fx.thoorens@ark.io>",
     "Brian Faust <brian@ark.io>",

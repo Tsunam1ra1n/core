@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@phantomchain/core-container": "^0.1.4",
-    "@phantomchain/crypto": "^0.2.6",
+    "@phantomchain/crypto": "^0.2.7",
     "cli-table3": "^0.5.1",
     "moment": "^2.22.2"
   },

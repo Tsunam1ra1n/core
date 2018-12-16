@@ -23,7 +23,7 @@
   "dependencies": {
     "@phantomchain/core-container": "^0.1.4",
     "@phantomchain/core-http-utils": "^0.1.2",
-    "@phantomchain/crypto": "^0.2.6",
+    "@phantomchain/crypto": "^0.2.7",
     "apollo-server-hapi": "^2.2.0",
     "graphql-tools-types": "^1.1.26",
     "moment": "^2.22.2"

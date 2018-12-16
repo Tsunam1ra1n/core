@@ -22,7 +22,7 @@
   "dependencies": {
     "@phantomchain/core-container": "^0.1.4",
     "@phantomchain/core-http-utils": "^0.1.2",
-    "@phantomchain/crypto": "^0.2.6",
+    "@phantomchain/crypto": "^0.2.7",
     "elasticsearch": "^15.2.0",
     "fs-extra": "^7.0.1",
     "joi": "^14.0.4",

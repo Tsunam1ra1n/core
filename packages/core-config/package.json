@@ -22,7 +22,7 @@
     "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomchain/crypto": "^0.2.6",
+    "@phantomchain/crypto": "^0.2.7",
     "axios": "^0.18.0",
     "directory-tree": "^2.1.0",
     "fs-extra": "^7.0.1",
