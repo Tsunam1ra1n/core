@@ -2,13 +2,12 @@
   "name": "mainnet",
   "messagePrefix": "PHANTOM message:\n",
   "bip32": {
-    "public": 46090600,
-    "private": 46089520
+    "public": 70617039,
+    "private": 70615956
   },
   "pubKeyHash": 56,
-  "nethash": "e62ee59508e610421d7d39567cca36479397fa3c63b1d2e9458e08dee9eb6481",
+  "nethash": "c1464efad94d7a3bd1d7f9ab6db0a1e1d042279a0c7c2a41a625928df7ceefec",
   "wif": 188,
-  "aip20": 0,
   "client": {
     "token": "XPH",
     "symbol": "Ẕ",
@@ -22,7 +21,7 @@
       "blocktime": 8,
       "block": {
         "version": 0,
-        "maxTransactions": 150,
+        "maxTransactions": 50,
         "maxPayload": 2097152
       },
       "epoch": "2017-03-21T13:00:00.000Z",
@@ -51,8 +50,15 @@
       }
     },
     {
-      "height": 75600,
+      "height": 10800,
       "reward": 200000000
+    },
+    {
+      "height": 21600,
+      "block": {
+        "maxTransactions": 150,
+        "maxPayload": 6300000
+      }
     }
   ],
   "exceptions": {
