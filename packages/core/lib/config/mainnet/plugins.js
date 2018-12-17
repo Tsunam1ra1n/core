@@ -49,14 +49,14 @@ module.exports = {
   },
   '@phantomchain/core-p2p': {
     host: process.env.PHANTOM_P2P_HOST || '0.0.0.0',
-    port: process.env.PHANTOM_P2P_PORT || 4001,
+    port: process.env.PHANTOM_P2P_PORT || 4002,
     whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*'],
   },
   '@phantomchain/core-blockchain': {
     fastRebuild: true,
   },
-  '@phantomcore/core-api': {
-    enabled: false,
+  '@phantomchain/core-api': {
+    enabled: !process.env.PHANTOM_API_DISABLED,
     host: process.env.PHANTOM_API_HOST || '0.0.0.0',
     port: process.env.PHANTOM_API_PORT || 4003,
     whitelist: ['*'],
@@ -89,7 +89,7 @@ module.exports = {
     graphiql: true
   },
   '@phantomchain/core-forger': {
-    hosts: ['http://127.0.0.1:4001'],
+    hosts: [`http://127.0.0.1:${process.env.PHANTOM_P2P_PORT || 4002}`],
   },
   '@phantomcore/core-json-rpc': {
     enabled: process.env.PHANTOM_JSON_RPC_ENABLED,
@@ -97,6 +97,12 @@ module.exports = {
     port: process.env.PHANTOM_JSON_RPC_PORT || 8080,
     allowRemote: true,
     whitelist: ['127.0.0.1', '::ffff:127.0.0.1', '192.168.*'],
+    database: {
+      uri:
+        process.env.PHANTOM_JSON_RPC_DATABASE ||
+        `sqlite://${process.env.PHANTOM_PATH_DATA}/database/json-rpc.sqlite`,
+      options: {},
+    },
+    '@phantomchain/core-snapshots': {},
   },
-  '@phantomchain/core-snapshots': {},
 }
