@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-container",
   "description": "Container for PHANTOM Core",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "contributors": [
     "Brian Faust <brian@ark.io>"
   ],
@@ -21,7 +21,7 @@
     "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomchain/crypto": "^0.2.8",
+    "@phantomchain/crypto": "^0.2.9",
     "awilix": "^4.0.0",
     "axios": "^0.18.0",
     "delay": "^4.1.0",

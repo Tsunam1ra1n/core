@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/validation",
   "description": "Validation for PHANTOM Core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "contributors": [
     "Brian Faust <brian@ark.io>",
     "Alex Barnsley <alex@ark.io>"
@@ -25,6 +25,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@phantomchain/crypto": "^0.2.8"
+    "@phantomchain/crypto": "^0.2.9"
   }
 }

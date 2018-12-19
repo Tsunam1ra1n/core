@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-transaction-pool",
   "description": "Transaction Pool Manager for PHANTOM Core",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "contributors": [
     "Kristjan Košič <kristjan@ark.io>",
     "Brian Faust <brian@ark.io>",
@@ -23,15 +23,15 @@
     "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomchain/core-container": "^0.1.5",
-    "@phantomchain/core-database": "^0.1.5",
-    "@phantomchain/crypto": "^0.2.8",
+    "@phantomchain/core-container": "^0.1.6",
+    "@phantomchain/core-database": "^0.1.6",
+    "@phantomchain/crypto": "^0.2.9",
     "bs58check": "^2.1.2",
     "lodash": "^4.17.11",
     "moment": "^2.22.2"
   },
   "devDependencies": {
-    "@phantomchain/core-test-utils": "^0.1.6",
+    "@phantomchain/core-test-utils": "^0.1.7",
     "flow-bin": "^0.86.0"
   },
   "publishConfig": {

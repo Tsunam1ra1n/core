@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-snapshots-cli",
   "description": "Provides live cli interface to the core-snapshots module for PHANTOM Core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "contributors": [
     "Kristjan Košič <chris@ark.io>"
   ],
@@ -39,7 +39,7 @@
     "depcheck": "depcheck ./ --ignores=flow-bin,commander"
   },
   "dependencies": {
-    "@phantomchain/core-container": "^0.1.5",
+    "@phantomchain/core-container": "^0.1.6",
     "cli-progress": "^2.1.0",
     "commander": "^2.19.0",
     "fs-extra": "^7.0.1"
