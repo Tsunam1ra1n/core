@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-test-utils",
   "description": "Test Utilities for PHANTOM Core",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "contributors": [
     "Brian Faust <brian@ark.io>"
   ],
@@ -20,8 +20,8 @@
     "depcheck": "depcheck ./ --ignores=flow-bin"
   },
   "dependencies": {
-    "@phantomchain/core-container": "^0.1.4",
-    "@phantomchain/crypto": "^0.2.7",
+    "@phantomchain/core-container": "^0.1.5",
+    "@phantomchain/crypto": "^0.2.8",
     "bip39": "^2.5.0",
     "lodash": "^4.17.11",
     "superheroes": "^2.0.0",
