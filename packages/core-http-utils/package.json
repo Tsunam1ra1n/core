@@ -1,7 +1,7 @@
 {
   "name": "@phantomchain/core-http-utils",
   "description": "Http Utilities for PHANTOM Core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "contributors": [
     "Brian Faust <brian@ark.io>"
   ],
@@ -20,7 +20,7 @@
     "depcheck": "depcheck ./ --ignores=flow-bin,hapi,inert,lout,vision,good-console,good-squeeze"
   },
   "dependencies": {
-    "@phantomchain/core-container": "^0.1.4",
+    "@phantomchain/core-container": "^0.1.5",
     "boom": "^7.2.2",
     "good": "^8.1.1",
     "good-console": "^7.1.0",
