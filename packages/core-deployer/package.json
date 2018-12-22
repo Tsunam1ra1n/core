@@ -22,20 +22,18 @@
     "depcheck": "depcheck ./ --ignores=commander"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@phantomchain/crypto": "^2.1.0",
-=======
-    "@phantomchain/crypto": "^0.2.10",
->>>>>>> update crypto version
     "bip39": "^2.5.0",
     "bytebuffer": "^5.0.1",
     "commander": "^2.15.1",
     "envfile": "^2.3.0",
     "expand-home-dir": "0.0.3",
-    "fs-extra": "^6.0.1",
-    "joi": "^13.3.0",
-    "lodash": "^4.17.10",
-    "pino": "^4.16.1"
+    "fs-extra": "^7.0.1",
+    "joi": "^14.0.4",
+    "lodash": "^4.17.11",
+    "pino": "^5.8.1",
+    "pino-pretty": "^2.2.3",
+    "xlsx": "^0.14.1"
   },
   "publishConfig": {
     "access": "public"
