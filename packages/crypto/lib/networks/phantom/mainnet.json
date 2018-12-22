@@ -5,9 +5,9 @@
     "public": 70617039,
     "private": 70615956
   },
-  "pubKeyHash": 56,
+  "pubKeyHash": 55,
   "nethash": "c1464efad94d7a3bd1d7f9ab6db0a1e1d042279a0c7c2a41a625928df7ceefec",
-  "wif": 188,
+  "wif": 170,
   "client": {
     "token": "XPH",
     "symbol": "ⓟ",
@@ -49,8 +49,8 @@
       }
     },
     {
-      "height": 10800,
-      "reward": 200000000
+      "height": 208000,
+      "reward": 2000000000
     },
     {
       "height": 21600,
