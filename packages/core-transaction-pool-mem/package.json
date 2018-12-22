@@ -25,7 +25,7 @@
   "dependencies": {
     "@phantomchain/core-container": "^0.1.6",
     "@phantomchain/core-transaction-pool": "^0.1.6",
-    "@phantomchain/crypto": "^0.2.9",
+    "@phantomchain/crypto": "^0.2.10",
     "better-sqlite3": "^5.0.1",
     "delay": "^4.1.0",
     "fs-extra": "^7.0.1"

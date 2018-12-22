@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "@phantomchain/core",
     "description": "Core of the PHANTOM Blockchain",
     "version": "2.1.0",
@@ -93,4 +94,86 @@
     "jest": {
         "preset": "../../jest-preset.json"
     }
+=======
+  "name": "@phantomchain/core",
+  "description": "Core of the PHANTOM Blockchain",
+  "version": "0.1.5",
+  "contributors": [
+    "François-Xavier Thoorens <fx@phantom.org>",
+    "Kristjan Košič <kristjan@phantom.org>",
+    "Brian Faust <brian@phantom.org>",
+    "Alex Barnsley <alex@phantom.org>"
+  ],
+  "license": "MIT",
+  "bin": {
+    "phantom:start": "./bin/phantom start",
+    "phantom:relay": "./bin/phantom relay",
+    "phantom:forger": "./bin/phantom forger",
+    "phantom:snapshot": "./bin/phantom snapshot"
+  },
+  "scripts": {
+    "debug:start": "node --inspect-brk ./bin/phantom start",
+    "debug:relay": "node --inspect-brk ./bin/phantom relay",
+    "debug:forger": "node --inspect-brk ./bin/phantom forger",
+    "debug:snapshot": "node --inspect-brk ./bin/phantom snapshot",
+    "start": "./bin/phantom start",
+    "start:mainnet": "./bin/phantom start --config ./lib/config/mainnet --network mainnet",
+    "start:devnet": "./bin/phantom start --config ./lib/config/devnet --network devnet",
+    "start:testnet": "PHANTOM_ENV=test ./bin/phantom start --config ./lib/config/testnet --network testnet",
+    "start:testnet:live": "./bin/phantom start --config ./lib/config/testnet.live --network testnet",
+    "relay": "./bin/phantom relay",
+    "relay:mainnet": "./bin/phantom relay --config ./lib/config/mainnet --network mainnet",
+    "relay:devnet": "./bin/phantom relay --config ./lib/config/devnet --network devnet",
+    "relay:testnet": "PHANTOM_ENV=test ./bin/phantom relay --config ./lib/config/testnet --network testnet",
+    "relay:testnet:live": "./bin/phantom relay --config ./lib/config/testnet.live --network testnet",
+    "forger": "./bin/phantom forger",
+    "forger:mainnet": "./bin/phantom forger --config ./lib/config/mainnet --network mainnet",
+    "forger:devnet": "./bin/phantom forger --config ./lib/config/devnet --network devnet",
+    "forger:testnet": "PHANTOM_ENV=test ./bin/phantom forger --config ./lib/config/testnet --network testnet",
+    "forger:testnet:live": "./bin/phantom forger --config ./lib/config/testnet.live --network testnet",
+    "snapshot": "./bin/phantom snapshot",
+    "snapshot:mainnet": "./bin/phantom snapshot --config ./lib/config/mainnet --network mainnet",
+    "snapshot:devnet": "./bin/phantom snapshot --config ./lib/config/devnet --network devnet",
+    "snapshot:testnet": "./bin/phantom snapshot --config ./lib/config/testnet --network testnet",
+    "snapshot:testnet:live": "./bin/phantom snapshot --config ./lib/config/testnet.live --network testnet",
+    "full:testnet": "PHANTOM_ENV=test ./bin/phantom start --config ./lib/config/testnet --network testnet --network-start",
+    "full:testnet:live": "./bin/phantom start --config ./lib/config/testnet.live --network testnet --network-start",
+    "full:testnet:2tier:2": "PHANTOM_ENV=test ./bin/phantom start --config ./lib/config/testnet.2 --network testnet --network-start",
+    "full:testnet:2tier:1": "PHANTOM_ENV=test ./bin/phantom start --config ./lib/config/testnet.1 --network testnet --network-start",
+    "full:testnet:2tier": "PHANTOM_ENV=test ./bin/phantom start --config ./lib/config/testnet.1 --network testnet --network-start && ./bin/phantom start --config ./lib/config/testnet.2 --network testnet --network-start",
+    "flow:coverage": "flow-coverage-report --config ../../.flowcoverage.json",
+    "flow:check": "flow check ./lib",
+    "flow:deps": "flow-typed install",
+    "lint": "eslint ./ --fix",
+    "depcheck": "depcheck ./ --ignores commander,bip38,fs,wif,@phantomchain/core-api,@phantomchain/core-blockchain,@phantomchain/core-config,@phantomchain/core-database,@phantomchain/core-database-postgres,@phantomchain/core-forger,@phantomchain/core-graphql,@phantomchain/core-json-rpc,@phantomchain/core-logger,@phantomchain/core-logger-winston,@phantomchain/core-p2p,@phantomchain/core-transaction-pool,@phantomchain/core-transaction-pool-redis,@phantomchain/core-webhooks,@phantomchain/crypto"
+  },
+  "dependencies": {
+    "@phantomchain/core-api": "^0.1.4",
+    "@phantomchain/core-blockchain": "^0.1.5",
+    "@phantomchain/core-config": "^0.1.5",
+    "@phantomchain/core-container": "^0.1.6",
+    "@phantomchain/core-database-postgres": "^0.1.4",
+    "@phantomchain/core-forger": "^0.1.5",
+    "@phantomchain/core-graphql": "^0.1.4",
+    "@phantomchain/core-json-rpc": "^0.1.4",
+    "@phantomchain/core-logger-winston": "^0.1.2",
+    "@phantomchain/core-p2p": "^0.1.5",
+    "@phantomchain/core-transaction-pool-mem": "^0.1.4",
+    "@phantomchain/core-webhooks": "^0.1.4",
+    "@phantomchain/crypto": "^0.2.10",
+    "bip38": "^2.0.2",
+    "commander": "^2.19.0",
+    "fs": "^0.0.1-security",
+    "wif": "^2.0.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=10.x"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.86.0"
+  }
+>>>>>>> update crypto version
 }

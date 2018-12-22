@@ -19,7 +19,11 @@
     "depcheck": "depcheck ./"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@phantomchain/crypto": "^2.1.0",
+=======
+    "@phantomchain/crypto": "^0.2.10",
+>>>>>>> update crypto version
     "axios": "^0.18.0",
     "directory-tree": "^2.1.0",
     "fs-extra": "^6.0.1",
