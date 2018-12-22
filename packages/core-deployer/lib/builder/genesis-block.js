@@ -2,7 +2,8 @@ const phantom = require('phantomjscore')
 const bignum = require('bigi')
 const bip39 = require('bip39')
 const ByteBuffer = require('bytebuffer')
-const crypto = require('crypto')
+const { createHash } = require('crypto')
+const XLSX = require('xlsx')
 
 module.exports = class GenesisBlockBuilder {
   /**
