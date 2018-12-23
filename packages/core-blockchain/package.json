@@ -88,7 +88,7 @@
   "dependencies": {
     "@phantomchain/core-container": "^0.1.6",
     "@phantomchain/core-utils": "^0.1.5",
-    "@phantomchain/crypto": "^0.2.10",
+    "@phantomchain/crypto": "^0.2.11",
     "async": "^2.6.1",
     "awilix": "^4.0.0",
     "delay": "^4.1.0",

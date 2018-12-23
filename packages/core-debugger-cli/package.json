@@ -72,7 +72,7 @@
     "depcheck": "depcheck ./ --ignores=flow-bin,commander"
   },
   "dependencies": {
-    "@phantomchain/crypto": "^0.2.10",
+    "@phantomchain/crypto": "^0.2.11",
     "clipboardy": "^1.2.3",
     "commander": "^2.19.0"
   },

@@ -120,7 +120,7 @@
     "@phantomchain/core-event-emitter": "^0.1.2",
     "@phantomchain/core-http-utils": "^0.1.4",
     "@phantomchain/core-transaction-pool": "^0.1.6",
-    "@phantomchain/crypto": "^0.2.10",
+    "@phantomchain/crypto": "^0.2.11",
     "ajv": "^6.5.5",
     "axios": "^0.18.0",
     "boom": "^7.2.2",

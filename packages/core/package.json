@@ -160,7 +160,7 @@
     "@phantomchain/core-p2p": "^0.1.5",
     "@phantomchain/core-transaction-pool-mem": "^0.1.4",
     "@phantomchain/core-webhooks": "^0.1.4",
-    "@phantomchain/crypto": "^0.2.10",
+    "@phantomchain/crypto": "^0.2.11",
     "bip38": "^2.0.2",
     "commander": "^2.19.0",
     "fs": "^0.0.1-security",

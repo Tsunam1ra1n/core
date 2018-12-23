@@ -74,7 +74,7 @@
     "@phantomchain/core-container": "^0.1.6",
     "@phantomchain/core-database": "^0.1.6",
     "@phantomchain/core-utils": "^0.1.5",
-    "@phantomchain/crypto": "^0.2.10",
+    "@phantomchain/crypto": "^0.2.11",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11",
     "pg-promise": "^8.5.2",

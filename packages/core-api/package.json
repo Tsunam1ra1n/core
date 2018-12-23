@@ -91,7 +91,7 @@
     "@phantomchain/core-http-utils": "^0.1.4",
     "@phantomchain/core-transaction-pool": "^0.1.6",
     "@phantomchain/core-utils": "^0.1.5",
-    "@phantomchain/crypto": "^0.2.10",
+    "@phantomchain/crypto": "^0.2.11",
     "ajv": "^6.5.5",
     "boom": "^7.2.2",
     "bs58check": "^2.1.2",
