@@ -6,7 +6,7 @@
     "private": 70615956
   },
   "pubKeyHash": 55,
-  "nethash": "0c8ff28a19fb329fa76044c645445e9e461ab4896fa5a774cf2d19b32d581cf3",
+  "nethash": "34825f847126c8cf9805782ab61bbab6c419b0894cfaa06dda6b32c147e7446a",
   "wif": 170,
   "client": {
     "token": "XPH",
@@ -53,7 +53,7 @@
       "reward": 2000000000
     },
     {
-      "height": 21600,
+      "height": 216000,
       "block": {
         "maxTransactions": 150,
         "maxPayload": 6300000
