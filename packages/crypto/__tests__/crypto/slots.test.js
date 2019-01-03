@@ -98,7 +98,7 @@ describe('Slots', () => {
     })
 
     it('returns constant', () => {
-      expect(slots.getConstant('epoch')).toBe('2018-12-26T02:00:00.000Z')
+      expect(slots.getConstant('epoch')).toBe('2019-01-03T12:00:00.000Z')
     })
   })
 
