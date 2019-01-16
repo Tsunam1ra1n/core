@@ -1,4 +1,4 @@
-import { delegateCalculator } from "@arkecosystem/core-utils";
+import { delegateCalculator } from "@phantomchain/core-utils";
 
 export function transformDelegateLegacy(model) {
     return {

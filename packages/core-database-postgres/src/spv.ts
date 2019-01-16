@@ -1,8 +1,8 @@
-import { Bignum, models } from "@arkecosystem/crypto";
+import { Bignum, models } from "@phantomchain/crypto";
 const { Transaction } = models;
 
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
 import { PostgresConnection } from "./connection";
 import { queries } from "./queries";
 import { QueryExecutor } from "./sql/query-executor";

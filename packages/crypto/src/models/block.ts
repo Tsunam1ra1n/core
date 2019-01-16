@@ -15,7 +15,7 @@ const toBytesHex = data => {
 };
 
 /**
- * TODO copy some parts to ArkDocs
+ * TODO copy some parts to PhantomDocs
  * @classdesc This model holds the block data, its verification and serialization
  *
  * A Block model stores on the db:
@@ -25,9 +25,9 @@ const toBytesHex = data => {
  *   - previousBlock (id of the previous block)
  *   - height
  *   - numberOfTransactions
- *   - totalAmount (in arktoshi)
- *   - totalFee (in arktoshi)
- *   - reward (in arktoshi)
+ *   - totalAmount (in phantomtoshi)
+ *   - totalFee (in phantomtoshi)
+ *   - reward (in phantomtoshi)
  *   - payloadHash (hash of the transactions)
  *   - payloadLength (total length in bytes of the IDs of the transactions)
  *   - generatorPublicKey (public key of the delegate that forged this block)
@@ -351,6 +351,9 @@ export class Block {
             // TODO genesis block calculated id is wrong for some reason
             this.data.id = data.id;
             this.data.idHex = toBytesHex(this.data.id);
+
+            // TODO totalAmount calculated is wrong due to bignumber.js issue
+            this.data.totalAmount = data.totalAmount;
             delete this.data.previousBlock;
         }
 

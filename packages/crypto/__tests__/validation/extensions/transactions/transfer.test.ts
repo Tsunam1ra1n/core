@@ -5,8 +5,8 @@ import { extensions } from "../../../../src/validation/extensions";
 const validator = Joi.extend(extensions);
 
 const address = "APnDzjtDb1FthuqcLMeL5XMWb1uD1KeMGi";
-const fee = 1 * constants.ARKTOSHI;
-const amount = 10 * constants.ARKTOSHI;
+const fee = 1 * constants.PHANTOMTOSHI;
+const amount = 10 * constants.PHANTOMTOSHI;
 
 let transaction;
 beforeEach(() => {
@@ -19,7 +19,7 @@ describe("Transfer Transaction", () => {
             .recipientId(address)
             .amount(amount)
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).toBeNull();
     });
 
     it("should be valid with correct data", () => {
@@ -29,7 +29,7 @@ describe("Transfer Transaction", () => {
             .fee(fee)
             .vendorField("Ahoy")
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).toBeNull();
     });
 
     it("should be valid with up to 64 bytes in vendor field", () => {
@@ -39,7 +39,7 @@ describe("Transfer Transaction", () => {
             .fee(fee)
             .vendorField("a".repeat(64))
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).toBeNull();
 
         transaction
             .recipientId(address)
@@ -47,7 +47,7 @@ describe("Transfer Transaction", () => {
             .fee(fee)
             .vendorField("⊁".repeat(21))
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).toBeNull();
     });
 
     it("should be invalid with more than 64 bytes in vendor field", () => {
@@ -60,7 +60,7 @@ describe("Transfer Transaction", () => {
         transaction.data.vendorField = "a".repeat(65);
         transaction.sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).not.toBeNull();
 
         transaction
             .recipientId(address)
@@ -71,11 +71,11 @@ describe("Transfer Transaction", () => {
         transaction.vendorField("⊁".repeat(22));
         transaction.sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).not.toBeNull();
     });
 
     it("should be invalid due to no transaction as object", () => {
-        expect(validator.validate("test", validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate("test", validator.phantomTransfer()).error).not.toBeNull();
     });
 
     it("should be invalid due to no address", () => {
@@ -83,7 +83,7 @@ describe("Transfer Transaction", () => {
             .recipientId(null)
             .amount(amount)
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).not.toBeNull();
     });
 
     it("should be invalid due to invalid address", () => {
@@ -93,7 +93,7 @@ describe("Transfer Transaction", () => {
             .sign("passphrase");
         const struct = transaction.getStruct();
         struct.recipientId = "woop";
-        expect(validator.validate(struct, validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate(struct, validator.phantomTransfer()).error).not.toBeNull();
     });
 
     it("should be invalid due to zero amount", () => {
@@ -101,7 +101,7 @@ describe("Transfer Transaction", () => {
             .recipientId(address)
             .amount(0)
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).not.toBeNull();
     });
 
     it("should be invalid due to zero fee", () => {
@@ -110,13 +110,13 @@ describe("Transfer Transaction", () => {
             .amount(1)
             .fee(0)
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).not.toBeNull();
     });
 
     it("should be invalid due to wrong transaction type", () => {
         transaction = transactionBuilder.delegateRegistration();
         transaction.usernameAsset("delegate_name").sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).not.toBeNull();
     });
 
     it("should be valid due to missing network byte", () => {
@@ -126,7 +126,7 @@ describe("Transfer Transaction", () => {
             .fee(1)
             .sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).toBeNull();
     });
 
     it("should be valid due to correct network byte", () => {
@@ -137,7 +137,7 @@ describe("Transfer Transaction", () => {
             .network(configManager.get("pubKeyHash"))
             .sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).toBeNull();
     });
 
     it("should be invalid due to wrong network byte", () => {
@@ -148,7 +148,7 @@ describe("Transfer Transaction", () => {
             .network(1)
             .sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkTransfer()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomTransfer()).error).not.toBeNull();
     });
 
     it("should be valid after a network change", () => {
@@ -162,8 +162,8 @@ describe("Transfer Transaction", () => {
             .sign("passphrase")
             .build();
 
-        expect(transfer.data.network).toBe(30);
-        expect(validator.validate(transfer.data, validator.arkTransfer()).error).toBeNull();
+        expect(transfer.data.network).toBe(56);
+        expect(validator.validate(transfer.data, validator.phantomTransfer()).error).toBeNull();
 
         configManager.setFromPreset("mainnet");
 
@@ -175,7 +175,7 @@ describe("Transfer Transaction", () => {
             .sign("passphrase")
             .build();
 
-        expect(transfer.data.network).toBe(23);
-        expect(validator.validate(transfer.data, validator.arkTransfer()).error).toBeNull();
+        expect(transfer.data.network).toBe(55);
+        expect(validator.validate(transfer.data, validator.phantomTransfer()).error).toBeNull();
     });
 });

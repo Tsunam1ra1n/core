@@ -1,4 +1,4 @@
-import { Container, Logger } from "@arkecosystem/core-interfaces";
+import { Container, Logger } from "@phantomchain/core-interfaces";
 import pluralize from "pluralize";
 import { defaults } from "./defaults";
 import { ForgerManager } from "./manager";
@@ -18,7 +18,7 @@ export const plugin: Container.PluginDescriptor = {
         }
 
         // Don't keep bip38 password in memory
-        delete process.env.ARK_FORGER_PASSWORD;
+        delete process.env.PHANTOM_FORGER_PASSWORD;
         delete options.password;
 
         logger.info(`Forger Manager started with ${pluralize("forger", forgers.length, true)}`);

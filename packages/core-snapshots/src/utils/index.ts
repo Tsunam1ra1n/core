@@ -1,5 +1,5 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
 import fs from "fs-extra";
 
 export const getPath = (table, folder, codec) => {
@@ -8,14 +8,14 @@ export const getPath = (table, folder, codec) => {
 };
 
 export const writeMetaFile = snapshotInfo => {
-    const path = `${process.env.ARK_PATH_DATA}/snapshots/${process.env.ARK_NETWORK_NAME}/${
+    const path = `${process.env.PHANTOM_PATH_DATA}/snapshots/${process.env.PHANTOM_NETWORK_NAME}/${
         snapshotInfo.folder
     }/meta.json`;
     fs.writeFileSync(path, JSON.stringify(snapshotInfo), "utf8");
 };
 
 export const getFilePath = (filename, folder) =>
-    `${process.env.ARK_PATH_DATA}/snapshots/${process.env.ARK_NETWORK_NAME}/${folder}/${filename}`;
+    `${process.env.PHANTOM_PATH_DATA}/snapshots/${process.env.PHANTOM_NETWORK_NAME}/${folder}/${filename}`;
 
 export const copySnapshot = (sourceFolder, destFolder, codec) => {
     const logger = app.resolvePlugin<Logger.ILogger>("logger");

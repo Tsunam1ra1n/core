@@ -1,5 +1,5 @@
-import "@arkecosystem/core-test-utils";
-import { constants } from "@arkecosystem/crypto";
+import "@phantomchain/core-test-utils";
+import { constants } from "@phantomchain/crypto";
 import { setUp, tearDown } from "../../__support__/setup";
 import { utils } from "../utils";
 
@@ -601,7 +601,7 @@ describe("API 2.0 - Transactions", () => {
         });
 
         it.each([3, 5, 8])(
-            "should not accept the last of %i transactions emptying a wallet when the last one is 1 arktoshi too much",
+            "should not accept the last of %i transactions emptying a wallet when the last one is 1 phantomtoshi too much",
             async txNumber => {
                 const sender = delegates[txNumber + 1]; // use txNumber + 1 so that we don't use the same delegates as the above test
                 const receivers = generateWallets("testnet", 2);

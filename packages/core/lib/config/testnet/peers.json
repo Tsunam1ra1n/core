@@ -1,9 +1,0 @@
-{
-  "minimumVersion": ">=1.3.3",
-  "minimumNetworkReach": 5,
-  "globalTimeout": 5000,
-  "coldStart": 30,
-  "whiteList": [],
-  "blackList": [],
-  "list": []
-}

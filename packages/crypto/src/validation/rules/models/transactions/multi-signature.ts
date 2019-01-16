@@ -20,7 +20,7 @@ export const multiSignature = transaction => {
                 .alphanum()
                 .required(),
             // @ts-ignore
-            blockid: Engine.joi.alternatives().try(Engine.joi.arkBlockId(), Engine.joi.number().unsafe()),
+            blockid: Engine.joi.alternatives().try(Engine.joi.phantomBlockId(), Engine.joi.number().unsafe()),
             type: Engine.joi.number().valid(TransactionTypes.MultiSignature),
             timestamp: Engine.joi
                 .number()
@@ -36,9 +36,9 @@ export const multiSignature = transaction => {
                     .positive()
                     .required(),
             ),
-            senderId: Engine.joi.arkAddress(),
+            senderId: Engine.joi.phantomAddress(),
             recipientId: Engine.joi.empty(),
-            senderPublicKey: Engine.joi.arkPublicKey().required(),
+            senderPublicKey: Engine.joi.phantomPublicKey().required(),
             signature: Engine.joi
                 .string()
                 .alphanum()

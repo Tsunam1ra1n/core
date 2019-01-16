@@ -13,7 +13,7 @@ export class NetworkManager {
     /**
      * Find network by token and name.
      * @param  {String} name
-     * @param  {String} [token=ark]
+     * @param  {String} [token=phantom]
      * @return {Object}
      */
     public static findByName(name) {

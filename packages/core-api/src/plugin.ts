@@ -1,4 +1,4 @@
-import { Container, Logger } from "@arkecosystem/core-interfaces";
+import { Container, Logger } from "@phantomchain/core-interfaces";
 import { defaults } from "./defaults";
 import { Server } from "./server";
 
@@ -24,6 +24,5 @@ export const plugin: Container.PluginDescriptor = {
 
             await container.resolvePlugin<Server>("api").stop();
         }
-
     },
 };

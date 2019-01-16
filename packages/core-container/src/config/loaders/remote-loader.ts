@@ -1,4 +1,4 @@
-import { models } from "@arkecosystem/crypto";
+import { models } from "@phantomchain/crypto";
 import axios from "axios";
 import { spawnSync } from "child_process";
 import expandHomeDir from "expand-home-dir";
@@ -92,7 +92,7 @@ export class RemoteLoader {
     }
 
     private configureDatabase(network) {
-        const command = spawnSync("createdb", [`ark_${network.name}`]);
+        const command = spawnSync("createdb", [`phantom_${network.name}`]);
 
         if (command.stderr.length > 0) {
             // tslint:disable-next-line:no-console

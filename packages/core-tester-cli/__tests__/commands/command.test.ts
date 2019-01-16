@@ -181,7 +181,7 @@ describe("Command Base", () => {
     });
 
     describe("static parseFee", () => {
-        it("should give arktoshi", () => {
+        it("should give phantomtoshi", () => {
             expect(Command.parseFee(0.1).toString()).toBe("10000000");
             expect(Command.parseFee(1).toString()).toBe("100000000");
             expect(Command.parseFee(10).toString()).toBe("1000000000");
@@ -298,21 +298,21 @@ describe("Command Base", () => {
         });
     });
 
-    describe("static __arkToArktoshi", () => {
-        it("should give arktoshi", () => {
-            expect(Command.__arkToArktoshi(0.00000001).toString()).toBe("1");
-            expect(Command.__arkToArktoshi(0.1).toString()).toBe("10000000");
-            expect(Command.__arkToArktoshi(1).toString()).toBe("100000000");
-            expect(Command.__arkToArktoshi(10).toString()).toBe("1000000000");
+    describe("static __phantomToPhantomtoshi", () => {
+        it("should give phantomtoshi", () => {
+            expect(Command.__phantomToPhantomtoshi(0.00000001).toString()).toBe("1");
+            expect(Command.__phantomToPhantomtoshi(0.1).toString()).toBe("10000000");
+            expect(Command.__phantomToPhantomtoshi(1).toString()).toBe("100000000");
+            expect(Command.__phantomToPhantomtoshi(10).toString()).toBe("1000000000");
         });
     });
 
-    describe("static __arktoshiToArk", () => {
-        it("should give ark", () => {
-            expect(Command.__arktoshiToArk(1)).toBe("0.00000001 DѦ");
-            expect(Command.__arktoshiToArk(10000000)).toBe("0.1 DѦ");
-            expect(Command.__arktoshiToArk(100000000)).toBe("1 DѦ");
-            expect(Command.__arktoshiToArk(1000000000)).toBe("10 DѦ");
+    describe("static __phantomtoshiToPhantom", () => {
+        it("should give phantom", () => {
+            expect(Command.__phantomtoshiToPhantom(1)).toBe("0.00000001 Dⓟ");
+            expect(Command.__phantomtoshiToPhantom(10000000)).toBe("0.1 Dⓟ");
+            expect(Command.__phantomtoshiToPhantom(100000000)).toBe("1 Dⓟ");
+            expect(Command.__phantomtoshiToPhantom(1000000000)).toBe("10 Dⓟ");
         });
     });
 

@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
-import { configManager } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
+import { configManager } from "@phantomchain/crypto";
 import bs58check from "bs58check";
 
 const logger = app.resolvePlugin<Logger.ILogger>("logger");

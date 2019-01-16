@@ -1,11 +1,11 @@
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 import dayjs from "dayjs-ext";
 import { offences } from "../../src/court/offences";
 import { defaults } from "../../src/defaults";
 import { Peer } from "../../src/peer";
 import { setUp, tearDown } from "../__support__/setup";
 
-const ARK_ENV = process.env.ARK_ENV;
+const PHANTOM_ENV = process.env.PHANTOM_ENV;
 let guard;
 let peerMock;
 
@@ -34,18 +34,18 @@ beforeEach(async () => {
 describe("Guard", () => {
     describe("isSuspended", () => {
         it("should return true", async () => {
-            process.env.ARK_ENV = "false";
+            process.env.PHANTOM_ENV = "false";
             await guard.monitor.acceptNewPeer(peerMock);
-            process.env.ARK_ENV = ARK_ENV;
+            process.env.PHANTOM_ENV = PHANTOM_ENV;
 
             expect(guard.isSuspended(peerMock)).toBe(true);
         });
 
         it("should return false because passed", async () => {
-            process.env.ARK_ENV = "false";
+            process.env.PHANTOM_ENV = "false";
             await guard.monitor.acceptNewPeer(peerMock);
             guard.suspensions[peerMock.ip].until = dayjs().subtract(1, "minute");
-            process.env.ARK_ENV = ARK_ENV;
+            process.env.PHANTOM_ENV = PHANTOM_ENV;
 
             expect(guard.isSuspended(peerMock)).toBe(false);
         });

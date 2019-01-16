@@ -1,5 +1,5 @@
-import { app } from "@arkecosystem/core-container";
-import { TransactionPool } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { TransactionPool } from "@phantomchain/core-interfaces";
 import Boom from "boom";
 import Hapi from "hapi";
 import { Controller } from "../shared/controller";

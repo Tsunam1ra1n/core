@@ -1,4 +1,4 @@
-import { bignumify, delegateCalculator, formatTimestamp } from "@arkecosystem/core-utils";
+import { bignumify, delegateCalculator, formatTimestamp } from "@phantomchain/core-utils";
 
 export function transformDelegate(delegate) {
     const data = {

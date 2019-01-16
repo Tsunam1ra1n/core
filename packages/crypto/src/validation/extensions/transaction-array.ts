@@ -1,16 +1,16 @@
 export const transactionArray = joi => ({
-    name: "arkTransactionArray",
+    name: "phantomTransactionArray",
     base: joi
         .array()
         .items(
             joi
                 .alternatives()
                 .try(
-                    joi.arkTransfer(),
-                    joi.arkSecondSignature(),
-                    joi.arkDelegateRegistration(),
-                    joi.arkVote(),
-                    joi.arkMultiSignature(),
+                    joi.phantomTransfer(),
+                    joi.phantomSecondSignature(),
+                    joi.phantomDelegateRegistration(),
+                    joi.phatnomVote(),
+                    joi.phantomMultiSignature(),
                 ),
         ),
 });

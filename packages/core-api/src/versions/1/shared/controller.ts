@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Blockchain, Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Blockchain, Logger } from "@phantomchain/core-interfaces";
 import Hapi from "hapi";
 import { paginate, respondWith, respondWithCache, toCollection, toResource } from "../utils";
 

@@ -1,6 +1,6 @@
 {
-    "name": "@arkecosystem/core-interfaces",
-    "description": "Interface types for essential Ark core modules",
+    "name": "@phantomchain/core-interfaces",
+    "description": "Interface types for essential PHANTOM core modules",
     "version": "2.1.0",
     "contributors": [
         "François-Xavier Thoorens <fx@ark.io>",
@@ -26,7 +26,7 @@
         "updates": "../../node_modules/npm-check-updates/bin/npm-check-updates -a"
     },
     "dependencies": {
-        "@arkecosystem/crypto": "^2.1.0",
+        "@phantomchain/crypto": "^2.1.0",
         "awilix": "^4.0.1",
         "eventemitter3": "^3.1.0"
     },

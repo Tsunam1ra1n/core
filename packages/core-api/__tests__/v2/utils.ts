@@ -1,5 +1,5 @@
-import { app } from "@arkecosystem/core-container";
-import { client, NetworkManager, transactionBuilder } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { client, NetworkManager, transactionBuilder } from "@phantomchain/crypto";
 import axios from "axios";
 import "jest-extended";
 import { ApiHelpers } from "../../../core-test-utils/src/helpers/api";
@@ -20,7 +20,7 @@ class Helpers {
     public async requestWithAcceptHeader(method, path, params = {}) {
         const url = `http://localhost:4003/api/${path}`;
         const headers = {
-            Accept: "application/vnd.ark.core-api.v2+json",
+            Accept: "application/vnd.phantom.core-api.v2+json",
             "Content-Type": "application/json",
         };
 

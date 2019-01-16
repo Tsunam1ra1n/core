@@ -1,10 +1,10 @@
 /* tslint:disable:jsdoc-format max-line-length */
 
-import { app } from "@arkecosystem/core-container";
-import { EventEmitter, Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { EventEmitter, Logger } from "@phantomchain/core-interfaces";
 
-import { roundCalculator } from "@arkecosystem/core-utils";
-import { models, slots } from "@arkecosystem/crypto";
+import { roundCalculator } from "@phantomchain/core-utils";
+import { models, slots } from "@phantomchain/crypto";
 
 import pluralize from "pluralize";
 import { config as localConfig } from "./config";
@@ -96,7 +96,7 @@ blockchainMachine.actionMap = (blockchain: Blockchain) => ({
             event = "SYNCED";
         }
 
-        if (process.env.ARK_ENV === "test") {
+        if (process.env.PHANTOM_ENV === "test") {
             event = "TEST";
         }
 
@@ -152,7 +152,7 @@ blockchainMachine.actionMap = (blockchain: Blockchain) => ({
     },
 
     exitApp() {
-        app.forceExit("Failed to startup blockchain. Exiting Ark Core! :rotating_light:");
+        app.forceExit("Failed to startup blockchain. Exiting PHANTOM Core! :rotating_light:");
     },
 
     async init() {

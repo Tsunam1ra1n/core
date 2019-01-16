@@ -1,4 +1,4 @@
-import { Bignum, crypto, models } from "@arkecosystem/crypto";
+import { Bignum, crypto, models } from "@phantomchain/crypto";
 import compact from "lodash/compact";
 import uniq from "lodash/uniq";
 import genesisBlockTestnet from "../../../core-test-utils/src/config/testnet/genesisBlock.json";

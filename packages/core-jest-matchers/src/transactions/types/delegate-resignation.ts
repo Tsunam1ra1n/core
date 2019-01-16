@@ -1,4 +1,4 @@
-import { constants } from "@arkecosystem/crypto";
+import { constants } from "@phantomchain/crypto";
 const { DelegateResignation } = constants.TransactionTypes;
 
 export {};

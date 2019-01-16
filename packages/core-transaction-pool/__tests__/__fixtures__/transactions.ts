@@ -1,5 +1,5 @@
 /*tslint:disable:max-line-length */
-import { models, slots } from "@arkecosystem/crypto";
+import { models, slots } from "@phantomchain/crypto";
 const { Transaction } = models;
 
 export const transactions = {

@@ -1,4 +1,4 @@
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 import fs from "fs-extra";
 import path from "path";
 import Sequelize from "sequelize";

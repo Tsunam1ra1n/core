@@ -1,4 +1,4 @@
-import { client } from "@arkecosystem/crypto";
+import { client } from "@phantomchain/crypto";
 import sample from "lodash/sample";
 import pluralize from "pluralize";
 import { logger } from "../utils";
@@ -57,7 +57,9 @@ export class Vote extends Command {
             transactions.push(transaction);
 
             logger.info(
-                `${i} ==> ${transaction.id}, ${wallet.address} (fee: ${Command.__arktoshiToArk(transaction.fee)})`,
+                `${i} ==> ${transaction.id}, ${wallet.address} (fee: ${Command.__phantomtoshiToPhantom(
+                    transaction.fee,
+                )})`,
             );
         });
 

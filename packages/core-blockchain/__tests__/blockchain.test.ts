@@ -1,9 +1,9 @@
 /* tslint:disable:max-line-length */
-import { Peer } from "@arkecosystem/core-p2p/src/peer";
-import "@arkecosystem/core-test-utils";
-import { blocks101to155 } from "@arkecosystem/core-test-utils/src/fixtures/testnet/blocks101to155";
-import { blocks2to100 } from "@arkecosystem/core-test-utils/src/fixtures/testnet/blocks2to100";
-import { crypto, models, slots } from "@arkecosystem/crypto";
+import { Peer } from "@phantomchain/core-p2p/src/peer";
+import "@phantomchain/core-test-utils";
+import { blocks101to155 } from "@phantomchain/core-test-utils/src/fixtures/testnet/blocks101to155";
+import { blocks2to100 } from "@phantomchain/core-test-utils/src/fixtures/testnet/blocks2to100";
+import { crypto, models, slots } from "@phantomchain/crypto";
 import { asValue } from "awilix";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -35,7 +35,7 @@ beforeAll(async () => {
 
     // Create the genesis block after the setup has finished or else it uses a potentially
     // wrong network config.
-    genesisBlock = new Block(require("@arkecosystem/core-test-utils/src/config/testnet/genesisBlock.json"));
+    genesisBlock = new Block(require("@phantomchain/core-test-utils/src/config/testnet/genesisBlock.json"));
 
     configManager = container.getConfig();
 
@@ -78,7 +78,7 @@ describe("Blockchain", () => {
 
     describe("start", () => {
         it("should be ok", async () => {
-            process.env.ARK_SKIP_BLOCKCHAIN = "false";
+            process.env.PHANTOM_SKIP_BLOCKCHAIN = "false";
 
             const started = await blockchain.start(true);
 
@@ -370,8 +370,8 @@ describe("Blockchain", () => {
 });
 
 async function __start() {
-    process.env.ARK_SKIP_BLOCKCHAIN = "false";
-    process.env.ARK_ENV = "false";
+    process.env.PHANTOM_SKIP_BLOCKCHAIN = "false";
+    process.env.PHANTOM_ENV = "false";
 
     const plugin = require("../src").plugin;
 

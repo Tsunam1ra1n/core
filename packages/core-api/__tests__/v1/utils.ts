@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { ApiHelpers } from "@arkecosystem/core-test-utils/dist/helpers/api";
-import { client, NetworkManager, transactionBuilder } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { ApiHelpers } from "@phantomchain/core-test-utils/dist/helpers/api";
+import { client, NetworkManager, transactionBuilder } from "@phantomchain/crypto";
 import axios from "axios";
 import "jest-extended";
 

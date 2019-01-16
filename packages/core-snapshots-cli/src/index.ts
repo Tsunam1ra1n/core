@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 import cli from "commander";
 import { createSnapshot, importSnapshot, rollbackSnapshot, truncateSnapshot, verifySnapshot } from "./commands";
 import * as utils from "./utils";
@@ -14,9 +14,9 @@ const registerCommand = (name, description) => {
     return cli
         .command(name)
         .description(description)
-        .option("-d, --data <data>", "data directory", "~/.ark")
-        .option("-c, --config <config>", "network config", "~/.ark/config")
-        .option("-t, --token <token>", "token name", "ark")
+        .option("-d, --data <data>", "data directory", "~/.phantom")
+        .option("-c, --config <config>", "network config", "~/.phantom/config")
+        .option("-t, --token <token>", "token name", "phantom")
         .option("-n, --network <network>", "token network")
         .option("--skip-compression", "skip gzip compression", false)
         .option("--trace", "dumps generated queries and settings to console", false);

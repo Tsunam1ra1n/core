@@ -1,7 +1,7 @@
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Blockchain, Container } from "@arkecosystem/core-interfaces";
-import { fixtures, generators } from "@arkecosystem/core-test-utils";
-import { crypto, models } from "@arkecosystem/crypto";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Blockchain, Container } from "@phantomchain/core-interfaces";
+import { fixtures, generators } from "@phantomchain/core-test-utils";
+import { crypto, models } from "@phantomchain/crypto";
 import bip39 from "bip39";
 import { PoolWalletManager } from "../src";
 import { setUpFull, tearDown } from "./__support__/setup";
@@ -10,7 +10,7 @@ const { Block } = models;
 const { generateTransfers, generateWallets } = generators;
 const { blocks2to100, delegates } = fixtures;
 
-const arktoshi = 10 ** 8;
+const phantomtoshi = 10 ** 8;
 let container: Container.IContainer;
 let poolWalletManager;
 let blockchain: Blockchain.IBlockchain;
@@ -85,13 +85,13 @@ describe("applyPoolTransactionToSender", () => {
                     // transfer from delegate to wallet 0
                     from: delegate,
                     to: wallets[0],
-                    amount: 100 * arktoshi,
+                    amount: 100 * phantomtoshi,
                 },
                 {
                     // transfer from wallet 0 to delegatej
                     from: wallets[0],
                     to: delegate,
-                    amount: 55 * arktoshi,
+                    amount: 55 * phantomtoshi,
                 },
             ];
 
@@ -123,7 +123,7 @@ describe("applyPoolTransactionToSender", () => {
                     .walletManager.forgetByPublicKey(transfer.publicKey);
             });
 
-            expect(+delegateWallet.balance).toBe(delegate.balance - (100 + 0.1) * arktoshi);
+            expect(+delegateWallet.balance).toBe(delegate.balance - (100 + 0.1) * phantomtoshi);
             expect(poolWallets[0].balance.isZero()).toBeTrue();
         });
     });
@@ -136,7 +136,7 @@ describe("Apply transactions and block rewards to wallets on new block", () => {
     beforeEach(__resetToHeight1);
     afterEach(__resetToHeight1);
 
-    it.each([2 * arktoshi, 0])("should apply forged block reward %i to delegate wallet", async reward => {
+    it.each([2 * phantomtoshi, 0])("should apply forged block reward %i to delegate wallet", async reward => {
         const forgingDelegate = delegates[reward ? 2 : 3]; // use different delegate to have clean initial balance
         const generatorPublicKey = forgingDelegate.publicKey;
 
@@ -152,7 +152,7 @@ describe("Apply transactions and block rewards to wallets on new block", () => {
             true,
         )[0];
 
-        const totalFee = 0.1 * arktoshi;
+        const totalFee = 0.1 * phantomtoshi;
         const blockWithReward = Object.assign({}, blocks2to100[0], {
             reward,
             generatorPublicKey,

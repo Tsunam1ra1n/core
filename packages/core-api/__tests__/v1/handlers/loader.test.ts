@@ -1,4 +1,4 @@
-import "@arkecosystem/core-test-utils";
+import "@phantomchain/core-test-utils";
 import { setUp, tearDown } from "../../__support__/setup";
 import { utils } from "../utils";
 

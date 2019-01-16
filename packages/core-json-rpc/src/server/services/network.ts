@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger, P2P } from "@arkecosystem/core-interfaces";
-import { configManager } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { Logger, P2P } from "@phantomchain/core-interfaces";
+import { configManager } from "@phantomchain/crypto";
 import axios from "axios";
 import isReachable from "is-reachable";
 import sample from "lodash/sample";
@@ -25,7 +25,7 @@ class Network {
 
         this.client = axios.create({
             headers: {
-                Accept: "application/vnd.ark.core-api.v2+json",
+                Accept: "application/vnd.phantom.core-api.v2+json",
                 "Content-Type": "application/json",
             },
             timeout: 3000,
@@ -73,7 +73,7 @@ class Network {
             const peerPort = app.resolveOptions("p2p").port;
             const response = await axios.get(`http://${this.server.ip}:${peerPort}/config`);
 
-            const plugin = response.data.data.plugins["@arkecosystem/core-api"];
+            const plugin = response.data.data.plugins["@phantomchain/core-api"];
 
             if (!plugin.enabled) {
                 const index = this.peers.findIndex(peer => peer.ip === this.server.ip);

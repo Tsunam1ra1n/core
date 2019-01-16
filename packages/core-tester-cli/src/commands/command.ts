@@ -1,5 +1,5 @@
-import { bignumify } from "@arkecosystem/core-utils";
-import { Bignum, crypto, formatArktoshi } from "@arkecosystem/crypto";
+import { bignumify } from "@phantomchain/core-utils";
+import { Bignum, crypto, formatPhantomtoshi } from "@phantomchain/crypto";
 import bip39 from "bip39";
 import clipboardy from "clipboardy";
 import delay from "delay";
@@ -34,21 +34,21 @@ export abstract class Command {
     }
 
     /**
-     * Convert ARK to Arktoshi.
-     * @param  {Number} ark
+     * Convert PHANTOM to Phantomtoshi.
+     * @param  {Number} phantom
      * @return {Bignum}
      */
-    public static __arkToArktoshi(ark) {
-        return bignumify(ark * 1e8);
+    public static __phantomToPhantomtoshi(phantom) {
+        return bignumify(phantom * 1e8);
     }
 
     /**
-     * Convert Arktoshi to ARK.
-     * @param  {Bignum} arktoshi
+     * Convert Phantomtoshi to PHANTOM.
+     * @param  {Bignum} phantomtoshi
      * @return {String}
      */
-    public static __arktoshiToArk(arktoshi) {
-        return formatArktoshi(arktoshi);
+    public static __phantomtoshiToPhantom(phantomtoshi) {
+        return formatPhantomtoshi(phantomtoshi);
     }
 
     /**

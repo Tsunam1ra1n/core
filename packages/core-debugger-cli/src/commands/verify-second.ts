@@ -1,4 +1,4 @@
-import { crypto, models } from "@arkecosystem/crypto";
+import { crypto, models } from "@phantomchain/crypto";
 import { handleOutput } from "../utils";
 
 function verifySecondSignature(opts) {

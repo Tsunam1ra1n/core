@@ -26,26 +26,26 @@ describe("Vote Transaction", () => {
             .votesAsset([vote])
 
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).toBeNull();
     });
 
     it("should be valid with 1 unvote", () => {
         transaction.votesAsset([unvote]).sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).toBeNull();
     });
 
     it("should be invalid due to no transaction as object", () => {
-        expect(validator.validate("test", validator.arkVote()).error).not.toBeNull();
+        expect(validator.validate("test", validator.phatnomVote()).error).not.toBeNull();
     });
 
     it("should be invalid due to non-zero amount", () => {
         transaction
             .votesAsset([vote])
-            .amount(10 * constants.ARKTOSHI)
+            .amount(10 * constants.PHANTOMTOSHI)
             .sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).not.toBeNull();
     });
 
     it("should be invalid due to zero fee", () => {
@@ -54,31 +54,31 @@ describe("Vote Transaction", () => {
             .fee(0)
             .sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).not.toBeNull();
     });
 
     it("should be invalid due to no votes", () => {
         transaction.votesAsset([]).sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).not.toBeNull();
     });
 
     it("should be invalid due to more than 1 vote", () => {
         transaction.votesAsset(votes).sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).not.toBeNull();
     });
 
     it("should be invalid due to invalid votes", () => {
         transaction.votesAsset(invalidVotes).sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).not.toBeNull();
     });
 
     it("should be invalid due to wrong vote type", () => {
         try {
             transaction.votesAsset(vote).sign("passphrase");
-            expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).not.toBeNull();
+            expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).not.toBeNull();
         } catch (error) {}
     });
 
@@ -86,6 +86,6 @@ describe("Vote Transaction", () => {
         transaction = transactionBuilder.delegateRegistration();
         transaction.usernameAsset("delegate_name").sign("passphrase");
 
-        expect(validator.validate(transaction.getStruct(), validator.arkVote()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phatnomVote()).error).not.toBeNull();
     });
 });

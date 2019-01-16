@@ -1,7 +1,7 @@
 import { Engine } from "../engine";
 
 export const publicKey = attributes => {
-    const { error, value } = Engine.validate(attributes, Engine.joi.arkPublicKey());
+    const { error, value } = Engine.validate(attributes, Engine.joi.phantomPublicKey());
 
     return {
         data: value,

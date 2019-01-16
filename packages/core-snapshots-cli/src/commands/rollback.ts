@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
-import { SnapshotManager } from "@arkecosystem/core-snapshots";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
+import { SnapshotManager } from "@phantomchain/core-snapshots";
 
 export async function rollbackSnapshot(options) {
     const logger = app.resolvePlugin<Logger.ILogger>("logger");

@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
-import { NetworkState, NetworkStateStatus } from "@arkecosystem/core-p2p";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
+import { NetworkState, NetworkStateStatus } from "@phantomchain/core-p2p";
 import axios from "axios";
 import delay from "delay";
 import sample from "lodash/sample";

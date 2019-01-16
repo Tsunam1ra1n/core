@@ -1,4 +1,4 @@
-import { Container, Logger } from "@arkecosystem/core-interfaces";
+import { Container, Logger } from "@phantomchain/core-interfaces";
 import { defaults } from "./defaults";
 import { blockIndex } from "./index/block";
 import { roundIndex } from "./index/round";

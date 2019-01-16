@@ -1,13 +1,13 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { EventEmitter, Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { EventEmitter, Logger } from "@phantomchain/core-interfaces";
 import first from "lodash/first";
 import last from "lodash/last";
 import { client } from "../services/client";
 import { storage } from "../services/storage";
 import { Index } from "./index";
 
-import { models } from "@arkecosystem/crypto";
+import { models } from "@phantomchain/crypto";
 const { Transaction } = models;
 
 const emitter = app.resolvePlugin<EventEmitter.EventEmitter>("event-emitter");

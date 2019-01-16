@@ -1,14 +1,14 @@
-import "@arkecosystem/core-test-utils";
+import "@phantomchain/core-test-utils";
 import { calculateRanks, setUp, tearDown } from "../../__support__/setup";
 import { utils } from "../utils";
 
 import { blocks2to100 } from "../../../../core-test-utils/src/fixtures/testnet/blocks2to100";
 
-import { models } from "@arkecosystem/crypto";
+import { models } from "@phantomchain/crypto";
 const { Block } = models;
 
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
 
 const delegate = {
     username: "genesis_9",

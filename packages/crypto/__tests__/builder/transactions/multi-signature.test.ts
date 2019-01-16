@@ -1,5 +1,5 @@
 import "jest-extended";
-import { client as ark } from "../../../src/client";
+import { client as phantom } from "../../../src/client";
 import { TransactionTypes } from "../../../src/constants";
 import { crypto } from "../../../src/crypto/crypto";
 import { feeManager } from "../../../src/managers/fee";
@@ -8,7 +8,7 @@ import { transactionBuilder } from "./__shared__/transaction-builder";
 let builder;
 
 beforeEach(() => {
-    builder = ark.getBuilder().multiSignature();
+    builder = phantom.getBuilder().multiSignature();
 
     // @ts-ignore
     global.builder = builder;
@@ -77,7 +77,7 @@ describe("Multi Signature Transaction", () => {
             crypto.sign = jest.fn();
 
             builder.sign(pass);
-            expect(builder.data.recipientId).toBe("D5q7YfEFDky1JJVQQEy4MGyiUhr5cGg47F");
+            expect(builder.data.recipientId).toBe("PYco9UyjgT1nZa7f39dLxY4AqpYc4C1JP7");
         });
     });
 

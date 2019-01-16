@@ -50,12 +50,12 @@ describe("Configuration", () => {
     });
 
     it("should get milestone for height", () => {
-        expect(configManager.getMilestone(21600)).toEqual(devnet.milestones[2]);
+        expect(configManager.getMilestone(216000)).toEqual(devnet.milestones[1]);
     });
 
     it("should set the height", () => {
-        configManager.setHeight(21600);
+        configManager.setHeight(216000);
 
-        expect(configManager.getHeight()).toEqual(21600);
+        expect(configManager.getHeight()).toEqual(216000);
     });
 });

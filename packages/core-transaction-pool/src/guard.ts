@@ -1,7 +1,7 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Logger, TransactionPool as transanctionPool } from "@arkecosystem/core-interfaces";
-import { configManager, constants, models, slots } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Logger, TransactionPool as transanctionPool } from "@phantomchain/core-interfaces";
+import { configManager, constants, models, slots } from "@phantomchain/crypto";
 import pluralize from "pluralize";
 import { TransactionPool } from "./connection";
 import { dynamicFeeMatcher } from "./dynamic-fee";

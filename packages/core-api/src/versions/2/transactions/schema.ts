@@ -1,5 +1,5 @@
-import { app } from "@arkecosystem/core-container";
-import { Joi } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { Joi } from "@phantomchain/crypto";
 import { pagination } from "../shared/schemas/pagination";
 
 export const index: object = {
@@ -45,7 +45,7 @@ export const index: object = {
 
 export const store: object = {
     payload: {
-        transactions: Joi.arkTransactionArray()
+        transactions: Joi.phantomTransactionArray()
             .min(1)
             .max(app.resolveOptions("transactionPool").maxTransactionsPerRequest)
             .options({ stripUnknown: true }),

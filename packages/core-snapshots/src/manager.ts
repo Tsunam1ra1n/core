@@ -1,7 +1,7 @@
 /* tslint:disable:max-line-length */
 
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
 import pick from "lodash/pick";
 
 const logger = app.resolvePlugin<Logger.ILogger>("logger");

@@ -1,12 +1,12 @@
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 import { buildPeerOptions } from "../utils";
 
 export async function startRelay(options, version) {
     await app.setUp(version, options, {
-        exclude: ["@arkecosystem/core-forger"],
+        exclude: ["@phantomchain/core-forger"],
         options: {
-            "@arkecosystem/core-p2p": buildPeerOptions(options),
-            "@arkecosystem/core-blockchain": {
+            "@phantomchain/core-p2p": buildPeerOptions(options),
+            "@phantomchain/core-blockchain": {
                 networkStart: options.networkStart,
             },
         },
@@ -19,16 +19,16 @@ export async function startRelay(options, version) {
 export async function startForger(options, version) {
     await app.setUp(version, options, {
         include: [
-            "@arkecosystem/core-event-emitter",
-            "@arkecosystem/core-logger",
-            "@arkecosystem/core-logger-winston",
-            "@arkecosystem/core-forger",
+            "@phantomchain/core-event-emitter",
+            "@phantomchain/core-logger",
+            "@phantomchain/core-logger-winston",
+            "@phantomchain/core-forger",
         ],
         options: {
-            "@arkecosystem/core-forger": {
-                bip38: options.bip38 || process.env.ARK_FORGER_BIP38,
+            "@phantomchain/core-forger": {
+                bip38: options.bip38 || process.env.PHANTOM_FORGER_BIP38,
                 address: options.address,
-                password: options.password || process.env.ARK_FORGER_PASSWORD,
+                password: options.password || process.env.PHANTOM_FORGER_PASSWORD,
             },
         },
         skipPlugins: options.skipPlugins,
@@ -40,14 +40,14 @@ export async function startForger(options, version) {
 export async function startRelayAndForger(options, version) {
     await app.setUp(version, options, {
         options: {
-            "@arkecosystem/core-p2p": buildPeerOptions(options),
-            "@arkecosystem/core-blockchain": {
+            "@phantomchain/core-p2p": buildPeerOptions(options),
+            "@phantomchain/core-blockchain": {
                 networkStart: options.networkStart,
             },
-            "@arkecosystem/core-forger": {
-                bip38: options.bip38 || process.env.ARK_FORGER_BIP38,
+            "@phantomchain/core-forger": {
+                bip38: options.bip38 || process.env.PHANTOM_FORGER_BIP38,
                 address: options.address,
-                password: options.password || process.env.ARK_FORGER_PASSWORD,
+                password: options.password || process.env.PHANTOM_FORGER_PASSWORD,
             },
         },
         skipPlugins: options.skipPlugins,

@@ -1,6 +1,6 @@
 import "jest-extended";
 
-import { ARKTOSHI } from "../../src/constants";
+import { PHANTOMTOSHI } from "../../src/constants";
 import { configManager } from "../../src/managers/config";
 import { Wallet } from "../../src/models/wallet";
 import { Bignum } from "../../src/utils/bignum";
@@ -17,7 +17,7 @@ describe("Models - Wallet", () => {
             const address = "Abcde";
             const wallet = new Wallet(address);
             const balance = +(Math.random() * 1000).toFixed(8);
-            wallet.balance = new Bignum(balance * ARKTOSHI);
+            wallet.balance = new Bignum(balance * PHANTOMTOSHI);
             expect(wallet.toString()).toBe(`${address} (${balance} ${configManager.config.client.symbol})`);
         });
     });

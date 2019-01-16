@@ -1,10 +1,10 @@
-import { ArkCodec } from "./ark-codec";
 import { LiteCodec } from "./lite-codec";
+import { PhantomCodec } from "./phantom-codec";
 
 export function getCodec(codec) {
     switch (codec) {
-        case "ark":
-            return new ArkCodec();
+        case "phantom":
+            return new PhantomCodec();
         case "lite":
             return new LiteCodec();
         case "msgpack":

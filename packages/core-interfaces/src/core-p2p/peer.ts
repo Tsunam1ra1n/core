@@ -1,4 +1,4 @@
-import { models } from "@arkecosystem/crypto";
+import { models } from "@phantomchain/crypto";
 
 export interface IPeer {
     setHeaders(headers: any): void;

@@ -1,5 +1,5 @@
-import { app } from "@arkecosystem/core-container";
-import { Blockchain } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { Blockchain } from "@phantomchain/core-interfaces";
 import Boom from "boom";
 
 /**

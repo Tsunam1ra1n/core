@@ -18,7 +18,7 @@ beforeEach(() => {
 
     transaction = {
         version: 1,
-        network: 30,
+        network: 56,
         type: 1,
         timestamp: 53995738,
         senderPublicKey: "03cba4fd60f856ad034ee0a9146432757ae35956b640c26fb6674061924b05a5c9",

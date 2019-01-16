@@ -1,4 +1,4 @@
-import { client } from "@arkecosystem/crypto";
+import { client } from "@phantomchain/crypto";
 import pluralize from "pluralize";
 import superheroes from "superheroes";
 import { logger } from "../utils";
@@ -63,7 +63,7 @@ export class DelegateRegistration extends Command {
             transactions.push(transaction);
 
             logger.info(
-                `${i} ==> ${transaction.id}, ${wallet.address} (fee: ${Command.__arktoshiToArk(
+                `${i} ==> ${transaction.id}, ${wallet.address} (fee: ${Command.__phantomtoshiToPhantom(
                     transaction.fee,
                 )}, username: ${wallet.username})`,
             );

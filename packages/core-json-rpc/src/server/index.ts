@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { createServer, mountServer, plugins } from "@arkecosystem/core-http-utils";
-import { Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { createServer, mountServer, plugins } from "@phantomchain/core-http-utils";
+import { Logger } from "@phantomchain/core-interfaces";
 import { registerMethods } from "./methods";
 import { Processor } from "./services/processor";
 

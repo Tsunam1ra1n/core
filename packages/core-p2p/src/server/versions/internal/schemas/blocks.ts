@@ -1,10 +1,10 @@
-import { Joi } from "@arkecosystem/crypto";
+import { Joi } from "@phantomchain/crypto";
 
 /**
  * @type {Object}
  */
 export const store = {
     payload: {
-        block: Joi.arkBlock().options({ stripUnknown: true }),
+        block: Joi.phantomBlock().options({ stripUnknown: true }),
     },
 };

@@ -1,14 +1,14 @@
-import "@arkecosystem/core-test-utils";
+import "@phantomchain/core-test-utils";
 import { setUp, tearDown } from "../../__support__/setup";
 import { utils } from "../utils";
 
-import { models } from "@arkecosystem/crypto";
+import { models } from "@phantomchain/crypto";
 import genesisBlock from "../../../../core-test-utils/src/config/testnet/genesisBlock.json";
 import { blocks2to100 } from "../../../../core-test-utils/src/fixtures";
 import { resetBlockchain } from "../../../../core-test-utils/src/helpers";
 
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
 
 const container = app;
 const { Block } = models;

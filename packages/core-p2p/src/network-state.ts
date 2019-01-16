@@ -1,6 +1,6 @@
 /* tslint:disable:no-shadowed-variable member-ordering max-classes-per-file */
-import { app } from "@arkecosystem/core-container";
-import { slots } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { slots } from "@phantomchain/crypto";
 import { config as localConfig } from "./config";
 import { Monitor } from "./monitor";
 import { Peer } from "./peer";
@@ -103,7 +103,7 @@ export class NetworkState {
 
         if (monitor.__isColdStartActive()) {
             return new NetworkState(NetworkStateStatus.ColdStart, lastBlock);
-        } else if (process.env.ARK_ENV === "test") {
+        } else if (process.env.PHANTOM_ENV === "test") {
             return new NetworkState(NetworkStateStatus.Test, lastBlock);
         } else if (peers.length < minimumNetworkReach) {
             return new NetworkState(NetworkStateStatus.BelowMinimumPeers, lastBlock);

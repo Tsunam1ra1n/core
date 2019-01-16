@@ -458,5 +458,5 @@ class Crypto {
     }
 }
 
-const arkCrypto = new Crypto();
-export { arkCrypto as crypto };
+const phantomCrypto = new Crypto();
+export { phantomCrypto as crypto };

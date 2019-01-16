@@ -1,4 +1,4 @@
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 
 async function mountServer(name, server) {
     try {

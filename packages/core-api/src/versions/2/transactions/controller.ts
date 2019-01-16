@@ -1,11 +1,11 @@
-import { app } from "@arkecosystem/core-container";
-import { P2P } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { P2P } from "@phantomchain/core-interfaces";
 import Boom from "boom";
 import Hapi from "hapi";
 import { Controller } from "../shared/controller";
 
-import { TransactionGuard, TransactionPool } from "@arkecosystem/core-transaction-pool";
-import { constants } from "@arkecosystem/crypto";
+import { TransactionGuard, TransactionPool } from "@phantomchain/core-transaction-pool";
+import { constants } from "@phantomchain/crypto";
 
 export class TransactionsController extends Controller {
     private transactionPool = app.resolvePlugin<TransactionPool>("transactionPool");

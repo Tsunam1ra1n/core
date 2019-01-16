@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { TransactionPool } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { TransactionPool } from "@phantomchain/core-interfaces";
 import snakeCase from "lodash/snakeCase";
 import { IRepository } from "../interfaces";
 

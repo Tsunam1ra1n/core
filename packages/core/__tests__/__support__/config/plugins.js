@@ -1,45 +1,45 @@
 module.exports = {
-    "@arkecosystem/core-event-emitter": {},
-    "@arkecosystem/core-logger-winston": {
+    "@phantomchain/core-event-emitter": {},
+    "@phantomchain/core-logger-winston": {
         transports: {
             console: {
                 options: {
-                    level: process.env.ARK_LOG_LEVEL || "debug",
+                    level: process.env.PHANTOM_LOG_LEVEL || "debug",
                 },
             },
             dailyRotate: {
                 options: {
-                    level: process.env.ARK_LOG_LEVEL || "debug",
+                    level: process.env.PHANTOM_LOG_LEVEL || "debug",
                 },
             },
         },
     },
-    "@arkecosystem/core-database-postgres": {
+    "@phantomchain/core-database-postgres": {
         connection: {
-            host: process.env.ARK_DB_HOST || "localhost",
-            port: process.env.ARK_DB_PORT || 5432,
-            database: process.env.ARK_DB_DATABASE || "ark_development",
-            user: process.env.ARK_DB_USERNAME || "ark",
-            password: process.env.ARK_DB_PASSWORD || "password",
+            host: process.env.PHANTOM_DB_HOST || "localhost",
+            port: process.env.PHANTOM_DB_PORT || 5432,
+            database: process.env.PHANTOM_DB_DATABASE || "phantom_development",
+            user: process.env.PHANTOM_DB_USERNAME || "phantom",
+            password: process.env.PHANTOM_DB_PASSWORD || "password",
         },
     },
-    "@arkecosystem/core-transaction-pool": {
-        enabled: !process.env.ARK_TRANSACTION_POOL_DISABLED,
-        maxTransactionsPerSender: process.env.ARK_TRANSACTION_POOL_MAX_PER_SENDER || 300,
+    "@phantomchain/core-transaction-pool": {
+        enabled: !process.env.PHANTOM_TRANSACTION_POOL_DISABLED,
+        maxTransactionsPerSender: process.env.PHANTOM_TRANSACTION_POOL_MAX_PER_SENDER || 300,
         allowedSenders: [],
         // 100+ years in the future to avoid our hardcoded transactions used in the
         // tests to expire immediately
         maxTransactionAge: 4036608000,
     },
-    "@arkecosystem/core-p2p": {
-        host: process.env.ARK_P2P_HOST || "0.0.0.0",
-        port: process.env.ARK_P2P_PORT || 4000,
+    "@phantomchain/core-p2p": {
+        host: process.env.PHANTOM_P2P_HOST || "0.0.0.0",
+        port: process.env.PHANTOM_P2P_PORT || 4000,
         whitelist: ["127.0.0.1", "::ffff:127.0.0.1"],
     },
-    "@arkecosystem/core-blockchain": {
+    "@phantomchain/core-blockchain": {
         fastRebuild: false,
     },
-    "@arkecosystem/core-forger": {
-        hosts: [`http://127.0.0.1:${process.env.ARK_P2P_PORT || 4000}`],
+    "@phantomchain/core-forger": {
+        hosts: [`http://127.0.0.1:${process.env.PHANTOM_P2P_PORT || 4000}`],
     },
 };

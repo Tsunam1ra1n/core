@@ -1,4 +1,4 @@
-import { Container as container, EventEmitter, Logger } from "@arkecosystem/core-interfaces";
+import { Container as container, EventEmitter, Logger } from "@phantomchain/core-interfaces";
 import { createContainer, Resolver } from "awilix";
 import { execSync } from "child_process";
 import delay from "delay";
@@ -240,7 +240,7 @@ export class Container implements container.IContainer {
 
             const logger = this.resolvePlugin<Logger.ILogger>("logger");
             logger.suppressConsoleOutput(this.silentShutdown);
-            logger.info("Ark Core is trying to gracefully shut down to avoid data corruption :pizza:");
+            logger.info("PHANTOM Core is trying to gracefully shut down to avoid data corruption :pizza:");
 
             try {
                 /* TODO: core-database-postgres has a dep on core-container. Yet we have code in core-container fetching a reference to core-database-postgres.

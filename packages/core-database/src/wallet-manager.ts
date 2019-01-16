@@ -1,7 +1,7 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
-import { roundCalculator } from "@arkecosystem/core-utils";
-import { configManager, constants, crypto, formatArktoshi, models } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
+import { roundCalculator } from "@phantomchain/core-utils";
+import { configManager, constants, crypto, formatPhantomtoshi, models } from "@phantomchain/crypto";
 import pluralize from "pluralize";
 
 const { Wallet } = models;
@@ -255,7 +255,7 @@ export class WalletManager {
             if (delegates.includes(values[0])) {
                 const mapped = values.map(v => `${v.username} (${v.publicKey})`);
                 this.logger.warn(
-                    `Delegates ${JSON.stringify(mapped, null, 4)} have a matching vote balance of ${formatArktoshi(
+                    `Delegates ${JSON.stringify(mapped, null, 4)} have a matching vote balance of ${formatPhantomtoshi(
                         voteBalance,
                     )}`,
                 );

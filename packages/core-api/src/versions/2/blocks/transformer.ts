@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { bignumify, formatTimestamp } from "@arkecosystem/core-utils";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { bignumify, formatTimestamp } from "@phantomchain/core-utils";
 
 export function transformBlock(model) {
     const database = app.resolvePlugin<PostgresConnection>("database");

@@ -1,5 +1,5 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
 import dayjs from "dayjs-ext";
 import head from "lodash/head";
 import sumBy from "lodash/sumBy";

@@ -1,6 +1,6 @@
 {
-    "name": "@arkecosystem/core-snapshots",
-    "description": "Provides live local streamed snapshots functionality for ARK Core",
+    "name": "@phantomchain/core-snapshots",
+    "description": "Provides live local streamed snapshots functionality for PHANTOM Core",
     "version": "2.1.0",
     "contributors": [
         "Kristjan Košič <chris@ark.io>"
@@ -20,18 +20,18 @@
         "clean": "del dist",
         "copy": "cd src/ && cpy './**/*.sql' --parents ../dist/ && cd ../",
         "lint": "../../node_modules/tslint/bin/tslint -c ../../tslint.json 'src/**/*.ts' '__tests__/**/*.ts' --fix",
-        "test": "cross-env ARK_ENV=test jest --runInBand --forceExit",
-        "test:coverage": "cross-env ARK_ENV=test jest --coverage --runInBand --forceExit",
-        "test:debug": "cross-env ARK_ENV=test node --inspect-brk ../../node_modules/.bin/jest --runInBand --watch",
-        "test:watch": "cross-env ARK_ENV=test jest --runInBand --watch",
-        "test:watch:all": "cross-env ARK_ENV=test jest --runInBand --watchAll",
+        "test": "cross-env PHANTOM_ENV=test jest --runInBand --forceExit",
+        "test:coverage": "cross-env PHANTOM_ENV=test jest --coverage --runInBand --forceExit",
+        "test:debug": "cross-env PHANTOM_ENV=test node --inspect-brk ../../node_modules/.bin/jest --runInBand --watch",
+        "test:watch": "cross-env PHANTOM_ENV=test jest --runInBand --watch",
+        "test:watch:all": "cross-env PHANTOM_ENV=test jest --runInBand --watchAll",
         "updates": "../../node_modules/npm-check-updates/bin/npm-check-updates -a"
     },
     "dependencies": {
-        "@arkecosystem/core-interfaces": "^2.1.0",
-        "@arkecosystem/core-container": "^2.1.0",
-        "@arkecosystem/core-database-postgres": "^2.1.0",
-        "@arkecosystem/crypto": "^2.1.0",
+        "@phantomchain/core-interfaces": "^2.1.0",
+        "@phantomchain/core-container": "^2.1.0",
+        "@phantomchain/core-database-postgres": "^2.1.0",
+        "@phantomchain/crypto": "^2.1.0",
         "@types/bluebird": "^3.5.25",
         "@types/create-hash": "^1.2.0",
         "@types/fs-extra": "^5.0.4",

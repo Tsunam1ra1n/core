@@ -1,5 +1,5 @@
 export const publicKey = joi => ({
-    name: "arkPublicKey",
+    name: "phantomPublicKey",
     base: joi
         .string()
         .hex()

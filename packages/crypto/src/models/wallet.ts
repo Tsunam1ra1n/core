@@ -1,10 +1,10 @@
 import { TransactionTypes } from "../constants";
 import { crypto } from "../crypto/crypto";
 import { transactionHandler } from "../handlers/transactions";
-import { Bignum, formatArktoshi } from "../utils";
+import { Bignum, formatPhantomtoshi } from "../utils";
 
 /**
- * TODO copy some parts to ArkDocs
+ * TODO copy some parts to PhantomDocs
  * @classdesc This class holds the wallet data, verifies it and applies the
  * transaction and blocks to it
  *
@@ -312,7 +312,7 @@ export class Wallet {
      * @return {String}
      */
     public toString() {
-        return `${this.address} (${formatArktoshi(this.balance)})`;
+        return `${this.address} (${formatPhantomtoshi(this.balance)})`;
     }
 
     /**

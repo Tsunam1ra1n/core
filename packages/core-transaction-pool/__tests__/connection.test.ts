@@ -1,16 +1,16 @@
 /* tslint:disable:max-line-length */
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { fixtures, generators } from "@arkecosystem/core-test-utils";
-import { bignumify } from "@arkecosystem/core-utils";
-import { constants, models, slots } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { fixtures, generators } from "@phantomchain/core-test-utils";
+import { bignumify } from "@phantomchain/core-utils";
+import { constants, models, slots } from "@phantomchain/crypto";
 import delay from "delay";
 import randomSeed from "random-seed";
 import { TransactionPool } from "../dist";
 import { transactions as mockData } from "./__fixtures__/transactions";
 import { setUpFull, tearDown } from "./__support__/setup";
 
-const { ARKTOSHI, TransactionTypes } = constants;
+const { PHANTOMTOSHI, TransactionTypes } = constants;
 const { Transaction } = models;
 const { generateTransfers } = generators;
 const { delegatesSecrets } = fixtures;
@@ -109,7 +109,7 @@ describe("Connection", () => {
         it("should not add not-appliable transactions", () => {
             // This should be skipped due to insufficient funds
             const highFeeTransaction = new Transaction(mockData.dummy3);
-            highFeeTransaction.fee = bignumify(1e9 * ARKTOSHI);
+            highFeeTransaction.fee = bignumify(1e9 * PHANTOMTOSHI);
             // changing public key as fixture transactions have the same one
             highFeeTransaction.senderPublicKey = "000000000000000000000000000000000000000420000000000000000000000000";
 
@@ -518,7 +518,7 @@ describe("Connection", () => {
             for (let i = 0; i < nAdd; i++) {
                 const transaction = new Transaction(mockData.dummy1);
                 transaction.id = fakeTransactionId(i);
-                transaction.fee = bignumify(rand.intBetween(0.002 * ARKTOSHI, 2 * ARKTOSHI));
+                transaction.fee = bignumify(rand.intBetween(0.002 * PHANTOMTOSHI, 2 * PHANTOMTOSHI));
                 transaction.serialized = Transaction.serialize(transaction).toString("hex");
                 allTransactions.push(transaction);
             }

@@ -1,7 +1,7 @@
-import "@arkecosystem/core-test-utils";
-import { blocks101to155 } from "@arkecosystem/core-test-utils/src/fixtures/testnet/blocks101to155";
-import { blocks2to100 } from "@arkecosystem/core-test-utils/src/fixtures/testnet/blocks2to100";
-import { models } from "@arkecosystem/crypto";
+import "@phantomchain/core-test-utils";
+import { blocks101to155 } from "@phantomchain/core-test-utils/src/fixtures/testnet/blocks101to155";
+import { blocks2to100 } from "@phantomchain/core-test-utils/src/fixtures/testnet/blocks2to100";
+import { models } from "@phantomchain/crypto";
 import { stateStorage } from "../src";
 import { config } from "../src/config";
 import { defaults } from "../src/defaults";

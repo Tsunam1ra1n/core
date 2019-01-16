@@ -1,11 +1,11 @@
 export function transformPorts(config: any) {
     const result = {};
     const keys = [
-        "@arkecosystem/core-p2p",
-        "@arkecosystem/core-api",
-        "@arkecosystem/core-graphql",
-        "@arkecosystem/core-json-rpc",
-        "@arkecosystem/core-webhooks",
+        "@phantomchain/core-p2p",
+        "@phantomchain/core-api",
+        "@phantomchain/core-graphql",
+        "@phantomchain/core-json-rpc",
+        "@phantomchain/core-webhooks",
     ];
 
     const plugins = config.get("plugins");

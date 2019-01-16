@@ -1,4 +1,4 @@
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 import { ApiHelpers } from "../../../core-test-utils/src/helpers/api";
 
 class Helpers {

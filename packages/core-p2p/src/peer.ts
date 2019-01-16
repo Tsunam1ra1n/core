@@ -1,5 +1,5 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger, P2P } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { Logger, P2P } from "@phantomchain/core-interfaces";
 import axios from "axios";
 import dayjs from "dayjs-ext";
 import util from "util";

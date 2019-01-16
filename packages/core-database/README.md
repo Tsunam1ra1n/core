@@ -1,4 +1,4 @@
-# Ark Core - Database - Interface
+# PHANTOM Core - Database - Interface
 
 <p align="center">
     <img src="../../banner.png?sanitize=true" />
@@ -22,5 +22,9 @@ If you discover a security vulnerability within this package, please send an e-m
 -   [All Contributors](../../../../contributors)
 
 ## License
+
+[MIT](LICENSE) © [PHANTOM](https://phantom.org)
+
+&
 
 [MIT](LICENSE) © [ArkEcosystem](https://ark.io)

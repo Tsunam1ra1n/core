@@ -1,6 +1,6 @@
 import "jest-extended";
 
-import { ARKTOSHI } from "../../../src/constants";
+import { PHANTOMTOSHI } from "../../../src/constants";
 import { Handler } from "../../../src/handlers/transactions/handler";
 import { configManager } from "../../../src/managers";
 import { Bignum } from "../../../src/utils/bignum";
@@ -27,7 +27,7 @@ beforeEach(() => {
     handler = new FakeHandler();
 
     wallet = {
-        address: "D5q7YfEFDky1JJVQQEy4MGyiUhr5cGg47F",
+        address: "PYco9UyjgT1nZa7f39dLxY4AqpYc4C1JP7",
         balance: new Bignum(4527654310),
         publicKey: "02a47a2f594635737d2ce9898680812ff7fa6aaa64ddea1360474c110e9985a087",
     };
@@ -41,7 +41,7 @@ beforeEach(() => {
         fee: new Bignum(10000000),
         senderPublicKey: "02a47a2f594635737d2ce9898680812ff7fa6aaa64ddea1360474c110e9985a087",
         amount: new Bignum(10000000),
-        recipientId: "D5q7YfEFDky1JJVQQEy4MGyiUhr5cGg47F",
+        recipientId: "PYco9UyjgT1nZa7f39dLxY4AqpYc4C1JP7",
     };
 
     transactionWithSecondSignature = {
@@ -55,7 +55,7 @@ beforeEach(() => {
         fee: new Bignum(10000000),
         senderPublicKey: "02a47a2f594635737d2ce9898680812ff7fa6aaa64ddea1360474c110e9985a087",
         amount: new Bignum(10000000),
-        recipientId: "D5q7YfEFDky1JJVQQEy4MGyiUhr5cGg47F",
+        recipientId: "PYco9UyjgT1nZa7f39dLxY4AqpYc4C1JP7",
     };
 
     errors = [];
@@ -110,7 +110,7 @@ describe("Handler", () => {
         it("should be ok", () => {
             handler.apply = jest.fn();
 
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
 
             handler.applyTransactionToSender(wallet, transaction);
@@ -123,7 +123,7 @@ describe("Handler", () => {
 
             transaction.senderPublicKey = "a".repeat(66);
 
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
 
             handler.applyTransactionToSender(wallet, transaction);
@@ -134,7 +134,7 @@ describe("Handler", () => {
         it("should not fail due to case mismatch", () => {
             handler.apply = jest.fn();
 
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
             transaction.senderPublicKey = transaction.senderPublicKey.toUpperCase();
             wallet.publicKey = wallet.publicKey.toLowerCase();
@@ -149,7 +149,7 @@ describe("Handler", () => {
         it("should be ok", () => {
             handler.revert = jest.fn();
 
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
 
             handler.revertTransactionForSender(wallet, transaction);
@@ -162,7 +162,7 @@ describe("Handler", () => {
 
             transaction.senderPublicKey = "a".repeat(66);
 
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
 
             handler.revertTransactionForSender(wallet, transaction);
@@ -173,7 +173,7 @@ describe("Handler", () => {
         it("should not fail due to case mismatch", () => {
             handler.revert = jest.fn();
 
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
             transaction.senderPublicKey = transaction.senderPublicKey.toUpperCase();
             wallet.publicKey = wallet.publicKey.toLowerCase();
@@ -186,7 +186,7 @@ describe("Handler", () => {
 
     describe("applyTransactionToRecipient", () => {
         it("should be ok", () => {
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
 
             handler.applyTransactionToRecipient(wallet, transaction);
@@ -197,7 +197,7 @@ describe("Handler", () => {
         it("should not be ok", () => {
             transaction.recipientId = "invalid-recipientId";
 
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
 
             handler.applyTransactionToRecipient(wallet, transaction);
@@ -208,7 +208,7 @@ describe("Handler", () => {
 
     describe("revertTransactionForRecipient", () => {
         it("should be ok", () => {
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
 
             handler.revertTransactionForRecipient(wallet, transaction);
@@ -219,7 +219,7 @@ describe("Handler", () => {
         it("should not be ok", () => {
             transaction.recipientId = "invalid-recipientId";
 
-            const initialBalance = 1000 * ARKTOSHI;
+            const initialBalance = 1000 * PHANTOMTOSHI;
             wallet.balance = new Bignum(initialBalance);
 
             handler.revertTransactionForRecipient(wallet, transaction);

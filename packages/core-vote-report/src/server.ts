@@ -1,4 +1,4 @@
-import { createServer, mountServer } from "@arkecosystem/core-http-utils";
+import { createServer, mountServer } from "@phantomchain/core-http-utils";
 import * as Handlebars from "handlebars";
 import { handler } from "./handler";
 

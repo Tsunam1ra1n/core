@@ -1,4 +1,4 @@
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 
 export function transformPeer(model) {
     const config = app.getConfig();

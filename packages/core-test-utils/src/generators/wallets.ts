@@ -1,4 +1,4 @@
-import { client, crypto } from "@arkecosystem/crypto";
+import { client, crypto } from "@phantomchain/crypto";
 import bip39 from "bip39";
 
 export const generateWallets = (network, quantity = 10) => {

@@ -1,12 +1,12 @@
 /* tslint:disable:max-line-length no-empty */
-import { fixtures, generators } from "@arkecosystem/core-test-utils";
-import { Bignum, constants, crypto, models, transactionBuilder } from "@arkecosystem/crypto";
+import { fixtures, generators } from "@phantomchain/core-test-utils";
+import { Bignum, constants, crypto, models, transactionBuilder } from "@phantomchain/crypto";
 import genesisBlockTestnet from "../../core-test-utils/src/config/testnet/genesisBlock.json";
 import wallets from "./__fixtures__/wallets.json";
 import { setUp, tearDown } from "./__support__/setup";
 
 const { Block, Transaction, Wallet } = models;
-const { ARKTOSHI, TransactionTypes } = constants;
+const { PHANTOMTOSHI, TransactionTypes } = constants;
 
 const { generateDelegateRegistration, generateSecondSignature, generateTransfers, generateVote } = generators;
 
@@ -175,11 +175,11 @@ describe("Wallet Manager", () => {
         const secondSign = generateSecondSignature("testnet", Math.random().toString(36), 1)[0];
         const vote = generateVote("testnet", Math.random().toString(36), walletData2.publicKey, 1)[0];
         describe.each`
-            type          | transaction    | amount               | balanceSuccess               | balanceFail
-            ${"transfer"} | ${transfer}    | ${new Bignum(96579)} | ${new Bignum(1 * ARKTOSHI)}  | ${Bignum.ONE}
-            ${"delegate"} | ${delegateReg} | ${Bignum.ZERO}       | ${new Bignum(30 * ARKTOSHI)} | ${Bignum.ONE}
-            ${"2nd sign"} | ${secondSign}  | ${Bignum.ZERO}       | ${new Bignum(10 * ARKTOSHI)} | ${Bignum.ONE}
-            ${"vote"}     | ${vote}        | ${Bignum.ZERO}       | ${new Bignum(5 * ARKTOSHI)}  | ${Bignum.ONE}
+            type          | transaction    | amount               | balanceSuccess                   | balanceFail
+            ${"transfer"} | ${transfer}    | ${new Bignum(96579)} | ${new Bignum(1 * PHANTOMTOSHI)}  | ${Bignum.ONE}
+            ${"delegate"} | ${delegateReg} | ${Bignum.ZERO}       | ${new Bignum(30 * PHANTOMTOSHI)} | ${Bignum.ONE}
+            ${"2nd sign"} | ${secondSign}  | ${Bignum.ZERO}       | ${new Bignum(10 * PHANTOMTOSHI)} | ${Bignum.ONE}
+            ${"vote"}     | ${vote}        | ${Bignum.ZERO}       | ${new Bignum(5 * PHANTOMTOSHI)}  | ${Bignum.ONE}
         `("when the transaction is a $type", ({ type, transaction, amount, balanceSuccess, balanceFail }) => {
             let sender;
             let recipient;
@@ -436,7 +436,7 @@ describe("Wallet Manager", () => {
 
                 const voter = {
                     address: crypto.getAddress((i + 5).toString().repeat(66)),
-                    balance: new Bignum((i + 1) * 1000 * ARKTOSHI),
+                    balance: new Bignum((i + 1) * 1000 * PHANTOMTOSHI),
                     publicKey: `v${delegateKey}`,
                     vote: delegateKey,
                 };
@@ -449,7 +449,7 @@ describe("Wallet Manager", () => {
             const delegates = walletManager.allByUsername();
             for (let i = 0; i < 5; i++) {
                 const delegate = delegates[4 - i];
-                expect(delegate.voteBalance).toEqual(new Bignum((5 - i) * 1000 * ARKTOSHI));
+                expect(delegate.voteBalance).toEqual(new Bignum((5 - i) * 1000 * PHANTOMTOSHI));
             }
         });
     });

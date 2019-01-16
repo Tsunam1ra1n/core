@@ -1,4 +1,4 @@
-import { Blockchain, Container } from "@arkecosystem/core-interfaces";
+import { Blockchain, Container } from "@phantomchain/core-interfaces";
 import { dynamicFeeMatcher } from "../dist/dynamic-fee";
 import { config } from "../src";
 import { transactions } from "./__fixtures__/transactions";

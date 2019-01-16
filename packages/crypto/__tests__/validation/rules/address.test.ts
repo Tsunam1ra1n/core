@@ -4,10 +4,10 @@ import { address } from "../../../src/validation/rules/address";
 
 describe("Address Rule", () => {
     it("should be true", () => {
-        expect(address("DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN").passes).toBeTrue();
+        expect(address("PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX").passes).toBeTrue();
     });
 
     it("should be false", () => {
-        expect(address("_DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN_").passes).toBeFalse();
+        expect(address("_PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX_").passes).toBeFalse();
     });
 });

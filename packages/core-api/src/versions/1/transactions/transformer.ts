@@ -1,7 +1,7 @@
-import { app } from "@arkecosystem/core-container";
-import { Blockchain } from "@arkecosystem/core-interfaces";
-import { bignumify } from "@arkecosystem/core-utils";
-import { crypto, models } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { Blockchain } from "@phantomchain/core-interfaces";
+import { bignumify } from "@phantomchain/core-utils";
+import { crypto, models } from "@phantomchain/crypto";
 
 export function transformTransactionLegacy(model) {
     const config = app.getConfig();

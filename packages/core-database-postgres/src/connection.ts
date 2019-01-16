@@ -5,12 +5,12 @@ import path from "path";
 import pgPromise from "pg-promise";
 import pluralize from "pluralize";
 
-import { ConnectionInterface } from "@arkecosystem/core-database";
+import { ConnectionInterface } from "@phantomchain/core-database";
 
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 
-import { roundCalculator } from "@arkecosystem/core-utils";
-import { Bignum, models } from "@arkecosystem/crypto";
+import { roundCalculator } from "@phantomchain/core-utils";
+import { Bignum, models } from "@phantomchain/crypto";
 
 import { SPV } from "./spv";
 
@@ -246,12 +246,12 @@ export class PostgresConnection extends ConnectionInterface {
     public async buildWallets(height) {
         this.walletManager.reset();
 
-        const spvPath = `${process.env.ARK_PATH_DATA}/spv.json`;
+        const spvPath = `${process.env.PHANTOM_PATH_DATA}/spv.json`;
 
         if (fs.existsSync(spvPath)) {
             (fs as any).removeSync(spvPath);
 
-            this.logger.info("Ark Core ended unexpectedly - resuming from where we left off :runner:");
+            this.logger.info("PHANTOM Core ended unexpectedly - resuming from where we left off :runner:");
 
             return true;
         }

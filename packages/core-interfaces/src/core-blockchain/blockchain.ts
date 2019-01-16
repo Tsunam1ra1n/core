@@ -1,4 +1,4 @@
-import { models } from "@arkecosystem/crypto";
+import { models } from "@phantomchain/crypto";
 import { IMonitor } from "../core-p2p";
 import { ITransactionPool } from "../core-transaction-pool";
 import { IStateStorage } from "./state-storage";

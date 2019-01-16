@@ -10,21 +10,21 @@ const { outlookTable } = configManager.getPreset("mainnet").exceptions;
 
 describe("Models - Block", () => {
     const data = {
-        id: "187940162505562345",
+        id: "15343729589348562071",
         blockSignature:
-            "3045022100a6605198e0f590c88798405bc76748d84e280d179bcefed2c993e70cded2a5dd022008c7f915b89fc4f3250fc4b481abb753c68f30ac351871c50bd6cfaf151370e8",
-        generatorPublicKey: "024c8247388a02ecd1de2a3e3fd5b7c61ecc2797fa3776599d558333ef1802d231",
+            "30440220704d1a35708a55ada6611519f6360ae732b52f2f84fb5c3cc60ae0a925e10d1002204a3c5ddc3a5174e07ff2ba61c6e3e3a30740706a327fb33c9aec5845cbbfc0b7",
+        generatorPublicKey: "03b09cef99b8d98e09f1594fbe14caab60bfcbdb9cba7ab384b05d298872f81812",
         height: 10,
         numberOfTransactions: 0,
-        payloadHash: "578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23",
+        payloadHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         payloadLength: 1,
-        previousBlock: "12123",
-        reward: 1,
-        timestamp: 111150,
-        totalAmount: 10,
-        totalFee: 1,
+        previousBlock: "7073453535188757209",
+        reward: 0,
+        timestamp: 37034,
+        totalAmount: 0,
+        totalFee: 0,
         transactions: [],
-        version: 6,
+        version: 0,
     };
 
     describe("constructor", () => {
@@ -204,7 +204,7 @@ describe("Models - Block", () => {
     describe("serializeFull", () => {
         describe("genesis block", () => {
             describe.each([["mainnet", 468048], ["devnet", 14492], ["testnet", 46488]])("%s", (network, length) => {
-                const genesis = require(`@arkecosystem/core/src/config/${network}/genesisBlock.json`);
+                const genesis = require(`@phantomchain/core/src/config/${network}/genesisBlock.json`);
                 // @ts-ignore
                 const serialized = Block.serializeFull(genesis).toString("hex");
                 const genesisBlock = new Block(Block.deserialize(serialized));

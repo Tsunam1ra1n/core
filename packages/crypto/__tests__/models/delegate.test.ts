@@ -1,6 +1,6 @@
 import "jest-extended";
 
-import { ARKTOSHI } from "../../src/constants";
+import { PHANTOMTOSHI } from "../../src/constants";
 import { configManager } from "../../src/managers/config";
 import { Delegate } from "../../src/models/delegate";
 import { Wallet } from "../../src/models/wallet";
@@ -152,7 +152,7 @@ describe("Models - Delegate", () => {
             it("doesn't sort the transactions", () => {
                 const address = "Abcde";
                 const wallet = new Wallet(address);
-                wallet.balance = new Bignum(ARKTOSHI);
+                wallet.balance = new Bignum(PHANTOMTOSHI);
 
                 expect(wallet.toString()).toBe(`${address} (1 ${configManager.config.client.symbol})`);
             });

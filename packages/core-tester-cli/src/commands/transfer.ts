@@ -1,4 +1,4 @@
-import { Bignum, client, crypto } from "@arkecosystem/crypto";
+import { Bignum, client, crypto } from "@phantomchain/crypto";
 import delay from "delay";
 import unique from "lodash/uniq";
 import pluralize from "pluralize";
@@ -38,11 +38,11 @@ export class Transfer extends Command {
         const walletBalance = await this.getWalletBalance(primaryAddress);
 
         if (!this.options.skipValidation) {
-            logger.info(`Sender starting balance: ${Command.__arktoshiToArk(walletBalance)}`);
+            logger.info(`Sender starting balance: ${Command.__phantomtoshiToPhantom(walletBalance)}`);
         }
 
         let totalDeductions = Bignum.ZERO;
-        const transactionAmount = Command.__arkToArktoshi(this.options.amount || 2);
+        const transactionAmount = Command.__phantomToPhantomtoshi(this.options.amount || 2);
 
         const transactions = this.generateTransactions(transactionAmount, wallets, null, true);
         for (const transaction of transactions) {
@@ -56,7 +56,7 @@ export class Transfer extends Command {
 
         const expectedSenderBalance = new Bignum(walletBalance).minus(totalDeductions);
         if (!this.options.skipValidation) {
-            logger.info(`Sender expected ending balance: ${Command.__arktoshiToArk(expectedSenderBalance)}`);
+            logger.info(`Sender expected ending balance: ${Command.__phantomtoshiToPhantom(expectedSenderBalance)}`);
         }
 
         const runOptions = {
@@ -146,7 +146,7 @@ export class Transfer extends Command {
 
             if (log) {
                 logger.info(
-                    `${i} ==> ${transaction.id}, ${transaction.recipientId} (fee: ${Command.__arktoshiToArk(
+                    `${i} ==> ${transaction.id}, ${transaction.recipientId} (fee: ${Command.__phantomtoshiToPhantom(
                         transaction.fee,
                     )})`,
                 );
@@ -255,9 +255,9 @@ export class Transfer extends Command {
             if (!walletBalance.isEqualTo(runOptions.expectedSenderBalance)) {
                 successfulTest = false;
                 logger.error(
-                    `Sender balance incorrect: '${Command.__arktoshiToArk(
+                    `Sender balance incorrect: '${Command.__phantomtoshiToPhantom(
                         walletBalance,
-                    )}' but should be '${Command.__arktoshiToArk(runOptions.expectedSenderBalance)}'`,
+                    )}' but should be '${Command.__phantomtoshiToPhantom(runOptions.expectedSenderBalance)}'`,
                 );
             }
         }
@@ -267,9 +267,9 @@ export class Transfer extends Command {
             if (!balance.isEqualTo(runOptions.transactionAmount)) {
                 successfulTest = false;
                 logger.error(
-                    `Incorrect destination balance for ${wallet.address}. Should be '${Command.__arktoshiToArk(
+                    `Incorrect destination balance for ${wallet.address}. Should be '${Command.__phantomtoshiToPhantom(
                         runOptions.transactionAmount,
-                    )}' but is '${Command.__arktoshiToArk(balance)}'`,
+                    )}' but is '${Command.__phantomtoshiToPhantom(balance)}'`,
                 );
             }
         }
@@ -286,7 +286,7 @@ export class Transfer extends Command {
         logger.info("Testing VendorField value is set correctly");
 
         const transactions = this.generateTransactions(
-            Command.__arkToArktoshi(2),
+            Command.__phantomToPhantomtoshi(2),
             wallets,
             null,
             null,
@@ -318,7 +318,7 @@ export class Transfer extends Command {
     public async __testEmptyVendorField(wallets) {
         logger.info("Testing empty VendorField value");
 
-        const transactions = this.generateTransactions(Command.__arkToArktoshi(2), wallets, null, null, null);
+        const transactions = this.generateTransactions(Command.__phantomToPhantomtoshi(2), wallets, null, null, null);
 
         try {
             await this.sendTransactions(transactions);

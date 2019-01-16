@@ -53,13 +53,13 @@ describe("Monitor", () => {
     describe("acceptNewPeer", () => {
         it("should be ok", async () => {
             axiosMock.onGet(`${peerMock.url}/peer/status`).reply(() => [200, { success: true }, peerMock.headers]);
-            process.env.ARK_ENV = "false";
+            process.env.PHANTOM_ENV = "false";
 
             await monitor.acceptNewPeer(peerMock);
 
             expect(monitor.peers[peerMock.ip]).toBeObject();
 
-            process.env.ARK_ENV = "test";
+            process.env.PHANTOM_ENV = "test";
         });
     });
 

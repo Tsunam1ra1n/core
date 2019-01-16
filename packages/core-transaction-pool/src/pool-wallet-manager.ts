@@ -1,7 +1,7 @@
-import { app } from "@arkecosystem/core-container";
-import { WalletManager } from "@arkecosystem/core-database";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { constants, crypto, models } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { WalletManager } from "@phantomchain/core-database";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { constants, crypto, models } from "@phantomchain/crypto";
 
 const { Wallet } = models;
 const { TransactionTypes } = constants;

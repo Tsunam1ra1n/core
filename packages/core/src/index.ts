@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { bip38, configManager, crypto } from "@arkecosystem/crypto";
+import { bip38, configManager, crypto } from "@phantomchain/crypto";
 import app from "commander";
 import fs from "fs";
 import wif from "wif";
@@ -15,8 +15,8 @@ function registerCommand(name: string, description: string): any {
     return app
         .command(name)
         .description(description)
-        .option("-d, --data <data>", "data directory", "~/.ark")
-        .option("-c, --config <config>", "core config", "~/.ark/config")
+        .option("-d, --data <data>", "data directory", "~/.phantom")
+        .option("-c, --config <config>", "core config", "~/.phantom/config")
         .option("-n, --network <network>", "token network")
         .option("-r, --remote <remote>", "remote peer for config")
         .option("--network-start", "force genesis network start", false)

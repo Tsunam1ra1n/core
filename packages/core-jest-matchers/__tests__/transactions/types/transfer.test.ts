@@ -1,6 +1,6 @@
 import "../../../src/transactions/types/transfer";
 
-import { constants } from "@arkecosystem/crypto";
+import { constants } from "@phantomchain/crypto";
 const { TransactionTypes } = constants;
 
 describe(".toBeTransferType", () => {

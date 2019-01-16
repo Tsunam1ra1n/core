@@ -1,5 +1,5 @@
 import "jest-extended";
-import { client as ark } from "../../../src/client";
+import { client as phantom } from "../../../src/client";
 import { TransactionTypes } from "../../../src/constants";
 import { crypto } from "../../../src/crypto/crypto";
 import { feeManager } from "../../../src/managers/fee";
@@ -8,7 +8,7 @@ import { transactionBuilder } from "./__shared__/transaction-builder";
 let builder;
 
 beforeEach(() => {
-    builder = ark.getBuilder().secondSignature();
+    builder = phantom.getBuilder().secondSignature();
 
     // @ts-ignore
     global.builder = builder;

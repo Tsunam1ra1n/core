@@ -1,5 +1,5 @@
 import { Bignum } from "./bignum";
-import { formatArktoshi } from "./format-arktoshi";
+import { formatPhantomtoshi } from "./format-phantomtoshi";
 import { sortTransactions } from "./sort-transactions";
 
-export { Bignum, formatArktoshi, sortTransactions };
+export { Bignum, formatPhantomtoshi, sortTransactions };

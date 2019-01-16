@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { Blockchain } from "@arkecosystem/core-interfaces";
-import { Bignum, configManager } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { Blockchain } from "@phantomchain/core-interfaces";
+import { Bignum, configManager } from "@phantomchain/crypto";
 
 /**
  * Calculate the total supply at the given height

@@ -1,4 +1,4 @@
-import { AbstractLogger } from "@arkecosystem/core-logger";
+import { AbstractLogger } from "@phantomchain/core-logger";
 import "colors";
 import * as winston from "winston";
 

@@ -1,8 +1,8 @@
-import { Logger } from "@arkecosystem/core-interfaces";
+import { Logger } from "@phantomchain/core-interfaces";
 import path from "path";
 import { QueryFile } from "pg-promise";
 
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 
 const logger = app.resolvePlugin<Logger.ILogger>("logger");
 

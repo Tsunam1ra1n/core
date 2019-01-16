@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { Logger } from "@arkecosystem/core-interfaces";
-import { SnapshotManager } from "@arkecosystem/core-snapshots";
+import { app } from "@phantomchain/core-container";
+import { Logger } from "@phantomchain/core-interfaces";
+import { SnapshotManager } from "@phantomchain/core-snapshots";
 import fs from "fs-extra";
 
 export async function verifySnapshot(options) {
@@ -9,7 +9,9 @@ export async function verifySnapshot(options) {
 
     if (
         options.filename &&
-        !fs.existsSync(`${process.env.ARK_PATH_DATA}/snapshots/${process.env.ARK_NETWORK_NAME}/${options.filename}`)
+        !fs.existsSync(
+            `${process.env.PHANTOM_PATH_DATA}/snapshots/${process.env.PHANTOM_NETWORK_NAME}/${options.filename}`,
+        )
     ) {
         logger.error(`Verify not possible. Snapshot ${options.filename} not found.`);
         logger.info("Use -f parameter with just the filename and not the full path.");

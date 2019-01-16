@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { setUpContainer } from "@arkecosystem/core-test-utils/src/helpers/container";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { setUpContainer } from "@phantomchain/core-test-utils/src/helpers/container";
 
 import { delegates } from "../../../core-test-utils/src/fixtures";
 import { generateRound } from "./utils/generate-round";
@@ -14,10 +14,10 @@ async function setUp() {
 
     await setUpContainer({
         exclude: [
-            "@arkecosystem/core-webhooks",
-            "@arkecosystem/core-graphql",
-            "@arkecosystem/core-forger",
-            "@arkecosystem/core-json-rpc",
+            "@phantomchain/core-webhooks",
+            "@phantomchain/core-graphql",
+            "@phantomchain/core-forger",
+            "@phantomchain/core-json-rpc",
         ],
     });
 

@@ -1,5 +1,5 @@
-import { app } from "@arkecosystem/core-container";
-import { ApiHelpers } from "@arkecosystem/core-test-utils/src/helpers/api";
+import { app } from "@phantomchain/core-container";
+import { ApiHelpers } from "@phantomchain/core-test-utils/src/helpers/api";
 
 class Helpers {
     public headers: any;

@@ -1,4 +1,4 @@
-import { NetworkManager } from "@arkecosystem/crypto";
+import { NetworkManager } from "@phantomchain/crypto";
 import expandHomeDir from "expand-home-dir";
 import { existsSync } from "fs-extra";
 import { resolve } from "path";
@@ -28,7 +28,7 @@ export class Environment {
 
         for (const [key, value] of Object.entries(this.variables)) {
             if (allowedKeys.includes(key)) {
-                process.env[`ARK_PATH_${key.toUpperCase()}`] = resolve(expandHomeDir(value));
+                process.env[`PHANTOM_PATH_${key.toUpperCase()}`] = resolve(expandHomeDir(value));
             }
         }
     }
@@ -43,7 +43,7 @@ export class Environment {
             return;
         }
 
-        const envPath = expandHomeDir(`${process.env.ARK_PATH_DATA}/.env`);
+        const envPath = expandHomeDir(`${process.env.PHANTOM_PATH_DATA}/.env`);
 
         if (existsSync(envPath)) {
             const env = require("envfile").parseFileSync(envPath);

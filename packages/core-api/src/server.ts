@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { createSecureServer, createServer, mountServer, plugins } from "@arkecosystem/core-http-utils";
-import { Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { createSecureServer, createServer, mountServer, plugins } from "@phantomchain/core-http-utils";
+import { Logger } from "@phantomchain/core-interfaces";
 import Hapi from "hapi";
 
 export class Server {
@@ -9,8 +9,7 @@ export class Server {
     private http: any;
     private https: any;
 
-    public constructor(private config: any) {
-    }
+    public constructor(private config: any) {}
 
     public async start(): Promise<void> {
         const options = {

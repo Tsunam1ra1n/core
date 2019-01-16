@@ -1,4 +1,4 @@
-import { Container } from "@arkecosystem/core-interfaces";
+import { Container } from "@phantomchain/core-interfaces";
 import { asValue } from "awilix";
 import { Blockchain } from "./blockchain";
 import { config } from "./config";
@@ -20,7 +20,7 @@ export const plugin: Container.PluginDescriptor = {
 
         container.register("state", asValue(stateStorage));
 
-        if (!process.env.ARK_SKIP_BLOCKCHAIN) {
+        if (!process.env.PHANTOM_SKIP_BLOCKCHAIN) {
             await blockchain.start();
         }
 

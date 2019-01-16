@@ -1,5 +1,5 @@
-import { Container } from "@arkecosystem/core-interfaces";
 import bugsnag from "@bugsnag/js";
+import { Container } from "@phantomchain/core-interfaces";
 import { defaults } from "./defaults";
 
 export const plugin: Container.PluginDescriptor = {

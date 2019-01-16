@@ -1,4 +1,4 @@
-import { Bignum } from "@arkecosystem/crypto";
+import { Bignum } from "@phantomchain/crypto";
 import orderBy from "lodash/orderBy";
 import filterRows from "./utils/filter-rows";
 import limitRows from "./utils/limit-rows";

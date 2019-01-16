@@ -1,14 +1,14 @@
 import "jest-extended";
 
-import { ARKTOSHI } from "../../src/constants";
-import { Bignum, formatArktoshi } from "../../src/utils";
+import { PHANTOMTOSHI } from "../../src/constants";
+import { Bignum, formatPhantomtoshi } from "../../src/utils";
 
-describe("Format Arktoshi", () => {
-    it("should format arktoshis", () => {
-        expect(formatArktoshi(ARKTOSHI)).toBe("1 DѦ");
-        expect(formatArktoshi(0.1 * ARKTOSHI)).toBe("0.1 DѦ");
-        expect(formatArktoshi((0.1 * ARKTOSHI).toString())).toBe("0.1 DѦ");
-        expect(formatArktoshi(new Bignum(10))).toBe("0.0000001 DѦ");
-        expect(formatArktoshi(new Bignum(ARKTOSHI + 10012))).toBe("1.00010012 DѦ");
+describe("Format Phantomtoshi", () => {
+    it("should format phantomtoshis", () => {
+        expect(formatPhantomtoshi(PHANTOMTOSHI)).toBe("1 Dⓟ");
+        expect(formatPhantomtoshi(0.1 * PHANTOMTOSHI)).toBe("0.1 Dⓟ");
+        expect(formatPhantomtoshi((0.1 * PHANTOMTOSHI).toString())).toBe("0.1 Dⓟ");
+        expect(formatPhantomtoshi(new Bignum(10))).toBe("0.0000001 Dⓟ");
+        expect(formatPhantomtoshi(new Bignum(PHANTOMTOSHI + 10012))).toBe("1.00010012 Dⓟ");
     });
 });

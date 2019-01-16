@@ -1,8 +1,8 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Blockchain } from "@arkecosystem/core-interfaces";
-import { delegateCalculator, supplyCalculator } from "@arkecosystem/core-utils";
-import { configManager } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Blockchain } from "@phantomchain/core-interfaces";
+import { delegateCalculator, supplyCalculator } from "@phantomchain/core-utils";
+import { configManager } from "@phantomchain/crypto";
 import sumBy from "lodash/sumBy";
 
 export function handler(request, h) {

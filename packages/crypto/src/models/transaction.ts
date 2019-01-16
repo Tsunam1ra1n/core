@@ -11,7 +11,7 @@ import { Bignum } from "../utils";
 const { transactionIdFixTable } = configManager.getPreset("mainnet").exceptions;
 
 /**
- * TODO copy some parts to ArkDocs
+ * TODO copy some parts to PhantomDocs
  * @classdesc This model holds the transaction data and its serialization
  *
  * A Transaction stores on the db:
@@ -23,8 +23,8 @@ const { transactionIdFixTable } = configManager.getPreset("mainnet").exceptions;
  *   - recipientId (address of the recipient)
  *   - type
  *   - vendorFieldHex (hexadecimal version of the vendorField)
- *   - amount (in arktoshi)
- *   - fee (in arktoshi)
+ *   - amount (in phantomtoshi)
+ *   - fee (in phantomtoshi)
  *   - serialized
  *
  * Apart, the Model includes other fields:
@@ -90,7 +90,7 @@ export class Transaction {
         const bb = new ByteBuffer(512, true);
         bb.writeByte(0xff); // fill, to disambiguate from v1
         bb.writeByte(transaction.version || 0x01); // version
-        bb.writeByte(transaction.network || configManager.get("pubKeyHash")); // ark = 0x17, devnet = 0x30
+        bb.writeByte(transaction.network || configManager.get("pubKeyHash")); // phantom = 0x38, devnet = 0x38
         bb.writeByte(transaction.type);
         bb.writeUint32(transaction.timestamp);
         bb.append(transaction.senderPublicKey, "hex");

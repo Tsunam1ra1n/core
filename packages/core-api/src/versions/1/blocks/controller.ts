@@ -1,4 +1,4 @@
-import { bignumify } from "@arkecosystem/core-utils";
+import { bignumify } from "@phantomchain/core-utils";
 import Boom from "boom";
 import Hapi from "hapi";
 import { Controller } from "../shared/controller";

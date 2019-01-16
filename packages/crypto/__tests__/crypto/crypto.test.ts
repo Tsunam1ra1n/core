@@ -138,10 +138,10 @@ describe("crypto.js", () => {
     });
 
     describe("getFee", () => {
-        it("should return 10000000", () => {
+        it("should return 100000000", () => {
             const fee = crypto.getFee({ type: TransactionTypes.Transfer });
             expect(fee).toBeNumber();
-            expect(fee).toBe(10000000);
+            expect(fee).toBe(100000000);
         });
     });
 
@@ -184,7 +184,7 @@ describe("crypto.js", () => {
             const keys = crypto.getKeys("SDgGxWHHQHnpm5sth7MBUoeSw7V7nbimJ1RBU587xkryTh4qe9ov");
             // @ts-ignore
             const address = crypto.getAddress(keys.publicKey.toString("hex"));
-            expect(address).toBe("DUMjDrT8mgqGLWZtkCqzvy7yxWr55mBEub");
+            expect(address).toBe("Pw9QpgCdENt3bnC9P7WHYECSKdYbdZ2b9f");
         });
     });
 
@@ -207,7 +207,7 @@ describe("crypto.js", () => {
             const keys = crypto.getKeysFromWIF("SDgGxWHHQHnpm5sth7MBUoeSw7V7nbimJ1RBU587xkryTh4qe9ov");
             // @ts-ignore
             const address = crypto.getAddress(keys.publicKey.toString("hex"));
-            expect(address).toBe("DCAaPzPAhhsMkHfQs7fZvXFW2EskDi92m8");
+            expect(address).toBe("PexFzp8fAPv91ZHfW2KrXnKxPMaGgb4cdG");
         });
 
         it("should get keys from compressed WIF", () => {
@@ -246,7 +246,7 @@ describe("crypto.js", () => {
             );
             const address = crypto.getAddress(keys.publicKey, networkMainnet.network.pubKeyHash);
             expect(keys.compressed).toBeTruthy();
-            expect(address).toBe("APnrtb2JGa6WjrRik9W3Hjt6h71mD6Zgez");
+            expect(address).toBe("PGcAQ4ZWzLvYuitVXaAEokbGqFFwysiy1J");
         });
 
         it("should get address from compressed WIF (devnet)", () => {
@@ -256,7 +256,7 @@ describe("crypto.js", () => {
             );
             const address = crypto.getAddress(keys.publicKey, networkDevnet.network.pubKeyHash);
             expect(keys.compressed).toBeTruthy();
-            expect(address).toBe("DDA5nM7KEqLeTtQKv5qGgcnc6dpNBKJNTS");
+            expect(address).toBe("PfwmPArohXPRjA2aYzVZHss4TkWthho7Ca");
         });
     });
 
@@ -266,7 +266,7 @@ describe("crypto.js", () => {
             const address = crypto.getAddress(keys.publicKey);
 
             expect(address).toBeString();
-            expect(address).toBe("D7seWn8JLVwX4nHd9hh2Lf7gvZNiRJ7qLk");
+            expect(address).toBe("PafL7bsnoBzJL3usncMJwvC9Hg5EtEf5W6");
         });
 
         it("should generate address by publicKey - second test", () => {
@@ -274,7 +274,7 @@ describe("crypto.js", () => {
             const address = crypto.getAddress(keys.publicKey);
 
             expect(address).toBeString();
-            expect(address).toBe("DDp4SYpnuzFPuN4W79PYY762d7FtW3DFFN");
+            expect(address).toBe("Pgbk3NaHNgJBAdgkk43q9NAUzDxR4aWapN");
         });
 
         it("should not throw an error if the publicKey is valid", () => {
@@ -303,13 +303,13 @@ describe("crypto.js", () => {
         it("should validate MAINNET addresses", () => {
             configManager.setConfig(networkMainnet);
 
-            expect(crypto.validateAddress("AdVSe37niA3uFUPgCgMUH2tMsHF4LpLoiX")).toBeTrue();
+            expect(crypto.validateAddress("PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX")).toBeTrue();
         });
 
         it("should validate DEVNET addresses", () => {
             configManager.setConfig(networkDevnet);
 
-            expect(crypto.validateAddress("DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN")).toBeTrue();
+            expect(crypto.validateAddress("PfwmPArohXPRjA2aYzVZHss4TkWthho7Ca")).toBeTrue();
         });
     });
 });

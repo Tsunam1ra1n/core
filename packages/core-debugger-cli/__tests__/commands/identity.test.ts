@@ -10,7 +10,7 @@ describe("Commands - Identity", () => {
             passphrase: "this is a top secret passphrase",
             publicKey: "034151a3ec46b5670a682b0a63394f863587d1bc97483b1b6c70eb58e7f0aed192",
             privateKey: "d8839c2432bfd0a67ef10a804ba991eabba19f154a3d707917681d45822a5712",
-            address: "D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib",
+            address: "PYoTGGSBTHyBwj6tjDMpvY76AQHMmNPJpu",
         };
 
         expect(
@@ -25,7 +25,7 @@ describe("Commands - Identity", () => {
         const expected = {
             publicKey: "034151a3ec46b5670a682b0a63394f863587d1bc97483b1b6c70eb58e7f0aed192",
             privateKey: "d8839c2432bfd0a67ef10a804ba991eabba19f154a3d707917681d45822a5712",
-            address: "D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib",
+            address: "PYoTGGSBTHyBwj6tjDMpvY76AQHMmNPJpu",
         };
 
         expect(
@@ -39,7 +39,7 @@ describe("Commands - Identity", () => {
     it("should return identities from publicKey", () => {
         const expected = {
             publicKey: "034151a3ec46b5670a682b0a63394f863587d1bc97483b1b6c70eb58e7f0aed192",
-            address: "D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib",
+            address: "PYoTGGSBTHyBwj6tjDMpvY76AQHMmNPJpu",
         };
 
         expect(

@@ -1,4 +1,4 @@
-import { crypto } from "@arkecosystem/crypto";
+import { crypto } from "@phantomchain/crypto";
 import { handleOutput } from "../utils";
 
 function identity(opts) {

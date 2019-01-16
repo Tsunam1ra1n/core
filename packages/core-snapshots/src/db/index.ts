@@ -1,6 +1,6 @@
-import { app } from "@arkecosystem/core-container";
-import { migrations, plugin } from "@arkecosystem/core-database-postgres";
-import { Logger } from "@arkecosystem/core-interfaces";
+import { app } from "@phantomchain/core-container";
+import { migrations, plugin } from "@phantomchain/core-database-postgres";
+import { Logger } from "@phantomchain/core-interfaces";
 import promise from "bluebird";
 
 import { queries } from "./queries";

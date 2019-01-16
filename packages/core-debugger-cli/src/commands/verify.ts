@@ -1,4 +1,4 @@
-import { models } from "@arkecosystem/crypto";
+import { models } from "@phantomchain/crypto";
 import { handleOutput } from "../utils";
 
 function verify(opts) {

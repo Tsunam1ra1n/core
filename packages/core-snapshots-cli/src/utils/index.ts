@@ -1,13 +1,13 @@
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 
 export const setUpLite = async options => {
-    process.env.ARK_SKIP_BLOCKCHAIN = "true";
+    process.env.PHANTOM_SKIP_BLOCKCHAIN = "true";
     await app.setUp("2.0.0", options, {
         include: [
-            "@arkecosystem/core-logger",
-            "@arkecosystem/core-logger-winston",
-            "@arkecosystem/core-event-emitter",
-            "@arkecosystem/core-snapshots",
+            "@phantomchain/core-logger",
+            "@phantomchain/core-logger-winston",
+            "@phantomchain/core-event-emitter",
+            "@phantomchain/core-snapshots",
         ],
     });
 

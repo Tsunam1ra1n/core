@@ -1,4 +1,4 @@
-import "@arkecosystem/core-test-utils/";
+import "@phantomchain/core-test-utils/";
 
 import { blockchainMachine } from "../../src/machines/blockchain";
 

@@ -1,4 +1,4 @@
-import { client, constants, crypto } from "@arkecosystem/crypto";
+import { client, constants, crypto } from "@phantomchain/crypto";
 import superheroes from "superheroes";
 import { delegatesSecrets } from "../../fixtures/testnet/passphrases";
 

@@ -1,11 +1,11 @@
 import "jest-extended";
 
-import { Bignum, constants, models, transactionBuilder } from "@arkecosystem/crypto";
+import { Bignum, constants, models, transactionBuilder } from "@phantomchain/crypto";
 import { setUp, tearDown } from "./__support__/setup";
 
 const { Block, Transaction, Wallet } = models;
 
-const { ARKTOSHI, TransactionTypes } = constants;
+const { PHANTOMTOSHI, TransactionTypes } = constants;
 
 let connectionInterface;
 let genesisBlock;
@@ -19,7 +19,7 @@ beforeAll(async () => {
     await setUp();
 
     connectionInterface = new DummyConnection({});
-    genesisBlock = new Block(require("@arkecosystem/core-test-utils/src/config/testnet/genesisBlock.json"));
+    genesisBlock = new Block(require("@phantomchain/core-test-utils/src/config/testnet/genesisBlock.json"));
 });
 
 afterAll(async () => {
@@ -65,7 +65,7 @@ describe("Connection Interface", () => {
             for (let i = 0; i < 51; i++) {
                 const transfer = transactionBuilder
                     .transfer()
-                    .amount(i * ARKTOSHI)
+                    .amount(i * PHANTOMTOSHI)
                     .recipientId(delegatesRound2[i].address)
                     .sign(keys.passphrase)
                     .build();

@@ -14,27 +14,27 @@ beforeEach(() => {
 describe("Second Signature Transaction", () => {
     it("should be valid", () => {
         transaction.signatureAsset("second passphrase").sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkSecondSignature()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomSecondSignature()).error).toBeNull();
     });
 
     it("should be valid with correct data", () => {
         transaction
             .signatureAsset("second passphrase")
-            .fee(1 * constants.ARKTOSHI)
+            .fee(1 * constants.PHANTOMTOSHI)
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkSecondSignature()).error).toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomSecondSignature()).error).toBeNull();
     });
 
     it("should be invalid due to no transaction as object", () => {
-        expect(validator.validate("test", validator.arkSecondSignature()).error).not.toBeNull();
+        expect(validator.validate("test", validator.phantomSecondSignature()).error).not.toBeNull();
     });
 
     it("should be invalid due to non-zero amount", () => {
         transaction
             .signatureAsset("second passphrase")
-            .amount(10 * constants.ARKTOSHI)
+            .amount(10 * constants.PHANTOMTOSHI)
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkSecondSignature()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomSecondSignature()).error).not.toBeNull();
     });
 
     it("should be invalid due to zero fee", () => {
@@ -42,7 +42,7 @@ describe("Second Signature Transaction", () => {
             .signatureAsset("second passphrase")
             .fee(0)
             .sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkSecondSignature()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomSecondSignature()).error).not.toBeNull();
     });
 
     it("should be invalid due to second signature", () => {
@@ -51,12 +51,12 @@ describe("Second Signature Transaction", () => {
             .fee(1)
             .sign("passphrase")
             .secondSign("second passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkSecondSignature())).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomSecondSignature())).not.toBeNull();
     });
 
     it("should be invalid due to wrong transaction type", () => {
         transaction = transactionBuilder.delegateRegistration();
         transaction.usernameAsset("delegate_name").sign("passphrase");
-        expect(validator.validate(transaction.getStruct(), validator.arkSecondSignature()).error).not.toBeNull();
+        expect(validator.validate(transaction.getStruct(), validator.phantomSecondSignature()).error).not.toBeNull();
     });
 });

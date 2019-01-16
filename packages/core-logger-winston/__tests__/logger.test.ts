@@ -1,4 +1,4 @@
-import { AbstractLogger } from "@arkecosystem/core-logger";
+import { AbstractLogger } from "@phantomchain/core-logger";
 import * as capcon from "capture-console";
 import "jest-extended";
 import { WinstonLogger } from "../src";

@@ -1,18 +1,18 @@
-import { app } from "@arkecosystem/core-container";
-import "@arkecosystem/core-test-utils";
-import { setUpContainer } from "@arkecosystem/core-test-utils/src/helpers/container";
+import { app } from "@phantomchain/core-container";
+import "@phantomchain/core-test-utils";
+import { setUpContainer } from "@phantomchain/core-test-utils/src/helpers/container";
 
 export const setUp = async () => {
     jest.setTimeout(60000);
 
-    process.env.ARK_SKIP_BLOCKCHAIN = "true";
+    process.env.PHANTOM_SKIP_BLOCKCHAIN = "true";
 
     await setUpContainer({
-        exit: "@arkecosystem/core-blockchain",
+        exit: "@phantomchain/core-blockchain",
         exclude: [
-            "@arkecosystem/core-p2p",
-            "@arkecosystem/core-transaction-pool",
-            "@arkecosystem/core-database-postgres",
+            "@phantomchain/core-p2p",
+            "@phantomchain/core-transaction-pool",
+            "@phantomchain/core-database-postgres",
         ],
     });
 };

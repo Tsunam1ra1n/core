@@ -1,4 +1,4 @@
 export const blockId = joi => ({
-    name: "arkBlockId",
+    name: "phantomBlockId",
     base: joi.string().regex(/^[0-9]+$/, "numbers"),
 });

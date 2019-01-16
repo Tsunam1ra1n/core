@@ -1,4 +1,4 @@
-import { bip38, crypto, HashAlgorithms } from "@arkecosystem/crypto";
+import { bip38, crypto, HashAlgorithms } from "@phantomchain/crypto";
 import bip39 from "bip39";
 import Joi from "joi";
 import { database } from "../../../services/database";

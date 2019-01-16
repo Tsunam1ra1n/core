@@ -1,8 +1,8 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Blockchain, Logger, P2P } from "@arkecosystem/core-interfaces";
-import { TransactionGuard, TransactionPool } from "@arkecosystem/core-transaction-pool";
-import { Joi, models, slots } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Blockchain, Logger, P2P } from "@phantomchain/core-interfaces";
+import { TransactionGuard, TransactionPool } from "@phantomchain/core-transaction-pool";
+import { Joi, models, slots } from "@phantomchain/crypto";
 
 import pluralize from "pluralize";
 import { monitor } from "../../../monitor";
@@ -230,7 +230,7 @@ export const postTransactions = {
         },
         validate: {
             payload: {
-                transactions: Joi.arkTransactionArray()
+                transactions: Joi.phantomTransactionArray()
                     .min(1)
                     .max(app.resolveOptions("transactionPool").maxTransactionsPerRequest)
                     .options({ stripUnknown: true }),

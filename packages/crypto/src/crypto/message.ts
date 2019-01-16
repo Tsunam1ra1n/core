@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { configManager } from "../managers";
-import { crypto as arkCrypto } from "./crypto";
+import { crypto as phantomCrypto } from "./crypto";
 
 const createHash = message =>
     crypto
@@ -16,11 +16,11 @@ export class Message {
      * @return {Object}
      */
     public static sign(message, passphrase) {
-        const keys = arkCrypto.getKeys(passphrase);
+        const keys = phantomCrypto.getKeys(passphrase);
 
         return {
             publicKey: keys.publicKey,
-            signature: arkCrypto.signHash(createHash(message), keys),
+            signature: phantomCrypto.signHash(createHash(message), keys),
             message,
         };
     }
@@ -37,11 +37,11 @@ export class Message {
             network = configManager.all();
         }
 
-        const keys = arkCrypto.getKeysFromWIF(wif, network);
+        const keys = phantomCrypto.getKeysFromWIF(wif, network);
 
         return {
             publicKey: keys.publicKey,
-            signature: arkCrypto.signHash(createHash(message), keys),
+            signature: phantomCrypto.signHash(createHash(message), keys),
             message,
         };
     }
@@ -54,6 +54,6 @@ export class Message {
      * @return {Boolean}
      */
     public static verify({ message, publicKey, signature }) {
-        return arkCrypto.verifyHash(createHash(message), signature, publicKey);
+        return phantomCrypto.verifyHash(createHash(message), signature, publicKey);
     }
 }

@@ -10,7 +10,7 @@ import bs58check from "bs58check";
 import xor from "buffer-xor/inplace";
 import crypto from "crypto";
 import secp256k1 from "secp256k1";
-import { crypto as arkCrypto, HashAlgorithms } from "../crypto";
+import { crypto as phantomCrypto, HashAlgorithms } from "../crypto";
 
 const SCRYPT_PARAMS = {
     N: 16384, // specified by BIP38
@@ -228,5 +228,5 @@ function getAddressPrivate(privateKey: Buffer, compressed: boolean): string {
 }
 
 function getPublicKey(buffer: Buffer, compressed: boolean): Buffer {
-    return Buffer.from(arkCrypto.getKeysByPrivateKey(buffer, compressed).publicKey, "hex");
+    return Buffer.from(phantomCrypto.getKeysByPrivateKey(buffer, compressed).publicKey, "hex");
 }

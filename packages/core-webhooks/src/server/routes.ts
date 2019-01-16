@@ -1,7 +1,7 @@
 import { destroy, index, show, store, update } from "./handler";
 
 export const registerRoutes = {
-    name: "Ark Webhooks API",
+    name: "PHANTOM Webhooks API",
     version: "0.1.0",
     async register(server, options) {
         server.route([

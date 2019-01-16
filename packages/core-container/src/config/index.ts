@@ -1,4 +1,4 @@
-import { configManager as crypto, HashAlgorithms } from "@arkecosystem/crypto";
+import { configManager as crypto, HashAlgorithms } from "@phantomchain/crypto";
 import get from "lodash/get";
 import set from "lodash/set";
 import { fileLoader, RemoteLoader } from "./loaders";
@@ -46,7 +46,7 @@ class Config {
     }
 
     /**
-     * Configure the @arkecosystem/crypto package.
+     * Configure the @phantomchain/crypto package.
      * @return {void}
      */
     private configureCrypto(value: any): void {

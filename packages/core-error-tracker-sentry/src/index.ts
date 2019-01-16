@@ -1,4 +1,4 @@
-import { Container } from "@arkecosystem/core-interfaces";
+import { Container } from "@phantomchain/core-interfaces";
 import Sentry from "@sentry/node";
 import { defaults } from "./defaults";
 

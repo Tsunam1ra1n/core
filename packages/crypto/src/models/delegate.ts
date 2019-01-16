@@ -10,7 +10,7 @@ import { sortTransactions } from "../utils";
 import { Block } from "./block";
 
 /**
- * TODO copy some parts to ArkDocs
+ * TODO copy some parts to PhantomDocs
  * @classdesc The delegate model
  *
  * The Delegate model does not store anything on db, but the object contains:

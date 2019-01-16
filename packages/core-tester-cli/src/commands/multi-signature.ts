@@ -1,4 +1,4 @@
-import { client } from "@arkecosystem/crypto";
+import { client } from "@phantomchain/crypto";
 import take from "lodash/take";
 import pluralize from "pluralize";
 import { logger } from "../utils";
@@ -121,7 +121,9 @@ export class MultiSignature extends Command {
 
             if (log) {
                 logger.info(
-                    `${i} ==> ${transaction.id}, ${wallet.address} (fee: ${Command.__arktoshiToArk(transaction.fee)})`,
+                    `${i} ==> ${transaction.id}, ${wallet.address} (fee: ${Command.__phantomtoshiToPhantom(
+                        transaction.fee,
+                    )})`,
                 );
             }
         });
@@ -139,7 +141,11 @@ export class MultiSignature extends Command {
     public async __testSendWithSignatures(transfer, wallets, approvalWallets = []) {
         logger.info("Sending transactions with signatures");
 
-        const transactions = transfer.generateTransactions(Command.__arkToArktoshi(2), wallets, approvalWallets);
+        const transactions = transfer.generateTransactions(
+            Command.__phantomToPhantomtoshi(2),
+            wallets,
+            approvalWallets,
+        );
 
         try {
             await this.sendTransactions(transactions);
@@ -168,7 +174,7 @@ export class MultiSignature extends Command {
         );
 
         const transactions = transfer.generateTransactions(
-            Command.__arkToArktoshi(2),
+            Command.__phantomToPhantomtoshi(2),
             wallets,
             take(approvalWallets, min),
         );
@@ -201,7 +207,7 @@ export class MultiSignature extends Command {
         );
 
         const transactions = transfer.generateTransactions(
-            Command.__arkToArktoshi(2),
+            Command.__phantomToPhantomtoshi(2),
             wallets,
             take(approvalWallets, max),
         );
@@ -235,7 +241,7 @@ export class MultiSignature extends Command {
     public async __testSendWithoutSignatures(transfer, wallets) {
         logger.info("Sending transactions without signatures");
 
-        const transactions = transfer.generateTransactions(Command.__arkToArktoshi(2), wallets);
+        const transactions = transfer.generateTransactions(Command.__phantomToPhantomtoshi(2), wallets);
 
         try {
             await this.sendTransactions(transactions);
@@ -266,7 +272,7 @@ export class MultiSignature extends Command {
     public async __testSendWithEmptySignatures(transfer, wallets) {
         logger.info("Sending transactions with empty signatures");
 
-        const transactions = transfer.generateTransactions(Command.__arkToArktoshi(2), wallets);
+        const transactions = transfer.generateTransactions(Command.__phantomToPhantomtoshi(2), wallets);
         for (const transaction of transactions) {
             transaction.data.signatures = [];
         }

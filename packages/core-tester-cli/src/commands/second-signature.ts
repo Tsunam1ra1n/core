@@ -1,4 +1,4 @@
-import { client } from "@arkecosystem/crypto";
+import { client } from "@phantomchain/crypto";
 import pluralize from "pluralize";
 import { logger } from "../utils";
 import { Command } from "./command";
@@ -47,7 +47,9 @@ export class SecondSignature extends Command {
             transactions.push(transaction);
 
             logger.info(
-                `${i} ==> ${transaction.id}, ${wallet.address} (fee: ${Command.__arktoshiToArk(transaction.fee)})`,
+                `${i} ==> ${transaction.id}, ${wallet.address} (fee: ${Command.__phantomtoshiToPhantom(
+                    transaction.fee,
+                )})`,
             );
         });
 

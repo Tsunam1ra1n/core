@@ -1,13 +1,13 @@
-import { app } from "@arkecosystem/core-container";
-import { setUpContainer } from "@arkecosystem/core-test-utils/src/helpers/container";
+import { app } from "@phantomchain/core-container";
+import { setUpContainer } from "@phantomchain/core-test-utils/src/helpers/container";
 
 jest.setTimeout(60000);
 
 export const setUp = async () => {
-    process.env.ARK_GRAPHQL_ENABLED = "true";
+    process.env.PHANTOM_GRAPHQL_ENABLED = "true";
 
     await setUpContainer({
-        exclude: ["@arkecosystem/core-api", "@arkecosystem/core-forger"],
+        exclude: ["@phantomchain/core-api", "@phantomchain/core-forger"],
     });
 
     return app;

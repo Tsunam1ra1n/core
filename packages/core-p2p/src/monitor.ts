@@ -1,9 +1,9 @@
 /* tslint:disable:max-line-length */
 
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Blockchain, EventEmitter, Logger, P2P } from "@arkecosystem/core-interfaces";
-import { slots } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Blockchain, EventEmitter, Logger, P2P } from "@phantomchain/core-interfaces";
+import { slots } from "@phantomchain/crypto";
 import dayjs from "dayjs-ext";
 import delay from "delay";
 import fs from "fs";
@@ -96,7 +96,7 @@ export class Monitor implements P2P.IMonitor {
      * @return {Promise}
      */
     public async updateNetworkStatus(networkStart: boolean = false) {
-        if (process.env.ARK_ENV === "test" || process.env.NODE_ENV === "test") {
+        if (process.env.PHANTOM_ENV === "test" || process.env.NODE_ENV === "test") {
             return;
         }
 
@@ -143,7 +143,7 @@ export class Monitor implements P2P.IMonitor {
             this.guard.isSuspended(peer) ||
             this.guard.isMyself(peer) ||
             this.pendingPeers[peer.ip] ||
-            process.env.ARK_ENV === "test"
+            process.env.PHANTOM_ENV === "test"
         ) {
             return;
         }
@@ -709,7 +709,7 @@ export class Monitor implements P2P.IMonitor {
         }));
 
         try {
-            fs.writeFileSync(`${process.env.ARK_PATH_CONFIG}/peers_backup.json`, JSON.stringify(peers, null, 2));
+            fs.writeFileSync(`${process.env.PHANTOM_PATH_CONFIG}/peers_backup.json`, JSON.stringify(peers, null, 2));
         } catch (err) {
             logger.error(`Failed to dump the peer list because of "${err.message}"`);
         }

@@ -1,11 +1,11 @@
-import { Bignum, constants, crypto, models } from "@arkecosystem/crypto";
+import { Bignum, constants, crypto, models } from "@phantomchain/crypto";
 import genesisBlockTestnet from "../../../core-test-utils/src/config/testnet/genesisBlock.json";
 
-import { delegateCalculator } from "@arkecosystem/core-utils";
+import { delegateCalculator } from "@phantomchain/core-utils";
 import { DelegatesRepository } from "../../src/repositories/delegates";
 import { setUp, tearDown } from "../__support__/setup";
 
-const { ARKTOSHI } = constants;
+const { PHANTOMTOSHI } = constants;
 const { Block } = models;
 
 let genesisBlock;
@@ -310,7 +310,7 @@ describe("Delegate Repository", () => {
             const delegate = {
                 username: "test",
                 publicKey: "test",
-                voteBalance: new Bignum(10000 * ARKTOSHI),
+                voteBalance: new Bignum(10000 * PHANTOMTOSHI),
                 producedBlocks: 1000,
                 missedBlocks: 500,
             };

@@ -1,7 +1,7 @@
-import { app } from "@arkecosystem/core-container";
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Blockchain } from "@arkecosystem/core-interfaces";
-import { models } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Blockchain } from "@phantomchain/core-interfaces";
+import { models } from "@phantomchain/crypto";
 import * as schema from "../schemas/transactions";
 
 const config = app.getConfig();

@@ -1,10 +1,10 @@
-jest.mock("@arkecosystem/core-container", () => {
+jest.mock("@phantomchain/core-container", () => {
     return {
         app: {
             getConfig: () => {
                 return {
                     getMilestone: () => ({
-                        epoch: "2017-03-21T13:00:00.000Z",
+                        epoch: "2019-01-03T12:00:00.000Z",
                         activeDelegates: 51,
                     }),
                 };

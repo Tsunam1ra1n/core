@@ -1,4 +1,4 @@
-import { app } from "@arkecosystem/core-container";
+import { app } from "@phantomchain/core-container";
 import { formatOrderBy, unserializeTransactions } from "../../helpers";
 
 const database = app.resolvePlugin("database");

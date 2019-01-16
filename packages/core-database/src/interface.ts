@@ -1,7 +1,7 @@
-import { app } from "@arkecosystem/core-container";
-import { EventEmitter, Logger } from "@arkecosystem/core-interfaces";
-import { roundCalculator } from "@arkecosystem/core-utils";
-import { configManager, constants, crypto, models, slots } from "@arkecosystem/crypto";
+import { app } from "@phantomchain/core-container";
+import { EventEmitter, Logger } from "@phantomchain/core-interfaces";
+import { roundCalculator } from "@phantomchain/core-utils";
+import { configManager, constants, crypto, models, slots } from "@phantomchain/crypto";
 import assert from "assert";
 import cloneDeep from "lodash/cloneDeep";
 import { DelegatesRepository } from "./repositories/delegates";

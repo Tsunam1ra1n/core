@@ -1,8 +1,8 @@
 /**
- * The Arktoshi base.
+ * The Phantomtoshi base.
  * @type {Number}
  */
-export const ARKTOSHI = 1e8;
+export const PHANTOMTOSHI = 1e8;
 
 /**
  * Available transaction types.

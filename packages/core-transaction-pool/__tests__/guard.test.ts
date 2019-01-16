@@ -1,7 +1,7 @@
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Container } from "@arkecosystem/core-interfaces";
-import { fixtures, generators } from "@arkecosystem/core-test-utils";
-import { configManager, crypto, slots } from "@arkecosystem/crypto";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Container } from "@phantomchain/core-interfaces";
+import { fixtures, generators } from "@phantomchain/core-test-utils";
+import { configManager, crypto, slots } from "@phantomchain/crypto";
 import bip39 from "bip39";
 import "jest-extended";
 import { TransactionPool } from "../src";
@@ -47,7 +47,7 @@ describe("Transaction Guard", () => {
                   A => B needs to be first confirmed (forged), then B can transfer to C
                 */
 
-                const arktoshi = 10 ** 8;
+                const phantomtoshi = 10 ** 8;
                 // don't re-use the same delegate (need clean balance)
                 const delegate = inverseOrder ? delegates[8] : delegates[9];
                 const delegateWallet = transactionPool.walletManager.findByAddress(delegate.address);
@@ -64,13 +64,13 @@ describe("Transaction Guard", () => {
                     // transfer from delegate to wallet 0
                     from: delegate,
                     to: wallets[0],
-                    amount: 100 * arktoshi,
+                    amount: 100 * phantomtoshi,
                 };
                 const transfer1 = {
                     // transfer from wallet 0 to wallet 1
                     from: wallets[0],
                     to: wallets[1],
-                    amount: 55 * arktoshi,
+                    amount: 55 * phantomtoshi,
                 };
                 const transfers = [transfer0, transfer1];
                 if (inverseOrder) {
@@ -101,7 +101,7 @@ describe("Transaction Guard", () => {
                 expect(guard.errors[transfer.id]).toContainEqual(expectedError);
 
                 // check final balances
-                expect(+delegateWallet.balance).toBe(delegate.balance - (100 + 0.1) * arktoshi);
+                expect(+delegateWallet.balance).toBe(delegate.balance - (100 + 0.1) * phantomtoshi);
                 expect(+poolWallets[0].balance).toBe(0);
                 expect(+poolWallets[1].balance).toBe(0);
             },
@@ -334,7 +334,7 @@ describe("Transaction Guard", () => {
         });
 
         it.each([3, 5, 8])(
-            "should not validate emptying wallet with %i transactions when the last one is 1 arktoshi too much",
+            "should not validate emptying wallet with %i transactions when the last one is 1 phantomtoshi too much",
             async txNumber => {
                 // use txNumber + 1 so that we don't use the same delegates as the above test
                 const sender = delegates[txNumber + 1];

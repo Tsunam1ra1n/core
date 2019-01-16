@@ -77,13 +77,13 @@ describe("Validator", () => {
 
     describe("__validateWithRule", () => {
         it("should be true", () => {
-            validator.__validateWithRule("DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN", "address");
+            validator.__validateWithRule("PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX", "address");
 
             expect(validator.passes()).toBeTrue();
         });
 
         it("should be false", () => {
-            validator.__validateWithRule("_DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN_", "address");
+            validator.__validateWithRule("_PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX_", "address");
 
             expect(validator.passes()).toBeFalse();
         });
@@ -91,7 +91,7 @@ describe("Validator", () => {
 
     describe("__validateWithFunction", () => {
         it("should be true", () => {
-            validator.__validateWithFunction("DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN", value => ({
+            validator.__validateWithFunction("PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX", value => ({
                 data: value,
                 passes: value.length === 34,
                 fails: value.length !== 34,
@@ -101,7 +101,7 @@ describe("Validator", () => {
         });
 
         it("should be false", () => {
-            validator.__validateWithFunction("_DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN_", value => ({
+            validator.__validateWithFunction("_PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX_", value => ({
                 data: value,
                 passes: value.length === 34,
                 fails: value.length !== 34,
@@ -114,7 +114,7 @@ describe("Validator", () => {
     describe("__validateWithJoi", () => {
         it("should be true", () => {
             validator.__validateWithJoi(
-                "DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN",
+                "PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX",
                 Joi.string()
                     .alphanum()
                     .length(34)
@@ -126,7 +126,7 @@ describe("Validator", () => {
 
         it("should be false", () => {
             validator.__validateWithJoi(
-                "_DARiJqhogp2Lu6bxufUFQQMuMyZbxjCydN_",
+                "_PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX_",
                 Joi.string()
                     .alphanum()
                     .length(34)

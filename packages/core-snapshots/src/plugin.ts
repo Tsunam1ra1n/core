@@ -1,5 +1,5 @@
-import { PostgresConnection } from "@arkecosystem/core-database-postgres";
-import { Container } from "@arkecosystem/core-interfaces";
+import { PostgresConnection } from "@phantomchain/core-database-postgres";
+import { Container } from "@phantomchain/core-interfaces";
 import { defaults } from "./defaults";
 import { SnapshotManager } from "./manager";
 

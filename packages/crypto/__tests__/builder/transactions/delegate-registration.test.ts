@@ -1,5 +1,5 @@
 import "jest-extended";
-import { client as ark } from "../../../src/client";
+import { client as phantom } from "../../../src/client";
 import { TransactionTypes } from "../../../src/constants";
 import { crypto } from "../../../src/crypto/crypto";
 import { feeManager } from "../../../src/managers/fee";
@@ -8,7 +8,7 @@ import { transactionBuilder } from "./__shared__/transaction-builder";
 let builder;
 
 beforeEach(() => {
-    builder = ark.getBuilder().delegateRegistration();
+    builder = phantom.getBuilder().delegateRegistration();
 
     // @ts-ignore
     global.builder = builder;
@@ -63,7 +63,7 @@ describe("Delegate Registration Transaction", () => {
         });
     });
 
-    // FIXME problems with ark-js V1
+    // FIXME problems with phantom-js V1
     describe("getStruct", () => {
         beforeEach(() => {
             builder = builder.usernameAsset("homer");

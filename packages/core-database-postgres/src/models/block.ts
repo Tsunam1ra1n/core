@@ -1,4 +1,4 @@
-import { bignumify } from "@arkecosystem/core-utils";
+import { bignumify } from "@phantomchain/core-utils";
 import { Model } from "./model";
 
 export class Block extends Model {

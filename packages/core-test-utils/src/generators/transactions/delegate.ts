@@ -1,4 +1,4 @@
-import { constants } from "@arkecosystem/crypto";
+import { constants } from "@phantomchain/crypto";
 import { generateTransaction } from "./transaction";
 
 const { DelegateRegistration } = constants.TransactionTypes;

@@ -1,4 +1,4 @@
-import { delegateCalculator } from "@arkecosystem/core-utils";
+import { delegateCalculator } from "@phantomchain/core-utils";
 import orderBy from "lodash/orderBy";
 import limitRows from "./utils/limit-rows";
 

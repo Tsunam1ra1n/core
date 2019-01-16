@@ -26,13 +26,13 @@ describe("HDWallet", () => {
                 .derive(0)
                 .derive(0);
 
-            expect(crypto.getAddress(child1.publicKey.toString("hex"))).toBe("AZXdSTRFGHPokX6yfXTfHcTzzHKncioj31");
-            expect(crypto.getAddress(child2.publicKey.toString("hex"))).toBe("AZXdSTRFGHPokX6yfXTfHcTzzHKncioj31");
+            expect(crypto.getAddress(child1.publicKey.toString("hex"))).toBe("PSLvwvxTz4DqvPZkSx7rodBB8RZyUNqQUY");
+            expect(crypto.getAddress(child2.publicKey.toString("hex"))).toBe("PSLvwvxTz4DqvPZkSx7rodBB8RZyUNqQUY");
         });
     });
 
     describe("bip44", () => {
-        it("can create a BIP44, ark, account 0, external address", () => {
+        it("can create a BIP44, phantom, account 0, external address", () => {
             const path = "m/44'/111'/0'/0/0";
             const root = bip32.fromSeed(
                 Buffer.from("dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "hex"),
@@ -48,8 +48,8 @@ describe("HDWallet", () => {
                 .derive(0)
                 .derive(0);
 
-            expect(crypto.getAddress(child1.publicKey.toString("hex"))).toBe("AKdstZSrxzeF54e1M41fQzqGqjod9ydG3E");
-            expect(crypto.getAddress(child2.publicKey.toString("hex"))).toBe("AKdstZSrxzeF54e1M41fQzqGqjod9ydG3E");
+            expect(crypto.getAddress(child1.publicKey.toString("hex"))).toBe("PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX");
+            expect(crypto.getAddress(child2.publicKey.toString("hex"))).toBe("PCTBQ2z5gmUHEw6n8Ufrw1YSyt3orJu1QX");
         });
     });
 
@@ -117,7 +117,7 @@ describe("HDWallet", () => {
                 .derive(0)
                 .derive(0);
 
-            expect(crypto.getAddress(actual.publicKey.toString("hex"))).toBe("AHQhEsLWX5BbvvK836f1rUyZZZ77YikYq5");
+            expect(crypto.getAddress(actual.publicKey.toString("hex"))).toBe("PADzkLsjEr1e6nmtpXKDNVgjhhMJFNoXZq");
             expect(actual.publicKey.toString("hex")).toBe(
                 "0330d7c2df15da16c72ac524f7548b2bca689beb0527ce54a50d3b79e4e91a8e9b",
             );
@@ -138,7 +138,7 @@ describe("HDWallet", () => {
                 .deriveHardened(0)
                 .derive(0);
 
-            expect(crypto.getAddress(actual.publicKey.toString("hex"))).toBe("AKjBp5V1xG9c5PQqUvtvtoGjvnyA3wLVpA");
+            expect(crypto.getAddress(actual.publicKey.toString("hex"))).toBe("PCYVKZ2Eg2yeFFscGMZ8Qoyv4wDLooxZgq");
             expect(actual.publicKey.toString("hex")).toBe(
                 "0281d69cadc9cf1bbbadd69503f071ce5de3826cee702e67a21d86f4fbe2d61b77",
             );

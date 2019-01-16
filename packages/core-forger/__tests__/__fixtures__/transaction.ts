@@ -1,4 +1,4 @@
-import { models } from "@arkecosystem/crypto";
+import { models } from "@phantomchain/crypto";
 
 export const sampleTransaction = new models.Transaction({
     type: 0,

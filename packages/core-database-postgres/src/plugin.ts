@@ -1,5 +1,5 @@
-import { DatabaseManager } from "@arkecosystem/core-database";
-import { Container, Logger } from "@arkecosystem/core-interfaces";
+import { DatabaseManager } from "@phantomchain/core-database";
+import { Container, Logger } from "@phantomchain/core-interfaces";
 import { PostgresConnection } from "./connection";
 import { defaults } from "./defaults";
 
@@ -7,7 +7,7 @@ export const plugin: Container.PluginDescriptor = {
     pkg: require("../package.json"),
     defaults,
     alias: "database",
-    extends: "@arkecosystem/core-database",
+    extends: "@phantomchain/core-database",
     async register(container: Container.IContainer, options) {
         container.resolvePlugin<Logger.ILogger>("logger").info("Establishing Database Connection");
 

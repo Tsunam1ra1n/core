@@ -1,4 +1,4 @@
-import { configManager, crypto, HashAlgorithms } from "@arkecosystem/crypto";
+import { configManager, crypto, HashAlgorithms } from "@phantomchain/crypto";
 import { database } from "../services/database";
 import { decryptWIF } from "./decrypt-wif";
 

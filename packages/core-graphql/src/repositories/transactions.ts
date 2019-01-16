@@ -1,4 +1,4 @@
-import { constants, slots } from "@arkecosystem/crypto";
+import { constants, slots } from "@phantomchain/crypto";
 import dayjs from "dayjs-ext";
 
 import { Repository } from "./repository";

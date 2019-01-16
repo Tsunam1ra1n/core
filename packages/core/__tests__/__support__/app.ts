@@ -1,9 +1,9 @@
 import { resolve } from "path";
 
 export const opts = {
-    data: "~/.ark",
+    data: "~/.phantom",
     config: resolve(__dirname, "./config"),
-    token: "ark",
+    token: "phantom",
     network: "testnet",
     skipPlugins: true,
 };
